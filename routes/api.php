@@ -19,18 +19,9 @@ use App\Http\Controllers\API\BrandController;
 use App\Http\Controllers\API\FacebookApiController;
 use App\Http\Controllers\API\AdminApiController;
 use App\Http\Controllers\API\youtube_data_controller;
-
 use App\Http\Controllers\API\InstagramApiController;
 use App\Http\Controllers\API\contactcontroller;
-use App\Http\Controllers\API\instacontroller;
-use App\Http\Controllers\API\InstagramApiController;
 use App\Http\Controllers\API\ProfileController;
-
-
-
-
-
-use App\Http\Controllers\API\contactcontroller;
 use App\Http\Controllers\API\instacontroller;
 use App\Http\Controllers\API\SocialMediaController;
 use App\Http\Controllers\API\AddBrandController;
