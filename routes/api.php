@@ -25,7 +25,7 @@ use App\Http\Controllers\API\ProfileController;
 use App\Http\Controllers\API\instacontroller;
 use App\Http\Controllers\API\SocialMediaController;
 use App\Http\Controllers\API\AddBrandController;
-use App\Http\Controllers\API\InstagramApiController;
+
 
 
 /*
