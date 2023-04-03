@@ -41,12 +41,9 @@
                                 <td>{{$i}}</td>
                                 <td>{{ $indus->industry_type }}</td>
                                 <td>{{ $indus->description }}</td>
+<!--  -->
 
-                                <!-- <?php
-                                  //print_r($indus->industry_image);exit();
-                                ?> -->
-
-                                <td><img src="{{asset('/public/industry_image/'.$indus->industry_image)}}" alt="{{$indus->industry_type}}" style="width: 100px;"></td>
+                        <td><img src="{{asset('/storage/app/'.$indus->industry_image)}}" alt="{{$indus->industry_type}}" style="width: 100px;"></td>
 
                                 <td>
                                   <div class="action-wrap-btn">

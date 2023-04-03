@@ -17,12 +17,12 @@ class IndustryController extends Controller
     public function index()
     {
         //  print_r("hre");exit();
-       $industry = Industry::latest()->paginate();
-        
-       return view('industry.index',compact('industry'))
-          ->with('i', (request()->input('page', 1) - 1) * 5);
+     $industry = Industry::latest()->paginate();
 
-    }
+     return view('industry.index',compact('industry'))
+     ->with('i', (request()->input('page', 1) - 1) * 5);
+
+ }
 
     /**
      * Show the form for creating a new resource.
@@ -32,8 +32,8 @@ class IndustryController extends Controller
     public function create()
     {
         //
-         return view('industry.create');
-    }
+       return view('industry.create');
+   }
 
     /**
      * Store a newly created resource in storage.
@@ -48,34 +48,20 @@ class IndustryController extends Controller
             'industry_type' => 'required',
             'description' => 'required',
             'industry_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
-             
-            $path = public_path('industry_image');
-
-            if(!File::isDirectory($path)){
-
-               
-            File::makeDirectory($path, 0777, true, true);
-             $imageName = time().'.'.$request->industry_image->extension();  
-             $request->industry_image->move(public_path('industry_image'), $imageName);
-             $imagewithfolder = $imageName;
-
-
-            }else{
-            $imageName = time().'.'.$request->industry_image->extension();
-            $request->industry_image->move(public_path('industry_image'), $imageName);
-            $imagewithfolder = $imageName;
-            }
-            $data = Industry::create([
+        ]);
+        $file = $request->file('industry_image');
+        $fileName = $request->file('industry_image')->getClientOriginalName();             
+        $path = $request->file('industry_image')->storeAs('industry_image', $fileName);
+        $data = Industry::create([
             'industry_type' => $request->industry_type,
             'description' => $request->description,
-            'industry_image' => $imagewithfolder,
+            'industry_image' => $path,
 
         ]);
-            //  print_r($imagewithfolder);exit();
-            return redirect()->route('industry.index')
-          ->with('success','Industry has been created successfully.');
-          
+
+         return redirect()->route('industry.index')
+        ->with('success','Industry has been created successfully.');
+
 
     }
 
@@ -117,49 +103,41 @@ class IndustryController extends Controller
      */
     public function update(Request $request,$id)
     {
-        
+
         $request->validate([
             'industry_type' => 'required',    
             'description' => 'required', 
-          ]);
-    
-        //  print_r($request->all());exit();
-    
-          if($_FILES['industry_image']['name'] != ''){
-                //upload image
-            $path = public_path('industry_image');
-    
-            if(!File::isDirectory($path)){
-              File::makeDirectory($path, 0777, true, true);
-              $imageName = time().'.'.$request->industry_image->extension();  
-              $request->industry_image->move(public_path('industry_image'), $imageName);
-              $imagewithfolder = $imageName;
-    
+            // 'industry_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+
+        if($_FILES['industry_image']['name'] != ''){
+            $file = $request->file('industry_image');
+            $fileName = $request->file('industry_image')->getClientOriginalName(); 
+            if($fileName != ''){
+                $path = $request->file('industry_image')->storeAs('industry_image', $fileName);
             }else{
-              $imageName = time().'.'.$request->industry_image->extension();
-              $request->industry_image->move(public_path('industry_image'), $imageName);
-              $imagewithfolder = $imageName;
-            }
-    
+                $path = $request['hidden_industry_image'];
+            }           
+            
             $UpdateDetails = Industry::where('id', $request->id)->update(array(
-           "industry_type" => $request->industry_type,
-           "description" => $request->description,
-           "industry_image" => $imagewithfolder,
-           
+             "industry_type" => $request->industry_type,
+             "description" => $request->description,
+             "industry_image" => $path,
+
          ));
-    
-          }else{
-           $UpdateDetails = Industry::where('id', $request->id)->update(array(
+
+        }else{
+         $UpdateDetails = Industry::where('id', $request->id)->update(array(
             "industry_type" => $request->industry_type,
             "description" => $request->description,
-         ));
-    
-          }
-            // print_r($request->all());exit();
-          return redirect()->route('industry.index')
-                       ->with('success','Industry updated successfully');
+        ));
 
-    }
+     }
+     return redirect()->route('industry.index')
+     ->with('success','Industry updated successfully');
+
+ }
 
     /**
      * Remove the specified resource from storage.
@@ -176,5 +154,5 @@ class IndustryController extends Controller
     }
 }
 
-    
+
 
