@@ -49,17 +49,17 @@ class BussinessCardController extends Controller
             'date' => 'required',
             'status' => 'required',
         ]);
-        $path = public_path('image');
+        $path = public_path('bcard_image');
 
             if(!File::isDirectory($path)){
             File::makeDirectory($path, 0777, true, true);
              $imageName = time().'.'.$request->image->extension();  
-             $request->image->move(public_path('image'), $imageName);
+             $request->image->move(public_path('bcard_image'), $imageName);
              $imagewithfolder = $imageName;
 
             }else{
             $imageName = time().'.'.$request->image->extension();
-            $request->image->move(public_path('image'), $imageName);
+            $request->image->move(public_path('bcard_image'), $imageName);
             $imagewithfolder = $imageName;
             }
             $data = business_card::create([
@@ -119,17 +119,17 @@ class BussinessCardController extends Controller
         ]);
          if($_FILES['image']['name'] != ''){
             //upload image
-        $path = public_path('image');
+        $path = public_path('bcard_image');
 
         if(!File::isDirectory($path)){
           File::makeDirectory($path, 0777, true, true);
           $imageName = time().'.'.$request->image->extension();  
-          $request->imageimage->move(public_path('image'), $imageName);
+          $request->imageimage->move(public_path('bcard_image'), $imageName);
           $imagewithfolder = $imageName;
 
         }else{
           $imageName = time().'.'.$request->image->extension();
-          $request->image->move(public_path('image'), $imageName);
+          $request->image->move(public_path('bcard_image'), $imageName);
           $imagewithfolder = $imageName;
         }
 

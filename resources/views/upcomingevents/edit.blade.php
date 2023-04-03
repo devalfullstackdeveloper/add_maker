@@ -37,8 +37,8 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Icon:</strong>
-                    <input type="file" name="icon" class="form-control" placeholder="icon" value="{{ $data->date}}">
-                 <img alt="img" src="{{asset('/public/events_img/'.$data->icon)}}" width="100px">
+                    <input type="file" name="icon" class="form-control" placeholder="icon">
+                 <img alt="img" src="{{asset('/public/event_image/'.$data->icon)}}" width="100px">
                 </div>
             </div>
 

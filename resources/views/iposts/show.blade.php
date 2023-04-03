@@ -34,7 +34,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Image:</strong>
-                <img src="{{asset($ipost->images)}}" alt="{{$ipost->title}}" style="width: 100px;">
+                <img src="{{asset('/public/ipost_image/'.$ipost->images)}}" alt="{{$ipost->title}}" style="width: 100px;">
             </div>
         </div>
         <a href="{{route('iposts.edit',$ipost->id)}}" class="btn btn-primary btn-icon-text mb-2 mb-md-0">

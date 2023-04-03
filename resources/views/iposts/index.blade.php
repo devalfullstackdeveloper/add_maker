@@ -41,7 +41,7 @@
                                 <td>{{$i}}</td>
                                 <td>{{ $po->title}}</td>
                                 <td>{{ $po->description }}</td>
-                                <td><img alt="img" src="{{asset($po->images)}}" width="100px"></td>
+                                <td><img alt="img" src="{{asset('/public/ipost_image/'.$po->images)}}" width="100px"></td>
                                 <td>{{ $po->created_at }}</td>
                                 <td>
                                   <div class="action-wrap-btn">

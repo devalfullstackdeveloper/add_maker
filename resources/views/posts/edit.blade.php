@@ -53,7 +53,7 @@
                     <div class="form-group">
                         <strong>Image</strong>
                             <input type="file" name="images" class="form-control" placeholder="Uplpoad Images">
-                            <img class="mt-2" src="{{asset($post->images)}}" width="300px">
+                            <img class="mt-2" src="{{asset('/public/fbpost_image/'.$post->images)}}" width="300px">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary ml-3">Update Post</button>

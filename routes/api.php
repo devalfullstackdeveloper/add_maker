@@ -25,6 +25,7 @@ use App\Http\Controllers\API\ProfileController;
 use App\Http\Controllers\API\instacontroller;
 use App\Http\Controllers\API\SocialMediaController;
 use App\Http\Controllers\API\AddBrandController;
+use App\Http\Controllers\API\InstagramApiController;
 
 
 /*
@@ -84,7 +85,12 @@ Route::get('/showpost',[FetchipostController::class, 'ipost']);
 //fetch api of facebook ads and facebook posts 
 Route::get('facebook', [FacebookApiController::class, 'facebook']);
 
-// Route::post('/store', contactcontroller::class,'store');
+
+ Route::post('/instagram',[InstagramApiController::class, 'instagram']);
+
+
+
+ // Route::post('/store', contactcontroller::class,'store');
 
  Route::post('/store', [contactcontroller::class, 'store']);
  Route::get('/insta', [instacontroller::class, 'insta']);
@@ -96,6 +102,7 @@ Route::get('facebook', [FacebookApiController::class, 'facebook']);
 Route::get('/add_brand', [AddBrandController::class, 'add_brand']);
 
  Route::resource('/profile',ProfileController::class);
+   Route::post('/ps', [InstagramApiController::class, 'instagram']);
 
 
 

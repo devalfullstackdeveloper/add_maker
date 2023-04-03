@@ -43,7 +43,7 @@
                                 <td>{{$i}}</td>
                                 <td>{{ $tw->title }}</td>
                                 <td>{{ $tw->description }}</td>
-                                <td><img alt="img" src="{{asset('/public/twitter_img/'.$tw->image)}}" width="100px"></td>
+                                <td><img alt="img" src="{{asset('/public/twitter_image/'.$tw->image)}}" width="100px"></td>
                                  <!-- <td><img src="{{asset($tw->image)}}" alt="{{ $tw->title}}" style="width: 100px;"></td> -->
                                 <!-- <td><img src="{{asset($tw->image)}}" alt="{{$tw->title}}" style="width: 100px;"></td> -->
                                  <td>{{$tw->date }}</td>

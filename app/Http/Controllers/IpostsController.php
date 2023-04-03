@@ -29,18 +29,22 @@ class IpostsController extends Controller
             'images' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
              
-            $path = public_path('images');
+            $path = public_path('ipost_image');
 
             if(!File::isDirectory($path)){
             File::makeDirectory($path, 0777, true, true);
              $imageName = time().'.'.$request->images->extension();  
-             $request->images->move(public_path('images'), $imageName);
-             $imagewithfolder = 'public\images\\'.$imageName;
+
+             $request->images->move(public_path('ipost_image'), $imageName);
+
+             $imagewithfolder = $imageName;
 
             }else{
             $imageName = time().'.'.$request->images->extension();
-            $request->images->move(public_path('images'), $imageName);
-            $imagewithfolder = 'public\images\\'.$imageName;
+
+            $request->images->move(public_path('ipost_image'), $imageName);
+
+            $imagewithfolder = $imageName;
             }
             $data = Iposts::create([
             'title' => $request->title,
@@ -76,18 +80,21 @@ class IpostsController extends Controller
     
           if($_FILES['images']['name'] != ''){
                
-            $path = public_path('images');
+            $path = public_path('ipost_image');
     
             if(!File::isDirectory($path)){
               File::makeDirectory($path, 0777, true, true);
               $imageName = time().'.'.$request->images->extension();  
-              $request->images->move(public_path('images'), $imageName);
-              $imagewithfolder = 'public\images\\'.$imageName;
+
+              $request->images->move(public_path('ipost_image'), $imageName);
+
+              $imagewithfolder = $imageName;
     
             }else{
               $imageName = time().'.'.$request->images->extension();
-              $request->images->move(public_path('images'), $imageName);
-              $imagewithfolder = 'public\images\\'.$imageName;
+              $request->images->move(public_path('ipost_image'), $imageName);
+
+              $imagewithfolder = $imageName;
             }
     
             $UpdateDetails = Iposts::where('id', $request->id)->update(array(

@@ -34,7 +34,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Image:</strong>
-                <img src="{{asset($data->image)}}" alt="{{$data->title}}" style="width: 100px;">
+                <img src="{{asset('/public/facebook_image/'.$data->image)}}" alt="{{$data->title}}" style="width: 100px;">
             </div>
         </div>
 

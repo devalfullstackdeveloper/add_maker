@@ -38,7 +38,7 @@
                 <div class="form-group">
                     <strong>Image:</strong>
                     <input type="file" name="image" class="form-control" placeholder="img">
-                     <img alt="img" src="{{asset('/public/twitter_img/'.$data->image)}}" width="100px">
+                     <img alt="img" src="{{asset('/public/twitter_image/'.$data->image)}}" width="100px">
                 </div>
             </div>
 

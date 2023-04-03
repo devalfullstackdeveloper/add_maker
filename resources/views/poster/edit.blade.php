@@ -39,7 +39,7 @@
                     <strong>Poster Image:</strong>
                     <input type="file" name="poster_img" class="form-control" placeholder="poster_img">
 
-                    <img alt="img" src="{{asset('/public/poster_img/'.$data->poster_img)}}" width="100px">
+                    <img alt="img" src="{{asset('/public/poster_image/'.$data->poster_img)}}" width="100px">
 
                     <img alt="img" src="{{asset($data->image)}}" width="100px">
 

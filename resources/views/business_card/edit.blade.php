@@ -42,7 +42,7 @@
 <div class="col-xs-12 col-sm-12 col-md-12">
 <div class="form-group">
 <strong>Image:</strong>
-<input type="file" name="image" value="{{ $data->image }}" class="form-control" placeholder="image">
+<input type="file" name="image" value="{{asset('/public/bcard_image/'.$data->image)}}" class="form-control" placeholder="image">
 @error('name')
 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
 @enderror

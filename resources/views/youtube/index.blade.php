@@ -43,7 +43,7 @@
                                 <td>{{$i}}</td>
                                 <td>{{ $yo->title }}</td>
                                 <td>{{ $yo->description }}</td>
-                                <td><img alt="img" src="{{asset('/public/youtube_img/'.$yo->image)}}" width="100px"></td>
+                                <td><img alt="img" src="{{asset('/public/yt_image/'.$yo->image)}}" width="100px"></td>
                                  <td>{{$yo->date }}</td>
                                 <td>{{ $yo->status }}</td>
                                 <td>

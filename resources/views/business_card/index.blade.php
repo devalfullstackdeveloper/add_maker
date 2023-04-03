@@ -42,7 +42,7 @@
                                 <td>{{$i}}</td>
                                 <td>{{ $business_card->description }}</td>
                       
-                                <td><img alt="img" src="{{asset($business_card->image)}}" width="100px"></td>
+                                <td><img alt="img" src="{{asset('/public/bcard_image/'.$business_card->image)}}" width="100px"></td>
                                 <td>{{ $business_card->date }}</td>
                                 <td>{{ $business_card->status }}</td>
                                 <td>
