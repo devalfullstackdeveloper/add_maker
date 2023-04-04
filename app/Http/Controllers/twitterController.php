@@ -120,7 +120,7 @@ class twitterController extends Controller
         $UpdateDetails = twitter::where('id', $request->id)->update(array(
        "title" => $request->title,
        "description" => $request->description,
-       "image" => $imagewithfolder,
+       "image" => $path,
        "date" => $request->date,
         "status" => $request->status,
      ));
