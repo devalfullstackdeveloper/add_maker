@@ -54,24 +54,21 @@ class eventController extends Controller
             'status'=> 'required'
 
             ]);
+         $file = $request->file('icon');
+        $fileName = $request->file('icon')->getClientOriginalName();             
+        $path = $request->file('icon')->storeAs('event_image', $fileName);
              
-            $path = public_path('event_image');
-
-            if(!File::isDirectory($path)){
-            File::makeDirectory($path, 0777, true, true);
-             $imageName = time().'.'.$request->icon->extension();  
-             $request->icon->move(public_path('event_image'), $imageName);
-             $imagewithfolder = $imageName;
-
-            }else{
-            $imageName = time().'.'.$request->icon->extension();
-            $request->icon->move(public_path('event_image'), $imageName);
-            $imagewithfolder = $imageName;
-            }
+<<<<<<< Updated upstream
+          
+=======
+            $file = $request->file('event_image');
+            $fileName = $request->file('event_image')->getClientOriginalName();             
+            $path = $request->file('event_image')->storeAs('event_image', $fileName);
+>>>>>>> Stashed changes
             $data = upcomingevents::create([
             'title' => $request->title,
             'description' => $request->description,
-            'icon' => $imagewithfolder,
+            'icon' => $path,
             'date'=>  $request->date,
             'status'=> $request->status,
 
@@ -101,9 +98,8 @@ class eventController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function edit(upcomingevents $upcomingevents,$id )
+    public function edit($id )
     {
-    
     
         $data= upcomingevents::find($id);
         return view('upcomingevents.edit',compact('data'));
@@ -126,24 +122,39 @@ class eventController extends Controller
             'description' => 'required',
             'date'=> 'required',
             'status'=> 'required'
-
             ]);
 
-       if($_FILES['icon']['name'] != ''){
-            //upload image
-        $path = public_path('event_image');
+<<<<<<< Updated upstream
+            if($_FILES['icon']['name'] != ''){
+            $file = $request->file('icon');
+            $fileName = $request->file('icon')->getClientOriginalName(); 
+            if($fileName != ''){
+                $path = $request->file('icon')->storeAs('event_image', $fileName);
+            }else{
+                $path = $request['hidden_icon'];
+            }           
+            
+            $UpdateDetails = upcomingevents::where('id', $request->id)->update(array(
+             "title" => $request->title,
+            "description" => $request->description,
+            "icon" => $path,
+            "date" => $request->date,
+             "status" => $request->status,
 
-        if(!File::isDirectory($path)){
-          File::makeDirectory($path, 0777, true, true);
-          $imageName = time().'.'.$request->icon->extension();  
-          $request->icon->move(public_path('event_image'), $imageName);
-          $imagewithfolder = $imageName;
+         ));
 
         }else{
-          $imageName = time().'.'.$request->icon->extension();
-          $request->icon->move(public_path('event_image'), $imageName);
-          $imagewithfolder = $imageName;
-        }
+         $UpdateDetails = upcomingevents::where('id', $request->id)->update(array(
+            "title" => $request->title,
+=======
+       if($_FILES['icon']['name'] != ''){
+           $file = $request->file('event_image');
+            $fileName = $request->file('event_image')->getClientOriginalName(); 
+            if($fileName != ''){
+                $path = $request->file('event_image')->storeAs('event_image', $fileName);
+            }else{
+                $path = $request['hidden_event_image'];
+            }       
 
         $UpdateDetails = upcomingevents::where('id', $request->id)->update(array(
        "title" => $request->title,
@@ -157,16 +168,15 @@ class eventController extends Controller
       }else{
        $UpdateDetails = upcomingevents::where('id', $request->id)->update(array(
         "title" => $request->title,
+>>>>>>> Stashed changes
         "description" => $request->description,
         "date" => $request->date,
         "status" => $request->status,
-
-     ));
-
-      }
+        ));
       return redirect()->route('event.index')
-          ->with('success','upcoming events has been created successfully.');
+          ->with('success','upcoming events has been updated successfully.');
     }
+}
 
     /**
      * Remove the specified resource from storage.
@@ -174,10 +184,9 @@ class eventController extends Controller
      * @param  \App\Models\upcomingevents  $upcomingevents
      * @return \Illuminate\Http\Response
      */
-    public function destroy(upcomingevents $upcomingevents ,$id)
-    {
-        //
-        //
+    public function destroy ($id)
+    { 
+
         $idd = upcomingevents::findOrFail($id);
         $idd->delete();
         return redirect('/event')->with('completed', 'event has been deleted');

@@ -34,7 +34,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Poster Image:</strong>
-                    <img alt="img" src="{{asset('/public/poster_image/'.$data->poster_img)}}" width="100px">
+                    <img alt="img" src="{{asset('/storage/app/'.$data->poster_img)}}" width="100px">
                 </div>
             </div>
 

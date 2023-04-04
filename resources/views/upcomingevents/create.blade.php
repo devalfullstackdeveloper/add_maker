@@ -44,7 +44,7 @@
 <div class="col-xs-12 col-sm-12 col-md-12">
 <div class="form-group">
 <strong>Date:</strong>
-<input name="date" class="form-control" placeholder="Date">
+<input type="date"  name="date" class="form-control" placeholder="Date">
 </div>
 </div>
 

@@ -38,14 +38,18 @@
                 <div class="form-group">
                     <strong>Image:</strong>
                     <input type="file" name="image" class="form-control" placeholder="img">
-                     <img alt="img" src="{{asset('/public/twitter_image/'.$data->image)}}" width="100px">
+                     <input type="hidden" name="hidden_image" class="form-control" placeholder=" Image" value={{$data->twitter_image}}>
+                        <img src="{{asset('/storage/app/'.$data->image)}}" alt="{{$data->twitter_image}}" style="width: 100px;">
+                        @error('name')
+                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                        @enderror
                 </div>
             </div>
 
              <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Date:</strong>
-                    <input  name="date" class="form-control" placeholder="Date"value="{{ $data->date}}">
+                    <input type="date"  name="date" class="form-control" placeholder="Date"value="{{ $data->date}}">
                 </div>
             </div>
 
