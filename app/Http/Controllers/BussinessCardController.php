@@ -106,7 +106,6 @@ class BussinessCardController extends Controller
         
         $request->validate([
             'description' => 'required',  
-            'image' => 'required',
             'date' => 'required',
             'status' => 'required',        
         ]);
