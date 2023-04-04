@@ -34,7 +34,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Icon:</strong>
-                    <img alt="img" src="{{asset('/public/event_image/'.$data->icon)}}" width="100px">
+                    <img alt="img" src="{{asset('/storage/app/'.$data->icon)}}" width="100px">
                 </div>
             </div>
 

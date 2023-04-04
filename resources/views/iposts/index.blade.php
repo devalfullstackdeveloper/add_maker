@@ -1,5 +1,4 @@
 @extends('layout.layout')
-
 @section('content')
 <section>
     <div class="container-fluid">
@@ -14,7 +13,6 @@
             </div>
 
             <div class="container-fluid">
-                <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary"> List</h6>
@@ -41,7 +39,7 @@
                                 <td>{{$i}}</td>
                                 <td>{{ $po->title}}</td>
                                 <td>{{ $po->description }}</td>
-                                <td><img alt="img" src="{{asset('/public/ipost_image/'.$po->images)}}" width="100px"></td>
+                                <td><img alt="img" src="{{asset('/storage/app/'.$po->images)}}" width="100px"></td>
                                 <td>{{ $po->created_at }}</td>
                                 <td>
                                   <div class="action-wrap-btn">

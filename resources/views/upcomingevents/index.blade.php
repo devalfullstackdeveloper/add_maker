@@ -43,8 +43,7 @@
                                 <td>{{$i}}</td>
                                 <td>{{ $up->title }}</td>
                                 <td>{{ $up->description }}</td>
-                                <td><img alt="img" src="{{asset('/public/event_image/'.$up->icon)}}" width="100px"></td>
-                                <!-- <td><img src="{{asset($up->p3)}}" alt="{{ $up->title}}" style="width: 100px;"></td> -->
+                                <td><img alt="img" src="{{asset('/storage/app/'.$up->icon)}}" width="100px"></td>
                                  <td>{{$up->date }}</td>
                                 <td>{{ $up->status }}</td>
                                 <td>
