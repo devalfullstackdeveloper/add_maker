@@ -37,15 +37,19 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Icon:</strong>
-                    <input type="file" name="icon" class="form-control" placeholder="icon">
-                 <img alt="img" src="{{asset('/public/event_image/'.$data->icon)}}" width="100px">
+                      <input type="file" name="icon" class="form-control" placeholder="Icon">
+                        <input type="hidden" name="hidden_event_image" class="form-control" placeholder="Icon" value={{$data->icon}}>
+                        <img src="{{asset('/storage/app/'.$data->icon)}}" alt="{{$data->icon}}" style="width: 100px;">
+                        @error('name')
+                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                        @enderror
                 </div>
             </div>
 
              <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Date:</strong>
-                    <input  name="date" class="form-control" placeholder="Date" value="{{ $data->date}}" >
+                    <input type="date"  name="date" class="form-control" placeholder="Date" value="{{ $data->date}}" >
                 </div>
             </div>
 
