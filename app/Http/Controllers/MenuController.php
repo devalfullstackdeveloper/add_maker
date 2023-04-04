@@ -7,7 +7,7 @@ use File;
 class MenuController extends Controller
 {
     public function index(){
-        $menu = Menu::latest()->paginate(5);
+        $menu = Menu::latest()->paginate();
         return view('menu.index', compact('menu')) ->with('i', (request()->input('page', 1) - 1) * 5);
     }
     public function create()
@@ -22,15 +22,14 @@ class MenuController extends Controller
             'images' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'price' => 'required',
             ]); 
-            $file = $request->file('images');
-            $fileName = $request->file('images')->getClientOriginalName();             
-            $path = $request->file('images')->storeAs('menu_image', $fileName);
-            $data = Menu::create([
-                'title' => $request->title,
-                'description' => $request->description,
-                'images' => $path,
-                'price' => $request->price,
-                
+        $file = $request->file('images');
+         $fileName = $request->file('images')->getClientOriginalName();             
+        $path = $request->file('images')->storeAs('menu_image', $fileName);
+        $data = Menu::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'images' => $path,
+            'price' => $request->price,     
             ]); 
            return redirect()->route('menu.index')
             ->with('success','Menu has been created successfully.');
@@ -60,7 +59,7 @@ class MenuController extends Controller
             }else{
                 $path = $request['hidden_menu_image'];
             }           
-            $UpdateDetails = Posts::where('id', $request->id)->update(array(
+            $UpdateDetails = Menu::where('id', $request->id)->update(array(
                 "title" => $request->title,
                 "description" => $request->description,
                 "images" => $path,
@@ -71,16 +70,11 @@ class MenuController extends Controller
             "title" => $request->title,
             "description" => $request->description,
             "price" => $request->price,
-           
         ));
-    
           }
-          
           return redirect()->route('menu.index')
                        ->with('success','Menu updated successfully');
         }
-
-
     public function destroy($id)
     {
         $idd = Menu::findOrFail($id);

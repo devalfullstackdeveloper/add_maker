@@ -1,6 +1,4 @@
 @extends('layout.layout')
-
-
 @section('content')
 <section>
 <div class="container mt-2">
@@ -10,12 +8,10 @@
                 <h2>Add New Menu</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('menu.index') }}"> All Post</a>
+                <a class="btn btn-primary" href="{{ route('menu.index') }}"> Back</a>
             </div>
         </div>
     </div>
-
-    
     @if ($errors->any())
         <div class="alert alert-danger">
             <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -26,9 +22,7 @@
             </ul>
         </div>
     @endif
-
-
-        <form action="{{ route('menu.update',$menu->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('menu.update',$menu->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
             <div class="row">

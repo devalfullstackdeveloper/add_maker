@@ -1,6 +1,4 @@
 @extends('layout.layout')
-
-
 @section('content')
 <section>
 <div class="container mt-2">
@@ -10,14 +8,12 @@
                 <h2>Add New Menu</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('menu.index') }}"> All Menu</a>
+                <a class="btn btn-primary" href="{{ route('menu.index') }}"> Back</a>
             </div>
         </div>
     </div>
-
     <div >
         <div class="card-body">
-
             @if ($errors->any())
                 <div class="mt-2 alert alert-danger">
                     <ul class="mb-0">
@@ -27,8 +23,6 @@
                     </ul>
                 </div>
             @endif  
-
-
         <form action="{{ route('menu.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
             <div class="row">
@@ -41,7 +35,6 @@
                         @enderror
                     </div>
                 </div>
-
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Menu Description</strong>
@@ -51,8 +44,6 @@
                         @enderror
                     </div>
                 </div>
-
-
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Image</strong>
@@ -62,7 +53,6 @@
                         @enderror
                     </div>
                 </div>
-
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Menu Price</strong>

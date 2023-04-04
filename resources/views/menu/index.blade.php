@@ -1,20 +1,16 @@
 @extends('layout.layout')
-
 @section('content')
 <section>
     <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">All Menu</h1>
-
-        <a href="{{ route('menu.create') }}" class="btn btn-primary btn-icon-split">
+                <h1 class="h3 mb-0 text-gray-800">All Menu</h1>
+                <a href="{{ route('menu.create') }}" class="btn btn-primary btn-icon-split">
                 <span class="icon text-white-50">
                     <i class="fa fa-plus" style="font-size:24px"></i>
                 </span>
                 <span class="text">Add New Menu</span></a>
             </div>
-
             <div class="container-fluid">
-                <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary"> List</h6>
@@ -47,11 +43,8 @@
                                 <td>{{ $menu->created_at }}</td>
                                 <td>
                                   <div class="action-wrap-btn">
-
                                    <a href="{{ route('menu.show', $menu->id) }}" class="btn btn-success btn-circle"><i class="fas fa-eye"></i></a>
-
                                    <a href="{{route('menu.edit', $menu->id)}}" class="btn btn-primary btn-circle"><i class="fas fa-edit"></i></a>
-
                                    <form action="{{ route('menu.destroy',$menu->id) }}" method="post" style="display: inline-block">
                                     @csrf
                                     @method('DELETE')
