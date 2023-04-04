@@ -92,17 +92,17 @@ Route::get('facebook', [FacebookApiController::class, 'facebook']);
 
  // Route::post('/store', contactcontroller::class,'store');
 
- Route::post('/store', [contactcontroller::class, 'store']);
- Route::get('/insta', [instacontroller::class, 'insta']);
- Route::post('/store', [contactcontroller::class, 'store']);
+Route::post('/store', [contactcontroller::class, 'store']);
+Route::get('/insta', [instacontroller::class, 'insta']);
+Route::post('/store', [contactcontroller::class, 'store']);
 
  Route::resource('/media', SocialMediaController::class); // social media api
  Route::post('/update/media/{id}',[SocialMediaController::class, 'update']);
 
 Route::get('/add_brand', [AddBrandController::class, 'add_brand']);
 
- Route::resource('/profile',ProfileController::class);
-   Route::post('/ps', [InstagramApiController::class, 'instagram']);
+Route::resource('/profile',ProfileController::class);
+Route::post('/ps', [InstagramApiController::class, 'instagram']);
 
 
 
