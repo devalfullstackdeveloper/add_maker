@@ -51,7 +51,9 @@
 <div class="form-group">
 <strong>Industry Image:</strong>
 <input type="file" name="industry_image" class="form-control" placeholder="Industry Image">
-<img src="{{asset('/public/industry_image/'.$data->industry_image)}}" alt="{{$data->industry_type}}" style="width: 100px;">
+  <input type="hidden" name="hidden_industry_image" class="form-control" placeholder="Industry Image" value="{{$data->image}}">
+
+  <img src="{{asset('/storage/app/'.$data->industry_image)}}" alt="{{$data->industry_type}}" style="width: 100px;">
 @error('name')
 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
 @enderror

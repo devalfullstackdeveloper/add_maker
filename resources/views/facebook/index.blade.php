@@ -40,7 +40,7 @@
                                 <td>{{$i}}</td>
                                 <td>{{ $fb->title }}</td>
                                 <td>{{ $fb->description }}</td>
-                                <td><img src="{{asset('/public/facebook_image/'.$fb->image)}}" alt="{{$fb->title}}" style="width: 100px;"></td>
+                                <td><img src="{{asset('/storage/app/'.$fb->image)}}" alt="{{$fb->title}}" style="width: 100px;"></td>
                                 <td>{{ $fb->status }}</td>
                                 <td>
                                   <div class="action-wrap-btn">

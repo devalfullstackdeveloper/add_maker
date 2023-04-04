@@ -49,23 +49,16 @@ class BussinessCardController extends Controller
             'date' => 'required',
             'status' => 'required',
         ]);
-        $path = public_path('bcard_image');
 
-            if(!File::isDirectory($path)){
-            File::makeDirectory($path, 0777, true, true);
-             $imageName = time().'.'.$request->image->extension();  
-             $request->image->move(public_path('bcard_image'), $imageName);
-             $imagewithfolder = $imageName;
+        
+        $file = $request->file('image');
+        $fileName = $request->file('image')->getClientOriginalName();             
+        $path = $request->file('image')->storeAs('bcard_image', $fileName);
 
-            }else{
-            $imageName = time().'.'.$request->image->extension();
-            $request->image->move(public_path('bcard_image'), $imageName);
-            $imagewithfolder = $imageName;
-            }
             $data = business_card::create([
             'title' => $request->title,
             'description' => $request->description,
-            'image' => $imagewithfolder,
+            'image' => $path,
             'date'=>  $request->date,
             'status'=> $request->status,
               ]);
