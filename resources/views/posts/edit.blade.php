@@ -53,7 +53,8 @@
                     <div class="form-group">
                         <strong>Image</strong>
                             <input type="file" name="images" class="form-control" placeholder="Uplpoad Images">
-                            <img class="mt-2" src="{{asset('/public/fbpost_image/'.$post->images)}}" width="300px">
+                           <input type="hidden" name="hidden_post_image" class="form-control" placeholder="Post Image" value="{{$post->images}}">
+                            <img class="mt-2" src="{{asset('/storage/app/'.$post->images)}}" width="300px">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary ml-3">Update Post</button>

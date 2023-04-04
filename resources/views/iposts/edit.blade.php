@@ -53,7 +53,9 @@
                     <div class="form-group">
                         <strong>Images</strong>
                             <input type="file" name="images" class="form-control" placeholder="Upload Images">
-                            <img class="mt-2" src="{{asset('/public/ipost_image/'.$ipost->images)}}" width="300px">
+                           <input type="hidden" name="hidden_ipost_image" class="form-control" placeholder="Post Image" value="{{$ipost->images}}">
+
+                            <img class="mt-2" src="{{asset('/storage/app/'.$ipost->images)}}" width="300px">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary ml-3">Update Post</button>
