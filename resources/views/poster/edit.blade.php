@@ -39,15 +39,13 @@
                     <strong>Poster Image:</strong>
                     <input type="file" name="poster_img" class="form-control" placeholder="poster_img">
                      <input type="hidden" name="hidden_poster_img" class="form-control" placeholder="Poster Image" value={{$data->poster_img}}>
-                        <img src="{{asset('/storage/app/'.$data->poster_img)}}" alt="{{$data->poster_img}}" style="width: 100px;">
+                        <img src="{{asset('/storage/app/'.$data->poster_img)}}" alt="{{$data->poster_name}}" style="width: 100px;">
                         @error('name')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                         @enderror
-
-
                 </div>
             </div>
-
+            
              <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Poster Date:</strong>
