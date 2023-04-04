@@ -44,7 +44,12 @@
                 <div class="form-group">
                     <strong>Image:</strong>
                     <input type="file" name="image" class="form-control" placeholder="Facebook Image">
-                    <img src="{{asset('/public/facebook_image/'.$data->image)}}" alt="{{$data->title}}" style="width: 100px;">
+                  
+
+                    <input type="hidden" name="hidden_facebook_image" class="form-control" placeholder="Facebook Image" value="{{$data->industry_image}}">
+
+                    <img src="{{asset('/storage/app/'.$data->image)}}" alt="{{$data->title}}" style="width: 100px;">
+
                     @error('name')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                     @enderror
