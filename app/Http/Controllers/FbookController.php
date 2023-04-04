@@ -47,9 +47,9 @@ class FbookController extends Controller
             'description'=> 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status'=> 'required'
+
             ]);
           
-
             $file = $request->file('image');
             $fileName = $request->file('image')->getClientOriginalName();             
             $path = $request->file('image')->storeAs('facebook_image', $fileName);
@@ -110,34 +110,19 @@ class FbookController extends Controller
 
     //  print_r($request->all());exit();
 
-      if($_FILES['image']['name'] != ''){
-            //upload image
-        $path = public_path('facebook_image');
-
-        if(!File::isDirectory($path)){
-          File::makeDirectory($path, 0777, true, true);
-          $imageName = time().'.'.$request->image->extension();  
-
-          $request->image->move(public_path('facebook_image'), $imageName);
-
-          $request->image->move(public_path('image'), $imageName);
-
-          $imagewithfolder = $imageName;
-
-        }else{
-          $imageName = time().'.'.$request->image->extension();
-
-          $request->image->move(public_path('facebook_image'), $imageName);
-
-          $request->image->move(public_path('image'), $imageName);
-
-          $imagewithfolder = $imageName;
-        }
+    if($_FILES['image']['name'] != ''){
+      $file = $request->file('image');
+      $fileName = $request->file('image')->getClientOriginalName(); 
+      if($fileName != ''){
+          $path = $request->file('image')->storeAs('facebook_image', $fileName);
+      }else{
+          $path = $request['hidden_facebook_image'];
+      }  
 
         $UpdateDetails = Facebook::where('id', $request->id)->update(array(
        "title" => $request->title,
        "description" => $request->description,
-       "image" => $imagewithfolder,
+       "image" => $path,
        "status" => $request->status,
      ));
 
