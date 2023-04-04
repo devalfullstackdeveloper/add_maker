@@ -58,7 +58,13 @@ class eventController extends Controller
         $fileName = $request->file('icon')->getClientOriginalName();             
         $path = $request->file('icon')->storeAs('event_image', $fileName);
              
+<<<<<<< Updated upstream
           
+=======
+            $file = $request->file('event_image');
+            $fileName = $request->file('event_image')->getClientOriginalName();             
+            $path = $request->file('event_image')->storeAs('event_image', $fileName);
+>>>>>>> Stashed changes
             $data = upcomingevents::create([
             'title' => $request->title,
             'description' => $request->description,
@@ -118,6 +124,7 @@ class eventController extends Controller
             'status'=> 'required'
             ]);
 
+<<<<<<< Updated upstream
             if($_FILES['icon']['name'] != ''){
             $file = $request->file('icon');
             $fileName = $request->file('icon')->getClientOriginalName(); 
@@ -139,6 +146,29 @@ class eventController extends Controller
         }else{
          $UpdateDetails = upcomingevents::where('id', $request->id)->update(array(
             "title" => $request->title,
+=======
+       if($_FILES['icon']['name'] != ''){
+           $file = $request->file('event_image');
+            $fileName = $request->file('event_image')->getClientOriginalName(); 
+            if($fileName != ''){
+                $path = $request->file('event_image')->storeAs('event_image', $fileName);
+            }else{
+                $path = $request['hidden_event_image'];
+            }       
+
+        $UpdateDetails = upcomingevents::where('id', $request->id)->update(array(
+       "title" => $request->title,
+       "description" => $request->description,
+       "icon" => $imagewithfolder,
+       "date" => $request->date,
+        "status" => $request->status,
+
+     ));
+
+      }else{
+       $UpdateDetails = upcomingevents::where('id', $request->id)->update(array(
+        "title" => $request->title,
+>>>>>>> Stashed changes
         "description" => $request->description,
         "date" => $request->date,
         "status" => $request->status,
