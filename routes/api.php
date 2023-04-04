@@ -114,5 +114,10 @@ Route::post('/update/media/{id}',[SocialMediaController::class, 'update']);
 // api for brand info
  Route::get('/add_brand', [AddBrandController::class, 'add_brand']);
 
+
 // api for profile
 Route::resource('/profile',ProfileController::class);
+
+
+
+

@@ -49,23 +49,16 @@ class BussinessCardController extends Controller
             'date' => 'required',
             'status' => 'required',
         ]);
-        $path = public_path('bcard_image');
 
-            if(!File::isDirectory($path)){
-            File::makeDirectory($path, 0777, true, true);
-             $imageName = time().'.'.$request->image->extension();  
-             $request->image->move(public_path('bcard_image'), $imageName);
-             $imagewithfolder = $imageName;
+        
+        $file = $request->file('image');
+        $fileName = $request->file('image')->getClientOriginalName();             
+        $path = $request->file('image')->storeAs('bcard_image', $fileName);
 
-            }else{
-            $imageName = time().'.'.$request->image->extension();
-            $request->image->move(public_path('bcard_image'), $imageName);
-            $imagewithfolder = $imageName;
-            }
             $data = business_card::create([
             'title' => $request->title,
             'description' => $request->description,
-            'image' => $imagewithfolder,
+            'image' => $path,
             'date'=>  $request->date,
             'status'=> $request->status,
               ]);
@@ -108,34 +101,27 @@ class BussinessCardController extends Controller
      * @param  \App\Models\business_card  $business_card
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, business_card $business_card)
+    public function update(Request $request, $id)
     {
         
         $request->validate([
             'description' => 'required',  
-            'image' => 'required',
             'date' => 'required',
             'status' => 'required',        
         ]);
-         if($_FILES['image']['name'] != ''){
-            //upload image
-        $path = public_path('bcard_image');
 
-        if(!File::isDirectory($path)){
-          File::makeDirectory($path, 0777, true, true);
-          $imageName = time().'.'.$request->image->extension();  
-          $request->imageimage->move(public_path('bcard_image'), $imageName);
-          $imagewithfolder = $imageName;
-
-        }else{
-          $imageName = time().'.'.$request->image->extension();
-          $request->image->move(public_path('bcard_image'), $imageName);
-          $imagewithfolder = $imageName;
-        }
+        if($_FILES['image']['name'] != ''){
+            $file = $request->file('image');
+            $fileName = $request->file('image')->getClientOriginalName(); 
+            if($fileName != ''){
+                $path = $request->file('image')->storeAs('bcard_image', $fileName);
+            }else{
+                $path = $request['hidden_bcard_image'];
+            }    
 
         $UpdateDetails = business_card::where('id', $request->id)->update(array(
        "description" => $request->description,
-       "image" => $imagewithfolder,
+       "image" => $path,
        "date" => $request->date,
         "status" => $request->status,
 
