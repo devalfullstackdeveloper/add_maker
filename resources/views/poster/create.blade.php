@@ -35,13 +35,16 @@
 <div class="form-group">
 <strong>Poster Image:</strong>
 <input type="file" name="poster_img" class="form-control" placeholder="Icon">
+@error('name')
+<div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+@enderror
 </div>
 </div>
 
 <div class="col-xs-12 col-sm-12 col-md-12">
 <div class="form-group">
 <strong>Poster Date:</strong>
-<input name="poster_date" class="form-control" placeholder="Date">
+<input type="date" name="poster_date" class="form-control" placeholder="Date">
 </div>
 </div>
 

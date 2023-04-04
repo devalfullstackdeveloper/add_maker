@@ -13,8 +13,7 @@ class InstagramApiController extends Controller
     public function instagram()
     {
         $products1 = Iposts::select()->orderBy('id','desc')->get();
-        // $products2 = Facebook::select()->orderBy('id','desc')->get();
-
+       
 
         print_r($products1);exit();
 
