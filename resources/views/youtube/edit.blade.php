@@ -38,8 +38,8 @@
                 <div class="form-group">
                     <strong>Image:</strong>
                     <input type="file" name="image" class="form-control" placeholder="img">
-                     <input type="hidden" name="hidden_yt_image" class="form-control" placeholder="Image" value={{$data->yt_image}}>
-                        <img src="{{asset('/storage/app/'.$data->yt_image)}}" alt="{{$data->yt_image}}" style="width: 100px;">
+                     <input type="hidden" name="hidden_yt_image" class="form-control" placeholder="Image" value={{$data-> image}}>
+                        <img src="{{asset('/storage/app/'.$data->image)}}" alt="{{$data->title}}" style="width: 100px;">
                         @error('name')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                         @enderror
