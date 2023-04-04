@@ -92,46 +92,46 @@ class PosterController extends Controller
      * @param  \App\Models\Poster  $poster
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Poster $poster)
-    {
+    public function update(Request $request,$id)
+    {  
+        // print_r("hgkjh"); exit;
         $request->validate([
             'poster_name' => 'required',
             'description'=> 'required',
-            'poster_img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'poster_date'=> 'required',
             'status'=> 'required'
+      ]);
 
-            ]);
-
-       if($_FILES['poster_img']['name'] != ''){
-        $file = $request->file('poster_img');
+            if($_FILES['poster_img']['name'] != ''){
+            $file = $request->file('poster_img');
             $fileName = $request->file('poster_img')->getClientOriginalName(); 
             if($fileName != ''){
                 $path = $request->file('poster_img')->storeAs('poster_img', $fileName);
             }else{
                 $path = $request['hidden_poster_img'];
-            }
+            }          
 
-        $UpdateDetails = poster::where('id', $request->id)->update(array(
-       "poster_name" => $request->poster_name,
-       "description" => $request->description,
-       "poster_img" => $imagewithfolder,
-       "poster_date" => $request->poster_date,
-        "status" => $request->status,
-     ));
+            $UpdateDetails = poster::where('id', $request->id)->update(array(
+             "poster_name" => $request->poster_name,
+             "description" => $request->description,
+             "poster_img" => $path,
+             "poster_date" => $request->poster_date,
+             "status" => $request->status,
+         ));
 
-      }else{
-       $UpdateDetails = poster::where('id', $request->id)->update(array(
-        "poster_name" => $request->poster_name,
-        "description" => $request->description,
-        "poster_date" => $request->poster_date,
-        "status" => $request->status,
+         }else{
+         $UpdateDetails = poster::where('id', $request->id)->update(array(
+            "poster_name" => $request->poster_name,
+            "description" => $request->description,
+            "poster_date" => $request->poster_date,
+            "status" => $request->status,
 
-     ));
+        ));
 
       }
+      // print_r("hgkjh"); exit;
       return redirect()->route('poster.index')
-          ->with('success','upcoming events has been created successfully.'); 
+          ->with('success','poster has been updated successfully.'); 
     }
 
     /**
