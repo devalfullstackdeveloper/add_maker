@@ -57,10 +57,10 @@ Route::get('/home',[HomeController::class, 'home']);
 
 
 //api for Mutliple select Industry
-Route::post('/user_i',[user_industryController::class, 'store']);
+Route::post('/user_industry',[user_industryController::class, 'store']);
 
 //api for Facebook
-Route::get('fbook', [FacebookApiController::class, 'index']);
+Route::get('facebook_ad', [FacebookApiController::class, 'index']);
 
 //api for Admin
 Route::put('edit/{id}', [ AdminApiController::class, 'edit']);
@@ -89,33 +89,30 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 //fetching for Facebook Post
-Route::get('/displaypost',[FetchpostController::class, 'index']);
+Route::get('/facebook_post',[FetchpostController::class, 'index']);
 
 // fetching for Instagram Post
-Route::get('/showpost',[FetchipostController::class, 'ipost']);
+Route::get('/instagram_post',[FetchipostController::class, 'ipost']);
 
 
 //fetch api of facebook ads and facebook posts 
 Route::get('facebook', [FacebookApiController::class, 'facebook']);
 
 //api for instagram story and instagram posts
-Route::post('/instagram',[InstagramApiController::class, 'instagram']);
+Route::get('/instagram',[InstagramApiController::class, 'instagram']);
 
+// api for contact us
+Route::post('/contact_store', [contactcontroller::class, 'store']);
 
+// api for instagram story
+Route::get('/instagram_story', [instacontroller::class, 'insta']);
 
- // Route::post('/store', contactcontroller::class,'store');
+// api for social media in brand info
+Route::resource('/media', SocialMediaController::class); 
+Route::post('/update/media/{id}',[SocialMediaController::class, 'update']);
 
-Route::post('/store', [contactcontroller::class, 'store']);
-Route::get('/insta', [instacontroller::class, 'insta']);
-Route::post('/store', [contactcontroller::class, 'store']);
-
- Route::resource('/media', SocialMediaController::class); // social media api
- Route::post('/update/media/{id}',[SocialMediaController::class, 'update']);
-
+// api for brand info
  Route::get('/add_brand', [AddBrandController::class, 'add_brand']);
 
- Route::resource('/profile',ProfileController::class);
- Route::post('/ps', [InstagramApiController::class, 'instagram']);
-
-
-
+// api for profile
+Route::resource('/profile',ProfileController::class);
