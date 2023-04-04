@@ -47,7 +47,7 @@ Route::post('/login',[AuthOtpController::class, 'login']);
 
 //api for Industry
 Route::get('/industry',[IndustrytypeController::class, 'index']);
-Route::get('/select/{id}',[IndustrytypeController::class, 'select']);
+Route::get('/select_industry/{id}',[IndustrytypeController::class, 'select']);
 
 //api for Business Card
 Route::get('/card',[BcardController::class, 'bcard']);
@@ -107,9 +107,15 @@ Route::post('/contact_store', [contactcontroller::class, 'store']);
 // api for instagram story
 Route::get('/instagram_story', [instacontroller::class, 'insta']);
 
+
+//FETCH api for Instagram Story
+Route::get('/insta', [instacontroller::class, 'insta']);
+
+
 // api for social media in brand info
 Route::resource('/media', SocialMediaController::class); 
 Route::post('/update/media/{id}',[SocialMediaController::class, 'update']);
+
 
 // api for brand info
  Route::get('/add_brand', [AddBrandController::class, 'add_brand']);
