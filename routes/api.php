@@ -26,6 +26,8 @@ use App\Http\Controllers\API\instacontroller;
 use App\Http\Controllers\API\SocialMediaController;
 use App\Http\Controllers\API\AddBrandController;
 use App\Http\Controllers\API\FavoriteController;
+use App\Http\Controllers\API\MenuApiController;
+
 
 
 
@@ -124,6 +126,10 @@ Route::post('/update/media/{id}',[SocialMediaController::class, 'update']);
 
 // api for profile
 Route::resource('/profile',ProfileController::class);
+
+//fetch api of menu
+Route::get('/menu', [MenuApiController::class, 'fetch_menu']);
+
 
 
 
