@@ -9,7 +9,7 @@ class IpostsController extends Controller
 {
     public function index()
     {
-        $iposts = Iposts::latest()->paginate(5);
+        $iposts = Iposts::latest()->paginate();
         return view('iposts.index', compact('iposts')) ->with('i', (request()->input('page', 1) - 1) * 5);    
     }
     public function create()
