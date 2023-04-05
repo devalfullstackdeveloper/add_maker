@@ -25,7 +25,9 @@ use App\Http\Controllers\API\ProfileController;
 use App\Http\Controllers\API\instacontroller;
 use App\Http\Controllers\API\SocialMediaController;
 use App\Http\Controllers\API\AddBrandController;
+use App\Http\Controllers\API\FavoriteController;
 use App\Http\Controllers\API\MenuApiController;
+
 
 
 
@@ -131,4 +133,6 @@ Route::get('/menu', [MenuApiController::class, 'fetch_menu']);
 
 
 
+//api for favorite
+Route::post('/fav',[FavoriteController::class, 'fav']);
 
