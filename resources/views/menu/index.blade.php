@@ -3,15 +3,13 @@
 <section>
     <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">All Instagram Posts</h1>
-
-        <a href="{{ route('iposts.create') }}" class="btn btn-primary btn-icon-split">
+                <h1 class="h3 mb-0 text-gray-800">All Menu</h1>
+                <a href="{{ route('menu.create') }}" class="btn btn-primary btn-icon-split">
                 <span class="icon text-white-50">
                     <i class="fa fa-plus" style="font-size:24px"></i>
                 </span>
-                <span class="text">Add New Post</span></a>
+                <span class="text">Add New Menu</span></a>
             </div>
-
             <div class="container-fluid">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
@@ -23,9 +21,10 @@
                                 <thead>
                                     <tr>
                                     <th>Id</th>
-                                    <th>Posts Title</th>
-                                    <th>Posts description</th>
-                                    <th>Posts Images</th>
+                                    <th>Item Title</th>
+                                    <th>Item description</th>
+                                    <th>Item Image</th>
+                                    <th>Item Price</th>
                                     <th>Created At</th>
                                     <th width="280px">Action</th>
                                     </tr>
@@ -34,21 +33,19 @@
                                 <tbody>
                                  <?php $i=1; 
                                    ?>
-                              @foreach ($iposts as $po)
+                              @foreach ($menu as $menu)
                                <tr>
                                 <td>{{$i}}</td>
-                                <td>{{ $po->title}}</td>
-                                <td>{{ $po->description }}</td>
-                                <td><img alt="img" src="{{asset('/storage/app/'.$po->images)}}" width="100px"></td>
-                                <td>{{ $po->created_at }}</td>
+                                <td>{{ $menu->title}}</td>
+                                <td>{{ $menu->description }}</td>
+                                <td><img alt="img" src="{{asset('/storage/app/'.$menu->images)}}" width="100px"></td>
+                                <td>{{ $menu->price }}</td>
+                                <td>{{ $menu->created_at }}</td>
                                 <td>
                                   <div class="action-wrap-btn">
-
-                                   <a href="{{ route('iposts.show', $po->id) }}" class="btn btn-success btn-circle"><i class="fas fa-eye"></i></a>
-
-                                   <a href="{{route('iposts.edit', $po->id)}}" class="btn btn-primary btn-circle"><i class="fas fa-edit"></i></a>
-
-                                   <form action="{{ route('iposts.destroy',$po->id) }}" method="post" style="display: inline-block">
+                                   <a href="{{ route('menu.show', $menu->id) }}" class="btn btn-success btn-circle"><i class="fas fa-eye"></i></a>
+                                   <a href="{{route('menu.edit', $menu->id)}}" class="btn btn-primary btn-circle"><i class="fas fa-edit"></i></a>
+                                   <form action="{{ route('menu.destroy',$menu->id) }}" method="post" style="display: inline-block">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash"></i></button>

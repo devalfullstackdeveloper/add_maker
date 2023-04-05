@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use App\Models\Posts;
 use Illuminate\Http\Request;
@@ -8,7 +7,7 @@ use DataTables;
 class PostController extends Controller
 {
     public function index(){
-        $posts = Posts::latest()->paginate(5);
+        $posts = Posts::latest()->paginate();
         return view('posts.index', compact('posts')) ->with('i', (request()->input('page', 1) - 1) * 5);
     }
     public function create()
