@@ -42,7 +42,9 @@
 <div class="col-xs-12 col-sm-12 col-md-12">
 <div class="form-group">
 <strong>Image:</strong>
-<input type="file" name="image" value="{{asset('/public/bcard_image/'.$data->image)}}" class="form-control" placeholder="image">
+<input type="file" name="image"  class="form-control" placeholder="image">
+<input type="hidden" name="hidden_bcard_image" class="form-control" placeholder="Business Card Image" value="{{$data->image}}">
+<img src="{{asset('/storage/app/'.$data->image)}}" alt="{{$data->description}}" style="width: 100px;">
 @error('name')
 <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
 @enderror

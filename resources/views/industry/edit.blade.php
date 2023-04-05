@@ -14,6 +14,9 @@
             </div>
         </div>
 
+        
+
+
         @if ($errors->any())
         <div class="alert alert-danger">
             <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -25,6 +28,7 @@
         </div>
         @endif
 
+   
         <form action="{{ route('industry.update',$data->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
 
@@ -50,23 +54,18 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Industry Image:</strong>
-
                         <input type="file" name="industry_image" class="form-control" placeholder="Industry Image">
-
                            <input type="hidden" name="hidden_industry_image" class="form-control" placeholder="Industry Image" value={{$data->industry_image}}>
-
                         <img src="{{asset('/storage/app/'.$data->industry_image)}}" alt="{{$data->industry_type}}" style="width: 100px;">
-               
+              
                         @error('name')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
-
                 <button type="submit" class="btn btn-primary ml-3">Update</button>
             </div>
         </div>
     </form> 
-
 </section>
 @endsection

@@ -19,6 +19,7 @@ use App\Http\Controllers\twitterController;
 use App\Http\Controllers\PosterController;
 use App\Http\Controllers\youtubeController;
 use App\Http\Controllers\instagramController;
+use App\Http\Controllers\MenuController;
 
 
 
@@ -91,10 +92,10 @@ Route::get('/logout', [LogoutController::class, 'perform'])->name('logout.perfor
 
 Route::resource('posts', PostController::class);
 Route::resource('/iposts', IpostsController::class);
-
- Route::resource('fbook', FbookController::class);
- Route::resource('bcard', BussinessCardController::class);
-  Route::post('/update/bcard/{id}', [BussinessCardController::class,'update'])->name('bcard.update');
+Route::resource('/menu', MenuController::class);
+Route::resource('fbook', FbookController::class);
+Route::resource('bcard', BussinessCardController::class);
+Route::post('/update/bcard/{id}', [BussinessCardController::class,'update'])->name('bcard.update');
   
 //  Route::post('delete-industry', [IndustryController::class,'destroy']);
 //  Route::get('admins', [IndustryController::class, 'indexs'])->name('admins.index');

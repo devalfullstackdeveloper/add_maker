@@ -1,8 +1,5 @@
 @extends('layout.layout')
-
-
 @section('content')
-
 <section> 
 <div class="container mt-2">
 <div class="row">
@@ -34,14 +31,11 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Image:</strong>
-                <img src="{{asset('/public/ipost_image/'.$ipost->images)}}" alt="{{$ipost->title}}" style="width: 100px;">
+                <div>
+                <img src="{{asset('/storage/app/'.$ipost->images)}}" alt="{{$ipost->title}}" style="width: 100px;">
+                </div>
             </div>
         </div>
-        <a href="{{route('iposts.edit',$ipost->id)}}" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
-                        Edit Post
-                    </a>
-        
-
     </div>
 </div>
 

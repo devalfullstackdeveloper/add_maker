@@ -12,8 +12,7 @@ class InstagramApiController extends Controller
 {
     
     public function instagram()
-    {
-         
+    {         
     $Iposts =  Iposts::select('id', 'title', 'description', 'images')->get()->toArray();
     foreach ($Iposts as $key => $value) {
     $data['Iposts'][$key] = $value;
@@ -25,6 +24,7 @@ class InstagramApiController extends Controller
         }
        
      return($data);
+
       
 
     }

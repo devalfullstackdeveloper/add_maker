@@ -4,7 +4,7 @@
 <section>
     <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">All Posts</h1>
+            <h1 class="h3 mb-0 text-gray-800">All Facebook Posts</h1>
 
         <a href="{{ route('posts.create') }}" class="btn btn-primary btn-icon-split">
                 <span class="icon text-white-50">
@@ -41,7 +41,7 @@
                                 <td>{{$i}}</td>
                                 <td>{{ $po->title}}</td>
                                 <td>{{ $po->description }}</td>
-                                <td><img alt="img" src="{{asset('/public/fbpost_image/'.$po->images)}}" width="100px"></td>
+                                <td><img alt="img" src="{{asset('/storage/app/'.$po->images)}}" width="100px"></td>
                                 <td>{{ $po->created_at }}</td>
                                 <td>
                                   <div class="action-wrap-btn">

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\poster;
+use App\Models\Poster;
 use Illuminate\Http\Request;
 
 class poster_data_controller extends Controller

@@ -46,26 +46,13 @@ class instagramController extends Controller
             'date'=> 'required',
             'status'=> 'required'
             ]);
-        
-
-           $path = public_path('insta_image');
-
-            if(!File::isDirectory($path)){
-            File::makeDirectory($path, 0777, true, true);
-             $imageName = time().'.'.$request->image->extension();  
-             $request->image->move(public_path('insta_image'), $imageName);
-             $imagewithfolder =$imageName;
-
-            }else{
-            $imageName = time().'.'.$request->image->extension();
-            $request->image->move(public_path('insta_image'), $imageName);
-
-            $imagewithfolder = $imageName;
-            }
+            $file = $request->file('image');
+          $fileName = $request->file('image')->getClientOriginalName();             
+          $path = $request->file('image')->storeAs('insta_image', $fileName);
             $data = instagram::create([
             'title' => $request->title,
             'description' => $request->description,
-            'image' => $imagewithfolder,
+            'image' => $path,
             'date'=>  $request->date,
             'status'=> $request->status,
               ]);
@@ -116,27 +103,18 @@ class instagramController extends Controller
        if($_FILES['image']['name'] != ''){
             //upload image
 
-        $path = public_path('insta_image');
-
-        if(!File::isDirectory($path)){
-          File::makeDirectory($path, 0777, true, true);
-          $imageName = time().'.'.$request->image->extension();  
-
-          $request->imageimage->move(public_path('insta_image'), $imageName);
-
-          $imagewithfolder = $imageName;
-
-        }else{
-          $imageName = time().'.'.$request->image->extension();
-          $request->image->move(public_path('insta_image'), $imageName);
-
-          $imagewithfolder = $imageName;
-        }
-
+      $file = $request->file('image');
+            $fileName = $request->file('image')->getClientOriginalName(); 
+            if($fileName != ''){
+                $path = $request->file('image')->storeAs('insta_image', $fileName);
+            }else{
+                $path = $request['hidden_image'];
+            }           
+                
         $UpdateDetails = instagram::where('id', $request->id)->update(array(
        "title" => $request->title,
        "description" => $request->description,
-       "image" => $imagewithfolder,
+       "image" => $path,
        "date" => $request->date,
         "status" => $request->status,
 

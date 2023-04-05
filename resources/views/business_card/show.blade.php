@@ -23,7 +23,7 @@
                 {{ $data->description }}
 
             <br><br><strong>Image:</strong><br>
-            <img src="{{asset('/public/bcard_image/'.$data->image)}}" alt="" style="width: 100px;">
+            <img src="{{asset('/storage/app/'.$data->image)}}" alt="" style="width: 100px;">
                 
 
              <br><br><strong>Date:</strong><br>

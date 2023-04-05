@@ -49,27 +49,16 @@ class twitterController extends Controller
             'date'=> 'required',
             'status'=> 'required'
             ]);
-        
-           $path = public_path('twitter_image');
-
-            if(!File::isDirectory($path)){
-            File::makeDirectory($path, 0777, true, true);
-             $imageName = time().'.'.$request->image->extension();  
-             $request->image->move(public_path('twitter_image'), $imageName);
-             $imagewithfolder = $imageName;
-
-            }else{
-            $imageName = time().'.'.$request->image->extension();
-            $request->image->move(public_path('twitter_image'), $imageName);
-            $imagewithfolder = $imageName;
-            }
-            $data = twitter::create([
-            'title' => $request->title,
+            $file = $request->file('image');
+        $fileName = $request->file('image')->getClientOriginalName();             
+        $path = $request->file('image')->storeAs('twitter_image', $fileName);
+        $data = twitter::create([
+           'title' => $request->title,
             'description' => $request->description,
-            'image' => $imagewithfolder,
+            'image' => $path,
             'date'=>  $request->date,
             'status'=> $request->status,
-              ]);
+        ]);
             return redirect()->route('twitter.index')
           ->with('success','upcoming events has been created successfully.');
     }
@@ -120,29 +109,22 @@ class twitterController extends Controller
 
        if($_FILES['image']['name'] != ''){
             //upload image
-        $path = public_path('twitter_image');
-
-        if(!File::isDirectory($path)){
-          File::makeDirectory($path, 0777, true, true);
-          $imageName = time().'.'.$request->image->extension();  
-          $request->imageimage->move(public_path('twitter_image'), $imageName);
-          $imagewithfolder = $imageName;
-
-        }else{
-          $imageName = time().'.'.$request->image->extension();
-          $request->image->move(public_path('twitter_image'), $imageName);
-          $imagewithfolder = $imageName;
-        }
+        $file = $request->file('image');
+            $fileName = $request->file('image')->getClientOriginalName(); 
+            if($fileName != ''){
+                $path = $request->file('image')->storeAs('twitter_image', $fileName);
+            }else{
+                $path = $request['hidden_image'];
+            }           
 
         $UpdateDetails = twitter::where('id', $request->id)->update(array(
        "title" => $request->title,
        "description" => $request->description,
-       "image" => $imagewithfolder,
+       "image" => $path,
        "date" => $request->date,
         "status" => $request->status,
-
      ));
-
+        
       }else{
        $UpdateDetails = twitter::where('id', $request->id)->update(array(
         "title" => $request->title,

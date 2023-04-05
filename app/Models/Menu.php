@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Iposts extends Model
+class Menu extends Model
 {
     use HasFactory;
-    protected $table='ipost';
+    protected $table='menus';
     protected $fillable = [
         'title',
         'description',
-        'images'
+        'images',
+        'price'
     ];
 }

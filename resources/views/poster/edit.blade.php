@@ -38,18 +38,18 @@
                 <div class="form-group">
                     <strong>Poster Image:</strong>
                     <input type="file" name="poster_img" class="form-control" placeholder="poster_img">
-
-                    <img alt="img" src="{{asset('/public/poster_image/'.$data->poster_img)}}" width="100px">
-
-                    <img alt="img" src="{{asset($data->image)}}" width="100px">
-
+                     <input type="hidden" name="hidden_poster_img" class="form-control" placeholder="Poster Image" value={{$data->poster_img}}>
+                        <img src="{{asset('/storage/app/'.$data->poster_img)}}" alt="{{$data->poster_name}}" style="width: 100px;">
+                        @error('name')
+                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                        @enderror
                 </div>
             </div>
-
+            
              <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Poster Date:</strong>
-                    <input  name="poster_date" class="form-control" placeholder="Date" value="{{ $data->poster_date}}" >
+                    <input type="date" name="poster_date" class="form-control" placeholder="Date" value="{{ $data->poster_date}}" >
                 </div>
             </div>
 

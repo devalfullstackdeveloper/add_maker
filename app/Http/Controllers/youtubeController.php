@@ -45,28 +45,18 @@ class youtubeController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'date'=> 'required',
             'status'=> 'required'
-            ]);
-        
-           $path = public_path('yt_image');
-
-            if(!File::isDirectory($path)){
-            File::makeDirectory($path, 0777, true, true);
-             $imageName = time().'.'.$request->image->extension();  
-             $request->image->move(public_path('yt_image'), $imageName);
-             $imagewithfolder =$imageName;
-
-            }else{
-            $imageName = time().'.'.$request->image->extension();
-            $request->image->move(public_path('yt_image'), $imageName);
-            $imagewithfolder = $imageName;
-            }
-            $data = youtube::create([
-            'title' => $request->title,
+        ]);
+        $file = $request->file('image');
+        $fileName = $request->file('image')->getClientOriginalName();             
+        $path = $request->file('image')->storeAs('yt_image', $fileName);
+        $data = youtube::create([
+             'title' => $request->title,
             'description' => $request->description,
-            'image' => $imagewithfolder,
+            'image' => $path,
             'date'=>  $request->date,
             'status'=> $request->status,
-              ]);
+
+        ]);
             return redirect()->route('youtube.index')
           ->with('success','thumbnail has been created successfully.');
     }
@@ -112,25 +102,19 @@ class youtubeController extends Controller
             ]);
 
        if($_FILES['image']['name'] != ''){
-            //upload image
-        $path = public_path('yt_image');
-
-        if(!File::isDirectory($path)){
-          File::makeDirectory($path, 0777, true, true);
-          $imageName = time().'.'.$request->image->extension();  
-          $request->imageimage->move(public_path('yt_image'), $imageName);
-          $imagewithfolder = $imageName;
-
-        }else{
-          $imageName = time().'.'.$request->image->extension();
-          $request->image->move(public_path('yt_image'), $imageName);
-          $imagewithfolder = $imageName;
-        }
+         $file = $request->file('image');
+            $fileName = $request->file('image')->getClientOriginalName(); 
+            if($fileName != ''){
+                $path = $request->file('image')->storeAs('yt_image', $fileName);
+            }else{
+                $path = $request['hidden_image'];
+            }           
+            
 
         $UpdateDetails = youtube::where('id', $request->id)->update(array(
        "title" => $request->title,
        "description" => $request->description,
-       "image" => $imagewithfolder,
+       "image" => $path,
        "date" => $request->date,
         "status" => $request->status,
 

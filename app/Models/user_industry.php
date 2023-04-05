@@ -9,7 +9,7 @@ class user_industry extends Model
 {
        use HasFactory;
         protected $table='user_industry';
-      protected $fillable = [
+        protected $fillable = [
         'userid',
         'industry_id',
         'description',
