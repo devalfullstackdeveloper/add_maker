@@ -25,6 +25,7 @@ use App\Http\Controllers\API\ProfileController;
 use App\Http\Controllers\API\instacontroller;
 use App\Http\Controllers\API\SocialMediaController;
 use App\Http\Controllers\API\AddBrandController;
+use App\Http\Controllers\API\FavoriteController;
 
 
 
@@ -118,4 +119,6 @@ Route::get('/add_brand', [AddBrandController::class, 'add_brand']);
    Route::post('/ps', [InstagramApiController::class, 'instagram']);
 
 
+//api for favorite
+Route::post('/fav',[FavoriteController::class, 'fav']);
 
