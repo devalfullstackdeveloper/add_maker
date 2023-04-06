@@ -33,6 +33,7 @@ return new class extends Migration
             $table->string('facebook_id')->nullable();
             $table->string('instagram_id')->nullable();
             $table->string('apple_id')->nullable();
+            $table->string('login_id')->nullable();
         });
     }
 

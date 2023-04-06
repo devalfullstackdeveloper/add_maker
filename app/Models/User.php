@@ -33,6 +33,7 @@ class User extends Authenticatable
         'facebook_id',
         'instagram_id',
         'apple_id',
+        'login_id',
          
     ];
 
