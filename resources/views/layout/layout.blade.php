@@ -124,6 +124,10 @@
                   <i class="menu-icon mdi mdi-file-document"></i>
                     <span class="menu-title">Menu</span>
                 </a>
+                <a class="nav-link" href="{{ url('category') }}">
+                  <i class="menu-icon mdi mdi-file-document"></i>
+                    <span class="menu-title">All Category</span>
+                </a>
 
                 </a>
             </li>

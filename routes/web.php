@@ -20,6 +20,7 @@ use App\Http\Controllers\PosterController;
 use App\Http\Controllers\youtubeController;
 use App\Http\Controllers\instagramController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\All_Posts_Controller;
 
 
@@ -93,6 +94,7 @@ Route::get('/logout', [LogoutController::class, 'perform'])->name('logout.perfor
 
 Route::resource('posts', PostController::class);
 Route::resource('/iposts', IpostsController::class);
+Route::resource('/category', CategoryController::class);
 Route::resource('/menu', MenuController::class);
 Route::resource('fbook', FbookController::class);
 Route::resource('bcard', BussinessCardController::class);
