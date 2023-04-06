@@ -21,6 +21,8 @@ use App\Http\Controllers\youtubeController;
 use App\Http\Controllers\instagramController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\All_Posts_Controller;
+
 
 
 
@@ -129,7 +131,7 @@ Route::post('update/youtube/{id}',[youtubeController::class, 'update'])->name('y
 Route::resource('instagram', instagramController::class);
 Route::post('update/instagram/{id}',[instagramController::class, 'update'])->name('instagram.update');
 
-
-
+Route::resource('all_posts', All_Posts_Controller::class);
+Route::post('update/all_posts/{id}',[All_Posts_Controller::class, 'update'])->name('all_posts.update');
 
 

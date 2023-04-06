@@ -119,6 +119,7 @@ class BussinessCardController extends Controller
                 $path = $request['hidden_bcard_image'];
             }    
 
+
         $UpdateDetails = business_card::where('id', $request->id)->update(array(
        "description" => $request->description,
        "image" => $path,

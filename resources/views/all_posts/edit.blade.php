@@ -9,20 +9,20 @@
                 <h2>Edit Data</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('poster.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('all_posts.index') }}"> Back</a>
             </div>
         </div>
     </div>
    
-    <form action="{{ route('poster.update',$data->id) }}" method="POST" enctype="multipart/form-data"> 
+    <form action="{{ route('all_posts.update',$data->id) }}" method="POST" enctype="multipart/form-data"> 
         @csrf
-
+        @method('POST')
      
          <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Poster Name</strong>
-                    <input type="text" name="poster_name" value="{{ $data->poster_name}}" class="form-control" placeholder="poster_name">
+                    <strong>Title:</strong>
+                    <input type="text" name="title" value="{{ $data->title}}" class="form-control" placeholder="Title">
                 </div>
             </div>
 
@@ -36,20 +36,20 @@
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Poster Image:</strong>
-                    <input type="file" name="poster_img" class="form-control" placeholder="poster_img">
-                     <input type="hidden" name="hidden_poster_img" class="form-control" placeholder="Poster Image" value={{$data->poster_img}}>
-                        <img src="{{asset('/storage/app/'.$data->poster_img)}}" alt="{{$data->poster_name}}" style="width: 100px;">
+                    <strong>Image:</strong>
+                      <input type="file" name="icon" class="form-control" placeholder="Icon">
+                        <input type="hidden" name="hidden_event_image" class="form-control" placeholder="Icon" value={{$data->icon}}>
+                        <img src="{{asset('/storage/app/'.$data->icon)}}" alt="{{$data->icon}}" style="width: 100px;">
                         @error('name')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                         @enderror
                 </div>
             </div>
-            
+
              <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Poster Date:</strong>
-                    <input type="date" name="poster_date" class="form-control" placeholder="Date" value="{{ $data->poster_date}}" >
+                    <strong>Date:</strong>
+                    <input type="date"  name="date" class="form-control" placeholder="Date" value="{{ $data->date}}" >
                 </div>
             </div>
 

@@ -25,6 +25,9 @@ use App\Http\Controllers\API\ProfileController;
 use App\Http\Controllers\API\instacontroller;
 use App\Http\Controllers\API\SocialMediaController;
 use App\Http\Controllers\API\AddBrandController;
+use App\Http\Controllers\API\FavoriteController;
+use App\Http\Controllers\API\MenuApiController;
+
 
 
 
@@ -40,31 +43,32 @@ use App\Http\Controllers\API\AddBrandController;
 */
 
 //api for register
-Route::post('register', [RegisterController::class, 'register']);
+Route::post('/register', [App\Http\Controllers\API\AdminApiController::class, 'register']);
 
 //api for login
-Route::post('/login',[AuthOtpController::class, 'login']);
+Route::post('/login',[App\Http\Controllers\API\AdminApiController::class, 'login']);
 
 //api for Industry
-Route::get('/industry',[IndustrytypeController::class, 'index']);
-Route::get('/select/{id}',[IndustrytypeController::class, 'select']);
+
+Route::get('/industry',[IndustrytypeController::class, 'index'])->middleware('auth:api');
+Route::get('/select_industry/{id}',[IndustrytypeController::class, 'select'])->middleware('auth:api');
 
 //api for Business Card
-Route::get('/card',[BcardController::class, 'bcard']);
+Route::get('/card',[BcardController::class, 'bcard'])->middleware('auth:api');
 
 //api for Home Page 
-Route::get('/home',[HomeController::class, 'home']);
+Route::get('/home',[HomeController::class, 'home'])->middleware('auth:api');
 
 
 //api for Mutliple select Industry
-Route::post('/user_i',[user_industryController::class, 'store']);
+Route::post('/user_industry',[user_industryController::class, 'store'])->middleware('auth:api');
 
 //api for Facebook
-Route::get('fbook', [FacebookApiController::class, 'index']);
+Route::get('facebook_ad', [FacebookApiController::class, 'index'])->middleware('auth:api');
 
 //api for Admin
-Route::put('edit/{id}', [ AdminApiController::class, 'edit']);
-Route::delete('delete/{id}', [ AdminApiController::class, 'delete']);
+Route::put('edit/{id}', [ AdminApiController::class, 'edit'])->middleware('auth:api');
+Route::delete('delete/{id}', [ AdminApiController::class, 'delete'])->middleware('auth:api');
 
 //api for  USER LOGIN using OTP
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -72,50 +76,62 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 //FETCH api for Upcomin Events 
- Route::get('/events',[fetchcontroller::class, 'fetch']);
+ Route::get('/events',[fetchcontroller::class, 'fetch'])->middleware('auth:api');
 
  //FETCH api Twitter  
- Route::get('/twitter',[TwitController::class, 'twitter']);
+ Route::get('/twitter',[TwitController::class, 'twitter'])->middleware('auth:api');
 
  //FETCH api for Poster
- Route::get('/poster',[poster_data_controller::class, 'poster']);
+ Route::get('/poster',[poster_data_controller::class, 'poster'])->middleware('auth:api');
 
  //FETCH api for Youtube 
- Route::get('/youtube',[youtube_data_controller::class, 'youtube']);
+ Route::get('/youtube',[youtube_data_controller::class, 'youtube'])->middleware('auth:api');
 
 //api for Brand info
- Route::post('/add/brand',[BrandController::class, 'store']);
- Route::post('/edit/brand/{id}',[BrandController::class, 'edit']);
+ Route::post('/add/brand',[BrandController::class, 'store'])->middleware('auth:api');
+ Route::post('/edit/brand/{id}',[BrandController::class, 'edit'])->middleware('auth:api');
 
 
 //fetching for Facebook Post
-Route::get('/displaypost',[FetchpostController::class, 'index']);
+Route::get('/facebook_post',[FetchpostController::class, 'index'])->middleware('auth:api');
 
 // fetching for Instagram Post
-Route::get('/showpost',[FetchipostController::class, 'ipost']);
+Route::get('/instagram_post',[FetchipostController::class, 'ipost'])->middleware('auth:api');
 
 
 //fetch api of facebook ads and facebook posts 
-Route::get('facebook', [FacebookApiController::class, 'facebook']);
+Route::get('facebook', [FacebookApiController::class, 'facebook'])->middleware('auth:api');
 
 //api for instagram story and instagram posts
-Route::post('/instagram',[InstagramApiController::class, 'instagram']);
+Route::get('/instagram',[InstagramApiController::class, 'instagram'])->middleware('auth:api');
+
+// api for contact us
+Route::post('/contact_store', [contactcontroller::class, 'store'])->middleware('auth:api');
+
+// api for instagram story
+Route::get('/instagram_story', [instacontroller::class, 'insta'])->middleware('auth:api');
 
 
 
- // Route::post('/store', contactcontroller::class,'store');
 
-Route::post('/store', [contactcontroller::class, 'store']);
-Route::get('/insta', [instacontroller::class, 'insta']);
-Route::post('/store', [contactcontroller::class, 'store']);
-
- Route::resource('/media', SocialMediaController::class); // social media api
- Route::post('/update/media/{id}',[SocialMediaController::class, 'update']);
-
- Route::get('/add_brand', [AddBrandController::class, 'add_brand']);
-
-Route::resource('/profile',ProfileController::class);
-Route::post('/ps', [InstagramApiController::class, 'instagram']);
+// api for social media in brand info
+Route::resource('/media', SocialMediaController::class)->middleware('auth:api'); 
+Route::post('/update/media/{id}',[SocialMediaController::class, 'update'])->middleware('auth:api');
 
 
+// api for brand info
+ Route::get('/add_brand', [AddBrandController::class, 'add_brand'])->middleware('auth:api');
+
+
+// api for profile
+Route::resource('/profile',ProfileController::class)->middleware('auth:api');
+
+//fetch api of menu
+Route::get('/menu', [MenuApiController::class, 'fetch_menu'])->middleware('auth:api');
+
+
+
+
+//api for favorite
+Route::post('/fav',[FavoriteController::class, 'fav'])->middleware('auth:api');
 
