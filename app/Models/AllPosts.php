@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class AllPosts extends Model
 {
     use HasFactory;
-    protected $table='all_posts';
+    protected $table='allposts';
     protected $fillable = [
       'name','industry_type', 'description', 'image','thumbnail','caption', 'start_date','end_date', 'status'];
 }
