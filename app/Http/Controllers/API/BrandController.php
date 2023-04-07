@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\API;
+
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\Brand;
@@ -41,7 +42,7 @@ class BrandController extends BaseController
         // print_r("here");exit();
 
         $input = $request->all();
-   
+
         $validator = Validator::make($input, [
             'name' => 'required',
             'contact' => 'required',
@@ -52,23 +53,23 @@ class BrandController extends BaseController
             'display_media' => 'required',
             'brand_icon' => 'required|image:jpeg,png,jpg,gif,svg|max:2048'
         ]);
-   
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
         }
-   
+
         if ($request->hasFile('brand_icon')) {
             $image_path = $request->file('brand_icon')->store('brand', 'public');
-            $input['brand_icon']=$image_path;
-           
-        $brand = Brand::create($input);
-   
-        return response()->json([
-            "success" => true,
-            "message" => "Brand info created successfully",
-            "data" => $brand
+            $input['brand_icon'] = $image_path;
+
+            $brand = Brand::create($input);
+
+            return response()->json([
+                "success" => true,
+                "message" => "Brand info created successfully",
+                "data" => $brand
             ]);
-        }  
+        }
     }
 
     /**
@@ -103,26 +104,25 @@ class BrandController extends BaseController
             'services' => 'required',
             'display_media' => 'required',
             'brand_icon' => 'required',
-        
-            ]);
-            if($validator->fails()){
-                return $this->sendError($validator->errors());       
-            }
-            $brand->name = $input['name'];
-            $brand->contact = $input['contact'];
-            $brand->address = $input['address'];
-            $brand->website = $input['website'];
-            $brand->tagline = $input['tagline'];
-            $brand->services = $input['services']; 
-            $brand->display_media = $input['display_media'];
-            $brand->brand_icon = $input['brand_icon'];          
-            $brand->save();
-                           
-            return response()->json([
-                "success" => true,
-                "message" => "Brand info edit successfully",
-                ]);
 
+        ]);
+        if ($validator->fails()) {
+            return $this->sendError($validator->errors());
+        }
+        $brand->name = $input['name'];
+        $brand->contact = $input['contact'];
+        $brand->address = $input['address'];
+        $brand->website = $input['website'];
+        $brand->tagline = $input['tagline'];
+        $brand->services = $input['services'];
+        $brand->display_media = $input['display_media'];
+        $brand->brand_icon = $input['brand_icon'];
+        $brand->save();
+
+        return response()->json([
+            "success" => true,
+            "message" => "Brand info edit successfully",
+        ]);
     }
 
     /**

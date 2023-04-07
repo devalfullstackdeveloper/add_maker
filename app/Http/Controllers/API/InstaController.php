@@ -8,11 +8,10 @@ use Illuminate\Http\Request;
 
 class InstaController extends Controller
 {
-    
+
     public function insta()
     {
         $user = Instagram::select('*')->get();
-         return ($user);
+        return ($user);
     }
-
 }

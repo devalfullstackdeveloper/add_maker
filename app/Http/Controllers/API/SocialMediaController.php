@@ -19,9 +19,8 @@ class SocialMediaController extends BaseController
     {
         //
         $media = SocialMedia::all();
-      
-        return $this->sendResponse($media, 'Products retrieved successfully.');
 
+        return $this->sendResponse($media, 'Products retrieved successfully.');
     }
 
     /**
@@ -44,8 +43,8 @@ class SocialMediaController extends BaseController
     {
         //
         // print_r($request->all());exit();
-          $input = $request->all();
-     
+        $input = $request->all();
+
         $validator = Validator::make($input, [
             'media_title' => 'required',
             'media_description' => 'required',
@@ -53,16 +52,16 @@ class SocialMediaController extends BaseController
             'media_thumbnail' => 'required|image:jpeg,png,jpg,gif,svg|max:2048'
 
         ]);
-        
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
         }
 
         if ($request->hasFile('media_thumbnail')) {
-        $image_path = $request->file('media_thumbnail')->store('media', 'public');
-        $input['media_thumbnail']=$image_path;
-        $media = SocialMedia::create($input);
-        return $this->sendResponse($media, 'Social Media created successfully.');
+            $image_path = $request->file('media_thumbnail')->store('media', 'public');
+            $input['media_thumbnail'] = $image_path;
+            $media = SocialMedia::create($input);
+            return $this->sendResponse($media, 'Social Media created successfully.');
         }
     }
 
@@ -76,11 +75,11 @@ class SocialMediaController extends BaseController
     {
         //
         $media = SocialMedia::find($id);
-    
+
         if (is_null($media)) {
             return $this->sendError('Social Media not found.');
         }
-     
+
         return $this->sendResponse($media, 'Social Media retrieved successfully.');
     }
 
@@ -92,7 +91,6 @@ class SocialMediaController extends BaseController
      */
     public function edit(SocialMedia $socialMedia)
     {
-        
     }
 
     /**
@@ -107,16 +105,16 @@ class SocialMediaController extends BaseController
         //
         $input = $request->all();
         $socialMedia = SocialMedia::find($id);
-     
+
         $validator = Validator::make($input, [
             'media_title' => 'required',
             'media_description' => 'required',
             'media_link' => 'required',
-            'media_thumbnail' => 'required|image:jpeg,png,jpg,gif,svg|max:2048' 
+            'media_thumbnail' => 'required|image:jpeg,png,jpg,gif,svg|max:2048'
         ]);
-     
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
         }
         if ($request->hasFile('media_thumbnail')) {
             $image_path = $request->file('media_thumbnail')->store('media', 'public');
@@ -124,10 +122,10 @@ class SocialMediaController extends BaseController
             $socialMedia->media_title = $input['media_title'];
             $socialMedia->media_description = $input['media_description'];
             $socialMedia->media_link = $input['media_link'];
-            $socialMedia->media_thumbnail = $image_path ;
+            $socialMedia->media_thumbnail = $image_path;
             $socialMedia->save();
-    
-        return $this->sendResponse($socialMedia, 'Social Media updated successfully.');
+
+            return $this->sendResponse($socialMedia, 'Social Media updated successfully.');
         }
     }
 
@@ -142,6 +140,6 @@ class SocialMediaController extends BaseController
         //
         $socialMedia = SocialMedia::find($id);
         $socialMedia->delete();
-        return $this->sendResponse($socialMedia, 'Social Media deleted successfully.'); 
+        return $this->sendResponse($socialMedia, 'Social Media deleted successfully.');
     }
 }
