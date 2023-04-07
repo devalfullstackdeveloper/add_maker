@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use File;
 use Validator;
 
-class YoutubeController extends Controller
+class youtubeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,8 +27,7 @@ class YoutubeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    { 
-        
+    {
         return view('youtube.create');   
      }
 
@@ -56,7 +55,8 @@ class YoutubeController extends Controller
             'image' => $path,
             'date'=>  $request->date,
             'status'=> $request->status,
-              ]);
+
+        ]);
             return redirect()->route('youtube.index')
           ->with('success','thumbnail has been created successfully.');
     }
@@ -132,6 +132,7 @@ class YoutubeController extends Controller
       }
       return redirect()->route('youtube.index')
           ->with('success','upcoming events has been created successfully.');
+  
     }
 
     /**
