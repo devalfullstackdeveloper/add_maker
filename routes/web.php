@@ -18,6 +18,7 @@ use App\Http\Controllers\PosterController;
 use App\Http\Controllers\YoutubeController;
 use App\Http\Controllers\InstagramController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\All_Posts_Controller;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AllPostsController;
@@ -94,6 +95,7 @@ Route::group(['middleware' => ['auth']], function() {
 
 Route::resource('posts', PostController::class);
 Route::resource('/iposts', IpostsController::class);
+Route::resource('/category', CategoryController::class);
 Route::resource('/menu', MenuController::class);
 Route::resource('fbook', FbookController::class);
 Route::resource('bcard', BussinessCardController::class);
