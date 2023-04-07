@@ -19,8 +19,6 @@ use App\Http\Controllers\YoutubeController;
 use App\Http\Controllers\InstagramController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\All_Posts_Controller;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AllPostsController;
 
 
