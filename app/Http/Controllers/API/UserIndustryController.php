@@ -6,15 +6,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
-use App\Models\user_industry;
+use App\Models\UserIndustry;
 use Validator;
 use DB;
 
-class user_industryController extends Controller
+class UserIndustryController extends Controller
 {
     public function user_i()
     {
-        $user = user_industry::select('*')->get();
+        $user = UserIndustry::select('*')->get();
         return ($user);
     }
 
@@ -24,7 +24,7 @@ class user_industryController extends Controller
      $input = $request->all();
       foreach ($input['industry'] as  $value) 
       {
-        $user_industry = user_industry::create([
+        $user_industry = UserIndustry::create([
             'industry_id'=>$value['industry_id'],
             'userid'=>$input['userid'],
             'description'=>$value['description'],

@@ -10,11 +10,13 @@
             <h2>Add New Data</h2>
         </div>
         <div class="pull-right">
+
             <a class="btn btn-primary" href="{{ route('allposts.index') }}"> Back</a>
         </div>
     </div>
 </div>
    
+
 @if ($errors->any())
     <div class="alert alert-danger">
         <strong>Whoops!</strong> There were some problems with your input.
@@ -27,17 +29,24 @@
 @endif
 
 <form action="{{ route('allposts.store') }}" method="POST" enctype="multipart/form-data">
+
+
+
+
 @csrf
 <div class="row">
 <div class="col-xs-12 col-sm-12 col-md-12">
 <div class="form-group">
+
 <strong>Name</strong>
+
 <input type="text" name="name" class="form-control" placeholder="Name">
 </div>
 </div>
 
 <div class="col-xs-12 col-sm-12 col-md-12">
 <div class="form-group">
+
 <strong>Industry Type</strong>
 <select class="custom-select"  name="industry_type">
     @foreach($industryType as $industryTypeData)
@@ -64,13 +73,17 @@
 <div class="col-xs-12 col-sm-12 col-md-12">
 <div class="form-group">
 <strong>Thumbnail:</strong>
+
 <input type="file" name="thumbnail" class="form-control" placeholder="Thumbnail">
+
+
 </div>
 </div>
 
 <div class="col-xs-12 col-sm-12 col-md-12">
 <div class="form-group">
 <strong>Caption:</strong>
+
 <input type="text" name="caption" class="form-control" placeholder="Caption">
 </div>
 </div>
@@ -79,7 +92,9 @@
 <div class="col-xs-12 col-sm-12 col-md-12">
 <div class="form-group">
 <strong>Start Date:</strong>
+
 <input type="date"  name="start_date" class="form-control" placeholder="Date">
+
 </div>
 </div>
 
@@ -87,14 +102,18 @@
 <div class="col-xs-12 col-sm-12 col-md-12">
 <div class="form-group">
 <strong>End Date:</strong>
+
 <input type="date"  name="end_date" class="form-control" placeholder="Date">
+
 </div>
 </div>
 
 
 <div class="col-xs-12 col-sm-12 col-md-12">
 <div class="form-group">
+
 <strong>Status:</strong>
+
 <input type="text" name="status" class="form-control" placeholder="Status">
 </div>
 </div>

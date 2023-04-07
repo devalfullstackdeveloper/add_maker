@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Passport\HasApiTokens;
 
-class upcomingevents extends Model
+class UpcomingEvents extends Model
 {
     use HasFactory;
     protected $table='upcomingevents';

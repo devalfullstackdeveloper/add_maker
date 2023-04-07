@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Profile extends Model
+class AllPosts extends Model
 {
     use HasFactory;
-    protected $table='profile';
+    protected $table='all_posts';
     protected $fillable = [
-        'name','mobile_no'
-    ];
+      'name','industry_type', 'description', 'image','thumbnail','caption', 'start_date','end_date', 'status'];
 }

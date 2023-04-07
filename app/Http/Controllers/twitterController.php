@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\twitter;
+use App\Models\Twitter;
 use Illuminate\Http\Request;
  use File;
 use Validator;
 
-class twitterController extends Controller
+class TwitterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class twitterController extends Controller
      */
     public function index()
     {
-        $twitter = twitter::latest()->paginate();
+        $twitter = Twitter::latest()->paginate();
        return view('twitter.index',compact('twitter'))
           ->with('i', (request()->input('page', 1) - 1) * 5);
     
@@ -52,7 +52,7 @@ class twitterController extends Controller
             $file = $request->file('image');
         $fileName = $request->file('image')->getClientOriginalName();             
         $path = $request->file('image')->storeAs('twitter_image', $fileName);
-        $data = twitter::create([
+        $data = Twitter::create([
            'title' => $request->title,
             'description' => $request->description,
             'image' => $path,
@@ -72,7 +72,7 @@ class twitterController extends Controller
      public function show($id)
     {
         //
-         $data= twitter::find($id);
+         $data= Twitter::find($id);
         return view('twitter.show',compact('data'));
     }
 
@@ -85,7 +85,7 @@ class twitterController extends Controller
     public function edit($id)
     {
     
-        $data= twitter::find($id);
+        $data= Twitter::find($id);
         return view('twitter.edit',compact('data'));
     }
 
@@ -117,7 +117,7 @@ class twitterController extends Controller
                 $path = $request['hidden_image'];
             }           
 
-        $UpdateDetails = twitter::where('id', $request->id)->update(array(
+        $UpdateDetails = Twitter::where('id', $request->id)->update(array(
        "title" => $request->title,
        "description" => $request->description,
        "image" => $path,
@@ -126,7 +126,7 @@ class twitterController extends Controller
      ));
         
       }else{
-       $UpdateDetails = twitter::where('id', $request->id)->update(array(
+       $UpdateDetails = Twitter::where('id', $request->id)->update(array(
         "title" => $request->title,
         "description" => $request->description,
         "date" => $request->date,
@@ -149,7 +149,7 @@ class twitterController extends Controller
     public function destroy($id)
     {
         //
-        $idd = twitter::findOrFail($id);
+        $idd = Twitter::findOrFail($id);
         $idd->delete();
         return redirect('/twitter')->with('completed', 'event has been deleted');
      }

@@ -4,13 +4,13 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\upcomingevents;
+use App\Models\UpcomingEvents;
 
-class fetchcontroller extends Controller
+class FetchController extends Controller
 {
     public function fetch()
     { 
-        $user = upcomingevents::select('*')->get();
+        $user = UpcomingEvents::select('*')->get();
         return ($user);
     
     }

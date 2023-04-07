@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\API\BaseController as BaseController;
-use App\Models\contactus;
+use App\Models\ContactUs;
 use Illuminate\Http\Request;
 use Validator;
 
-class contactcontroller extends BaseController
+class ContactController extends BaseController
 {
 
     public function store(Request $request)
@@ -23,7 +23,7 @@ class contactcontroller extends BaseController
         {
             return $this->sendError('Validation Error.', $validator->errors());
         }
-        $contactus = contactus::create($input);
+        $contactus = ContactUs::create($input);
    
         return $this->sendResponse($contactus, 'User register successfully.');
     } 

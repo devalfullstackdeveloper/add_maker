@@ -16,7 +16,7 @@ class PosterController extends Controller
      */
     public function index()
     {
-        $poster = poster::latest()->paginate();
+        $poster = Poster::latest()->paginate();
        return view('poster.index',compact('poster'))
           ->with('i', (request()->input('page', 1) - 1) * 5);
     }
@@ -49,7 +49,7 @@ class PosterController extends Controller
         $file = $request->file('poster_img');
         $fileName = $request->file('poster_img')->getClientOriginalName();             
         $path = $request->file('poster_img')->storeAs('poster_img', $fileName);
-        $data = poster::create([
+        $data = Poster::create([
          'poster_name' => $request->poster_name,
          'description' => $request->description,
          'poster_img' => $path,
@@ -69,7 +69,7 @@ class PosterController extends Controller
      */
     public function show($id)
     {
-        $data= poster::find($id);
+        $data= Poster::find($id);
         return view('poster.show',compact('data'));
     }
 
@@ -81,7 +81,7 @@ class PosterController extends Controller
      */
     public function edit($id)
     {
-         $data= poster::find($id);
+         $data= Poster::find($id);
         return view('poster.edit',compact('data'));
     }
 
@@ -100,7 +100,8 @@ class PosterController extends Controller
             'description'=> 'required',
             'poster_date'=> 'required',
             'status'=> 'required'
-      ]);
+
+            ]);
 
             if($_FILES['poster_img']['name'] != ''){
             $file = $request->file('poster_img');
@@ -111,7 +112,7 @@ class PosterController extends Controller
                 $path = $request['hidden_poster_img'];
             }          
 
-            $UpdateDetails = poster::where('id', $request->id)->update(array(
+            $UpdateDetails = Poster::where('id', $request->id)->update(array(
              "poster_name" => $request->poster_name,
              "description" => $request->description,
              "poster_img" => $path,
@@ -119,12 +120,12 @@ class PosterController extends Controller
              "status" => $request->status,
          ));
 
-         }else{
-         $UpdateDetails = poster::where('id', $request->id)->update(array(
-            "poster_name" => $request->poster_name,
-            "description" => $request->description,
-            "poster_date" => $request->poster_date,
-            "status" => $request->status,
+      }else{
+       $UpdateDetails = Poster::where('id', $request->id)->update(array(
+        "poster_name" => $request->poster_name,
+        "description" => $request->description,
+        "poster_date" => $request->poster_date,
+        "status" => $request->status,
 
         ));
 
@@ -143,7 +144,7 @@ class PosterController extends Controller
     public function destroy($id)
     {
         //
-        $idd = poster::findOrFail($id);
+        $idd = Poster::findOrFail($id);
         $idd->delete();
         return redirect('/poster')->with('completed', 'event has been deleted');
     }

@@ -16,11 +16,13 @@ class AllPostsController extends Controller
      */
     public function index()
     {
+
         $all_posts = AllPosts::latest()->paginate();
     
         
        return view('all_posts.index',compact('all_posts'))
           ->with('i', (request()->input('page', 1) - 1) * 5);
+
     }
 
     /**
@@ -30,9 +32,13 @@ class AllPostsController extends Controller
      */
     public function create()
     {
+
         $industryType = Industry::select('id', 'industry_type')->get();
         
          return view('all_posts.create', compact('industryType'));
+
+        
+
     }
 
     /**
@@ -43,6 +49,7 @@ class AllPostsController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'name' => 'required',
             'industry_type' => 'required',
@@ -79,6 +86,9 @@ class AllPostsController extends Controller
         ]);
             return redirect()->route('allposts.index')
           ->with('success','all posts has been created successfully.');
+
+       
+
     }
 
     /**
@@ -87,6 +97,7 @@ class AllPostsController extends Controller
      * @param  \App\Models\All_Posts  $all_Posts
      * @return \Illuminate\Http\Response
      */
+
     public function show($id)
     {
         $data= AllPosts::find($id);
@@ -99,6 +110,7 @@ class AllPostsController extends Controller
      * @param  \App\Models\All_Posts  $all_Posts
      * @return \Illuminate\Http\Response
      */
+
     public function edit($id)
     {
         $industryType = Industry::select('id', 'industry_type')->get();
@@ -113,6 +125,7 @@ class AllPostsController extends Controller
      * @param  \App\Models\All_Posts  $all_Posts
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -181,6 +194,7 @@ class AllPostsController extends Controller
      * @param  \App\Models\All_Posts  $all_Posts
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id)
     {
         //
