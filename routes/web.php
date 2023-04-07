@@ -118,7 +118,7 @@ Route::post('update/youtube/{id}',[YoutubeController::class, 'update'])->name('y
 Route::resource('instagram', InstagramController::class);
 Route::post('update/instagram/{id}',[InstagramController::class, 'update'])->name('instagram.update');
 
-Route::resource('all_posts', AllPostsController::class);
-Route::post('update/all_posts/{id}',[AllPostsController::class, 'update'])->name('all_posts.update');
+Route::resource('allposts', AllPostsController::class);
+Route::post('update/allposts/{id}',[AllPostsController::class, 'update'])->name('allposts.update');
 
 
