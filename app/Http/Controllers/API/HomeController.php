@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\API;
-use App\Models\business_card;
-use App\Models\upcomingevents;
+use App\Models\BusinessCard;
+use App\Models\UpcomingEvents;
 use App\Models\Facebook;
 use App\Models\Industry;
-use App\Models\twitter;
+use App\Models\Twitter;
 use App\Models\Iposts;
 use App\Models\Posts;
 use App\Http\Controllers\Controller;
@@ -17,13 +17,13 @@ class HomeController extends Controller
     public function home()
     {
     	//$business_card =  DB::table('business_card')->get()->toArray();
-        $business_card=business_card::select('id', 'description', 'image', 'date')->get()->toArray();
+        $business_card=BusinessCard::select('id', 'description', 'image', 'date')->get()->toArray();
         $data = array();
         foreach ($business_card as $key => $value) {
         	$data['business_card'][$key] = $value;
         }
 
-        $upcomingevents =  upcomingevents::select('id', 'title', 'description', 'icon', 'date')->get()->toArray();
+        $upcomingevents =  UpcomingEvents::select('id', 'title', 'description', 'icon', 'date')->get()->toArray();
         foreach ($upcomingevents as $key => $value) {
         	$data['upcomingevents'][$key] = $value;
         }
@@ -38,7 +38,7 @@ class HomeController extends Controller
         	$data['Industry'][$key] = $value;
         }
 
-        $twitter =  twitter::select('id', 'title', 'description', 'image', 'date')->get()->toArray();
+        $twitter =  Twitter::select('id', 'title', 'description', 'image', 'date')->get()->toArray();
         foreach ($twitter as $key => $value) {
         	$data['twitter'][$key] = $value;
         }

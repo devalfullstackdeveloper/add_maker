@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\twitter;
+use App\Models\Twitter;
 
 
 class TwitController extends Controller
@@ -12,7 +12,7 @@ class TwitController extends Controller
 
     public function twitter()
     {
-          $user = twitter::select('*')->get();
+          $user = Twitter::select('*')->get();
           return ($user);
     }
 

@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\youtube;
+use App\Models\Youtube;
 use Illuminate\Http\Request;
 
-class youtube_data_controller extends Controller
+class YoutubeDataController extends Controller
 {
     public function youtube()
     {
-        $user = youtube::select('*')->get();
+        $user = Youtube::select('*')->get();
           return ($user);
     }
 }

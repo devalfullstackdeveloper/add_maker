@@ -5,24 +5,24 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\API\ProductController;
-use App\Http\Controllers\API\FetchpostController;
-use App\Http\Controllers\API\FetchipostController;
+use App\Http\Controllers\API\FetchPostController;
+use App\Http\Controllers\API\FetchIpostController;
 use App\Http\Controllers\API\AuthOtpController;
 use App\Http\Controllers\API\IndustrytypeController;
 use App\Http\Controllers\API\BcardController;
 use App\Http\Controllers\API\HomeController;
-use App\Http\Controllers\API\user_industryController;
-use App\Http\Controllers\API\fetchcontroller;
+use App\Http\Controllers\API\UserIndustryController;
+use App\Http\Controllers\API\FetchController;
 use App\Http\Controllers\API\TwitController;
-use App\Http\Controllers\API\poster_data_controller;
+use App\Http\Controllers\API\PosterDataController;
 use App\Http\Controllers\API\BrandController;
 use App\Http\Controllers\API\FacebookApiController;
 use App\Http\Controllers\API\AdminApiController;
-use App\Http\Controllers\API\youtube_data_controller;
+use App\Http\Controllers\API\YoutubeDataController;
 use App\Http\Controllers\API\InstagramApiController;
-use App\Http\Controllers\API\contactcontroller;
+use App\Http\Controllers\API\ContactController;
 use App\Http\Controllers\API\ProfileController;
-use App\Http\Controllers\API\instacontroller;
+use App\Http\Controllers\API\InstaController;
 use App\Http\Controllers\API\SocialMediaController;
 use App\Http\Controllers\API\AddBrandController;
 
@@ -57,7 +57,11 @@ Route::get('/home',[HomeController::class, 'home']);
 
 
 //api for Mutliple select Industry
+
 Route::post('/user_industry',[user_industryController::class, 'store']);
+
+Route::post('/user_industry',[UserIndustryController::class, 'store'])->middleware('auth:api');
+
 
 //api for Facebook
 Route::get('facebook_ad', [FacebookApiController::class, 'index']);
@@ -72,16 +76,27 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 //FETCH api for Upcomin Events 
+
  Route::get('/events',[fetchcontroller::class, 'fetch']);
+
+ Route::get('/events',[FetchController::class, 'fetch'])->middleware('auth:api');
+
 
  //FETCH api Twitter  
  Route::get('/twitter',[TwitController::class, 'twitter']);
 
  //FETCH api for Poster
+
  Route::get('/poster',[poster_data_controller::class, 'poster']);
 
  //FETCH api for Youtube 
  Route::get('/youtube',[youtube_data_controller::class, 'youtube']);
+
+ Route::get('/poster',[PosterDataController::class, 'poster'])->middleware('auth:api');
+
+ //FETCH api for Youtube 
+ Route::get('/youtube',[YoutubeDataController::class, 'youtube'])->middleware('auth:api');
+
 
 //api for Brand info
  Route::post('/add/brand',[BrandController::class, 'store']);
@@ -89,10 +104,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 //fetching for Facebook Post
+
 Route::get('/facebook_post',[FetchpostController::class, 'index']);
 
 // fetching for Instagram Post
 Route::get('/instagram_post',[FetchipostController::class, 'ipost']);
+
+Route::get('/facebook_post',[FetchPostController::class, 'index'])->middleware('auth:api');
+
+// fetching for Instagram Post
+Route::get('/instagram_post',[FetchIpostController::class, 'ipost'])->middleware('auth:api');
+
 
 
 //fetch api of facebook ads and facebook posts 
@@ -102,10 +124,17 @@ Route::get('facebook', [FacebookApiController::class, 'facebook']);
 Route::get('/instagram',[InstagramApiController::class, 'instagram']);
 
 // api for contact us
+
 Route::post('/contact_store', [contactcontroller::class, 'store']);
 
 // api for instagram story
 Route::get('/instagram_story', [instacontroller::class, 'insta']);
+
+Route::post('/contact_store', [ContactController::class, 'store'])->middleware('auth:api');
+
+// api for instagram story
+Route::get('/instagram_story', [InstaController::class, 'insta'])->middleware('auth:api');
+
 
 
 //FETCH api for Instagram Story

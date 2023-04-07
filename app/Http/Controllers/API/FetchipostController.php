@@ -5,7 +5,7 @@ use App\Models\Iposts;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class FetchipostController extends Controller
+class FetchIpostController extends Controller
 {
     public function ipost()
     {
