@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('industry_type');
+            $table->string('category_type');
             $table->text('description');
             $table->string('image');
             $table->string('thumbnail');
@@ -27,8 +28,6 @@ return new class extends Migration
             $table->timestamps();
         });
     }
-        
-   
 
     /**
      * Reverse the migrations.

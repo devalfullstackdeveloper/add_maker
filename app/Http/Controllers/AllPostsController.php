@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AllPosts;
 use App\Models\Industry;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use File;
 
@@ -34,10 +35,10 @@ class AllPostsController extends Controller
     {
 
         $industryType = Industry::select('id', 'industry_type')->get();
-        
-         return view('all_posts.create', compact('industryType'));
+        $category = Category::select('id', 'title')->get();
 
-        
+         return view('all_posts.create', compact('industryType','category'));
+      
 
     }
 
@@ -53,6 +54,7 @@ class AllPostsController extends Controller
         $request->validate([
             'name' => 'required',
             'industry_type' => 'required',
+            'category_type' => 'required',
             'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -75,6 +77,7 @@ class AllPostsController extends Controller
             $data = AllPosts::create([
             'name' => $request->name,
             'industry_type' => $request->industry_type,
+            'category_type' => $request->category_type,
             'description' => $request->description,
             'image' => $path1,
             'thumbnail' => $path2,
@@ -131,6 +134,7 @@ class AllPostsController extends Controller
         $request->validate([
             'name' => 'required',
             'industry_type' => 'required',
+            'category_type' => 'required',
             'description' => 'required',
             'caption' => 'required',
             'start_date' => 'required',
@@ -175,6 +179,7 @@ class AllPostsController extends Controller
     $UpdateDetails = AllPosts::where('id', $request->id)->update(array(
     'name' => $request->name,
     'industry_type' => $request->industry_type,
+    'category_type' => $request->category_type,
     'description' => $request->description,
     'image' => $path1,
     'thumbnail' => $path2 ,

@@ -29,14 +29,15 @@
                                     <tr>
                                     <th>Id</th>
                                     <th>Name</th>
-                                    <th>industry_type</th>
-                                    <th>description</th>
-                                    <th>image</th>
-                                    <th>thumbnail</th>
-                                    <th>caption</th>
-                                    <th>start_date</th>
-                                    <th>end_date</th>
-                                    <th>status</th>
+                                    <th>Category Type</th>
+                                    <th>Industry Type</th>
+                                    <th>Description</th>
+                                    <th>Image</th>
+                                    <th>Thumbnail</th>
+                                    <th>Caption</th>
+                                    <th>Start_date</th>
+                                    <th>End Date</th>
+                                    <th>Status</th>
 
                                     <th width="280px">Action</th>
                                     </tr>
@@ -51,6 +52,7 @@
                                 <td>{{$i}}</td>
                                 <td>{{ $ap->name }}</td>
                                 <td>{{ $ap->industry_type }}</td>
+                                <td>{{ $ap->category_type }}</td>
                                 <td>{{ $ap->description }}</td>
                                 <td><img alt="img" src="{{asset('/storage/app/'.$ap->image)}}" width="100px"></td>
                                  <td><img alt="img" src="{{asset('/storage/app/'.$ap->thumbnail)}}" width="100px"></td>
