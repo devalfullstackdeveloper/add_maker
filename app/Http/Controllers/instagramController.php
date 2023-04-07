@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\instagram;
+use App\Models\Instagram;
 use Illuminate\Http\Request;
 use File;
 use Validator;
 
-class instagramController extends Controller
+class InstagramController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class instagramController extends Controller
      */
     public function index()
     {
-        $instagram = instagram::latest()->paginate();
+        $instagram = Instagram::latest()->paginate();
        return view('instagram.index',compact('instagram'))
         ->with('i', (request()->input('page', 1) - 1) * 5);
     }
@@ -49,7 +49,7 @@ class instagramController extends Controller
             $file = $request->file('image');
           $fileName = $request->file('image')->getClientOriginalName();             
           $path = $request->file('image')->storeAs('insta_image', $fileName);
-            $data = instagram::create([
+            $data = Instagram::create([
             'title' => $request->title,
             'description' => $request->description,
             'image' => $path,
@@ -68,7 +68,7 @@ class instagramController extends Controller
      */
     public function show($id)
     {
-         $data= instagram::find($id);
+         $data= Instagram::find($id);
         return view('instagram.show',compact('data'));
     }
 
@@ -80,7 +80,7 @@ class instagramController extends Controller
      */
     public function edit($id)
     {
-         $data= instagram::find($id);
+         $data= Instagram::find($id);
         return view('instagram.edit',compact('data'));
     }
 
@@ -91,7 +91,7 @@ class instagramController extends Controller
      * @param  \App\Models\instagram  $instagram
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, instagram $instagram)
+    public function update(Request $request, Instagram $instagram)
     {
         $request->validate([
             'title' => 'required',
@@ -111,7 +111,7 @@ class instagramController extends Controller
                 $path = $request['hidden_image'];
             }           
                 
-        $UpdateDetails = instagram::where('id', $request->id)->update(array(
+        $UpdateDetails = Instagram::where('id', $request->id)->update(array(
        "title" => $request->title,
        "description" => $request->description,
        "image" => $path,
@@ -121,7 +121,7 @@ class instagramController extends Controller
      ));
 
       }else{
-       $UpdateDetails = instagram::where('id', $request->id)->update(array(
+       $UpdateDetails = Instagram::where('id', $request->id)->update(array(
         "title" => $request->title,
         "description" => $request->description,
         "date" => $request->date,
@@ -142,7 +142,7 @@ class instagramController extends Controller
     public function destroy($id)
     {
         
-        $idd = instagram::findOrFail($id);
+        $idd = Instagram::findOrFail($id);
         $idd->delete();
         return redirect('/instagram')->with('completed', 'event has been deleted');
     }

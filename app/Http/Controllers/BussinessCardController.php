@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\business_card;
+use App\Models\BusinessCard;
 use Illuminate\Http\Request;
 use File;
 
@@ -16,7 +16,7 @@ class BussinessCardController extends Controller
     public function index()
     {
         
-        $business_card= business_card::latest()->paginate(5);
+        $business_card= BusinessCard::latest()->paginate(5);
       
         return view('business_card.index',compact('business_card'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
@@ -55,7 +55,7 @@ class BussinessCardController extends Controller
         $fileName = $request->file('image')->getClientOriginalName();             
         $path = $request->file('image')->storeAs('bcard_image', $fileName);
 
-            $data = business_card::create([
+            $data = BusinessCard::create([
             'title' => $request->title,
             'description' => $request->description,
             'image' => $path,
@@ -78,7 +78,7 @@ class BussinessCardController extends Controller
     public function show($id)
     {
         
-          $data= business_card::find($id);
+          $data= BusinessCard::find($id);
         return view('business_card.show',compact('data'));
     }
 
@@ -90,7 +90,7 @@ class BussinessCardController extends Controller
      */
     public function edit($id)
     {
-          $data= business_card::find($id);
+          $data= BusinessCard::find($id);
         return view('business_card.edit',compact('data'));
     }
 
@@ -119,8 +119,7 @@ class BussinessCardController extends Controller
                 $path = $request['hidden_bcard_image'];
             }    
 
-
-        $UpdateDetails = business_card::where('id', $request->id)->update(array(
+        $UpdateDetails = BusinessCard::where('id', $request->id)->update(array(
        "description" => $request->description,
        "image" => $path,
        "date" => $request->date,
@@ -129,7 +128,7 @@ class BussinessCardController extends Controller
      ));
 
       }else{
-       $UpdateDetails = business_card::where('id', $request->id)->update(array(
+       $UpdateDetails = BusinessCard::where('id', $request->id)->update(array(
         "description" => $request->description,
         "date" => $request->date,
         "status" => $request->status,
@@ -151,7 +150,7 @@ class BussinessCardController extends Controller
      */
     public function destroy($id)
     {
-        $business_card = business_card::findOrFail($id);
+        $business_card = BusinessCard::findOrFail($id);
         $business_card->delete();
         return redirect()->route('bcard.index');
     }

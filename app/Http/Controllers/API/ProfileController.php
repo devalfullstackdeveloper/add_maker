@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 
 use App\Http\Controllers\API\BaseController as BaseController;
-use App\Models\profile;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -17,7 +17,7 @@ class ProfileController extends BaseController
      */
     public function index()
     {
-        $profile = profile::all();
+        $profile = Profile::all();
         return $this->sendResponse($profile, 'profile retrieved successfully.');
     }
 
@@ -41,7 +41,7 @@ class ProfileController extends BaseController
         {
             return $this->sendError('Validation Error.', $validator->errors());
         }
-        $profile = profile::create($input);
+        $profile = Profile::create($input);
    
         return $this->sendResponse($profile, 'User register successfully.');
 
@@ -56,7 +56,7 @@ class ProfileController extends BaseController
     public function show($id)
     {
        
-        $profile = profile::find($id);
+        $profile = Profile::find($id);
         if (is_null($profile)) {
             return $this->sendError(' profile not found.');
         }
@@ -98,7 +98,7 @@ class ProfileController extends BaseController
      */
     public function destroy($id)
     {
-          $profile = profile::find($id);
+          $profile = Profile::find($id);
           $profile->delete();
           return response()->json([
           "success" => true,

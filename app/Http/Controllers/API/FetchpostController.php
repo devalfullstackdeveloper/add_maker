@@ -5,7 +5,7 @@ use App\Models\Posts;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class FetchpostController extends Controller
+class FetchPostController extends Controller
 {
     public function index()
     {

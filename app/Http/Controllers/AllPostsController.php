@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\All_Posts;
+use App\Models\AllPosts;
 use Illuminate\Http\Request;
 
-class All_Posts_Controller extends Controller
+class AllPostsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -44,7 +44,7 @@ class All_Posts_Controller extends Controller
      * @param  \App\Models\All_Posts  $all_Posts
      * @return \Illuminate\Http\Response
      */
-    public function show(All_Posts $all_Posts)
+    public function show(AllPosts $all_Posts)
     {
         //
     }
@@ -55,7 +55,7 @@ class All_Posts_Controller extends Controller
      * @param  \App\Models\All_Posts  $all_Posts
      * @return \Illuminate\Http\Response
      */
-    public function edit(All_Posts $all_Posts)
+    public function edit(AllPosts $all_Posts)
     {
         //
     }
@@ -67,7 +67,7 @@ class All_Posts_Controller extends Controller
      * @param  \App\Models\All_Posts  $all_Posts
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, All_Posts $all_Posts)
+    public function update(Request $request, AllPosts $all_Posts)
     {
         //
     }
