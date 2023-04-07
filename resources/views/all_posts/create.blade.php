@@ -10,27 +10,49 @@
             <h2>Add New Data</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('all_posts.index') }}"> Back</a>
+
+            <a class="btn btn-primary" href="{{ route('allposts.index') }}"> Back</a>
         </div>
     </div>
 </div>
    
 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <strong>Whoops!</strong> There were some problems with your input.
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
-<form action="{{ route('event.store') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('allposts.store') }}" method="POST" enctype="multipart/form-data">
+
+
+
+
 @csrf
 <div class="row">
 <div class="col-xs-12 col-sm-12 col-md-12">
 <div class="form-group">
-<strong>name</strong>
+
+<strong>Name</strong>
+
 <input type="text" name="name" class="form-control" placeholder="Name">
 </div>
 </div>
 
 <div class="col-xs-12 col-sm-12 col-md-12">
 <div class="form-group">
-<strong>Industry_type</strong>
-<input type="text" name="Industry_type" class="form-control" placeholder="Industry_type">
+
+<strong>Industry Type</strong>
+<select class="custom-select"  name="industry_type">
+    @foreach($industryType as $industryTypeData)
+<option value="{{$industryTypeData->industry_type}}">{{$industryTypeData->industry_type}}</option>
+@endforeach
+ </select>
 </div>
 </div>
 
@@ -51,14 +73,18 @@
 <div class="col-xs-12 col-sm-12 col-md-12">
 <div class="form-group">
 <strong>Thumbnail:</strong>
-<input type="file" name="Thumbnail" class="form-control" placeholder="Thumbnail">
+
+<input type="file" name="thumbnail" class="form-control" placeholder="Thumbnail">
+
+
 </div>
 </div>
 
 <div class="col-xs-12 col-sm-12 col-md-12">
 <div class="form-group">
 <strong>Caption:</strong>
-<input type="file" name="Caption" class="form-control" placeholder="Caption">
+
+<input type="text" name="caption" class="form-control" placeholder="Caption">
 </div>
 </div>
 
@@ -66,7 +92,9 @@
 <div class="col-xs-12 col-sm-12 col-md-12">
 <div class="form-group">
 <strong>Start Date:</strong>
-<input type="date"  name="date" class="form-control" placeholder="Date">
+
+<input type="date"  name="start_date" class="form-control" placeholder="Date">
+
 </div>
 </div>
 
@@ -74,14 +102,18 @@
 <div class="col-xs-12 col-sm-12 col-md-12">
 <div class="form-group">
 <strong>End Date:</strong>
-<input type="date"  name="date" class="form-control" placeholder="Date">
+
+<input type="date"  name="end_date" class="form-control" placeholder="Date">
+
 </div>
 </div>
 
 
 <div class="col-xs-12 col-sm-12 col-md-12">
 <div class="form-group">
-<strong>Status</strong>
+
+<strong>Status:</strong>
+
 <input type="text" name="status" class="form-control" placeholder="Status">
 </div>
 </div>
