@@ -31,20 +31,18 @@ class ProfileController extends BaseController
     {
 
 
-         $input = $request->all();
+        $input = $request->all();
         $validator = Validator::make($input, [
             'name' => 'required',
             'mobile_no' => 'required',
-            
+
         ]);
-         if($validator->fails())
-        {
+        if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
         $profile = Profile::create($input);
-   
-        return $this->sendResponse($profile, 'User register successfully.');
 
+        return $this->sendResponse($profile, 'User register successfully.');
     }
 
     /**
@@ -55,12 +53,12 @@ class ProfileController extends BaseController
      */
     public function show($id)
     {
-       
+
         $profile = Profile::find($id);
         if (is_null($profile)) {
             return $this->sendError(' profile not found.');
         }
-        return $this->sendResponse($profile, 'profile retrieved successfully.'); 
+        return $this->sendResponse($profile, 'profile retrieved successfully.');
     }
 
     /**
@@ -78,15 +76,15 @@ class ProfileController extends BaseController
             'name' => 'required',
             'mobile_no' => 'required'
         ]);
-     
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors());
         }
-     
+
         $profile->name = $input['name'];
         $profile->mobile_no = $input['mobile_no'];
         $profile->save();
-     
+
         return $this->sendResponse($profile, 'profile updated successfully.');
     }
 
@@ -98,11 +96,11 @@ class ProfileController extends BaseController
      */
     public function destroy($id)
     {
-          $profile = Profile::find($id);
-          $profile->delete();
-          return response()->json([
-          "success" => true,
-          "message" => "Profile deleted successfully.",
-          ]);
+        $profile = Profile::find($id);
+        $profile->delete();
+        return response()->json([
+            "success" => true,
+            "message" => "Profile deleted successfully.",
+        ]);
     }
 }

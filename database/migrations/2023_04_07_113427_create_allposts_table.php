@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('All_Posts', function (Blueprint $table) {
+        Schema::create('allposts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('industry_type');
@@ -27,6 +27,8 @@ return new class extends Migration
             $table->timestamps();
         });
     }
+        
+   
 
     /**
      * Reverse the migrations.
@@ -35,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('All_Posts');
+        Schema::dropIfExists('allposts');
     }
 };

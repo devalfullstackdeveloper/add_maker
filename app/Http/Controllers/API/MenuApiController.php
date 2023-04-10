@@ -13,10 +13,9 @@ class MenuApiController extends Controller
     {
         $product = Menu::all();
         return response()->json([
-        "success" => true,
-        "message" => "Menu",
-        "data" => $product
+            "success" => true,
+            "message" => "Menu",
+            "data" => $product
         ]);
-        
     }
 }

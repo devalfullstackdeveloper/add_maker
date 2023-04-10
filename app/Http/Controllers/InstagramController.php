@@ -147,3 +147,5 @@ class InstagramController extends Controller
         return redirect('/instagram')->with('completed', 'event has been deleted');
     }
 }
+
+

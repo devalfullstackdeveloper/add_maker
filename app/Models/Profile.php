@@ -4,13 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Passport\HasApiTokens;
 
-class UpcomingEvents extends Model
+class Profile extends Model
 {
     use HasFactory;
-    protected $table='upcomingevents';
+    protected $table='profile';
     protected $fillable = [
-        'title','description', 'icon','date', 'status'
+        'name','mobile_no'
     ];
 }
