@@ -16,6 +16,7 @@ class AdminApiController extends BaseController
     {
 
       $input=$request->login_id;
+//otp and mobile number login
 if($input == '1'){
         if(isset($request->otp))
         {
@@ -25,7 +26,7 @@ if($input == '1'){
                 'lastname' => 'max:255',
                 'middlename' => 'max:255',
                 'email' => 'email|max:255',
-                'mobileno' => 'unique:users|required|max:15',
+                'mobileno' => 'required|max:15',
                 'otp' => 'min:6|max:6',
                 'login_id' => 'required',
             ]);
@@ -50,7 +51,6 @@ if($input == '1'){
                         'success' => true,
                          "code" => 1,
                          'token' => $token,
-                         'user' => $get_user,
                         'message' => "Registration is successfully done",
                     ], 200);
                 } else {
@@ -67,7 +67,7 @@ if($input == '1'){
                 'middlename' => 'max:255',
                 'email' => 'max:255',
                 'mobileno' => 'required|max:15',
-                'otp' => 'min:6|max:6',
+                //'otp' => 'min:6|max:6',
                 'login_id' => 'required',
             ]);
          if($validation->fails()){
@@ -89,12 +89,7 @@ if($input == '1'){
                     'email' => $request['email'],
                     'password' => bcrypt($request['password']),
                     'mobileno' => $request['mobileno'],
-                    'is_admin' => $request['is_admin'],
                     'login_id' =>  $request['login_id'],
-                    'google_id' => isset($request->google_id) ? $request->google_id : null,
-                    'instagram_id' => isset($request->instagram_id) ? $request->instagram_id : null,
-                    'facebook_id' => isset($request->facebook_id) ? $request->facebook_id : null,
-                    'apple_id' => isset($request->apple_id) ? $request->apple_id : null,
                     'otp' => $otp,
                 ]);
 
@@ -108,12 +103,13 @@ if($input == '1'){
             }
         }
 }
+//facebook_id login
 else if($input == 2){
      $validation = Validator::make($request->all(), [
               'firstname' => 'max:255',
                 'lastname' => 'max:255',
                 'middlename' => 'max:255',
-                'facebook_id' => 'unique:users|required',
+                'facebook_id' => 'required',
                 'login_id' => 'required',
             ]);
          if($validation->fails()){
@@ -124,6 +120,11 @@ else if($input == 2){
 
             } else{
 
+                 $get_user = User::select()
+                ->where('facebook_id',$request->facebook_id)
+                ->first();
+                
+               
                 //create the users after validate
                 $user = User::create([
                     'firstname' => $request['firstname'],
@@ -132,21 +133,29 @@ else if($input == 2){
                     'login_id' =>  $request['login_id'],
                     'facebook_id' =>  $request['facebook_id'],
                 ]);
-
-          return response([
+                $success['token'] = $user->createToken('MyApp')->accessToken;
+                 if(isset($user)){
+                    return response([
                     'success' => true,
-                    // 'token' => $token,
+                    'token' => $success,
                     'message'=> 'registration successfully done.']
                     ,200);
-
+            }
+            else {
+                return response()->json([
+                    'success' => false,
+                    'message' => "in-correct",
+                ]);
+            }
             }
         }
+//instagram_id login
 else if($input == 3){
-     $validation = Validator::make($request->all(), [
+   $validation = Validator::make($request->all(), [
               'firstname' => 'max:255',
                 'lastname' => 'max:255',
                 'middlename' => 'max:255',
-                'instagram_id' => 'unique:users|required',
+                'instagram_id' => 'required',
                 'login_id' => 'required',
             ]);
          if($validation->fails()){
@@ -157,6 +166,9 @@ else if($input == 3){
 
             } else{
 
+                 $get_user = User::select()
+                ->where('instagram_id',$request->instagram_id)
+                ->first();
                 
 
                 //create the users after validate
@@ -167,21 +179,29 @@ else if($input == 3){
                     'login_id' =>  $request['login_id'],
                     'instagram_id' =>  $request['instagram_id'],
                 ]);
-
-          return response([
+                $success['token'] = $user->createToken('MyApp')->accessToken;
+                 if(isset($user)){
+                    return response([
                     'success' => true,
-                    // 'token' => $token,
+                    'token' => $success,
                     'message'=> 'registration successfully done.']
                     ,200);
-
+            }
+            else {
+                return response()->json([
+                    'success' => false,
+                    'message' => "in-correct",
+                ]);
+            }
             }
         }
+//google_id Login
 else if($input == 4){
-     $validation = Validator::make($request->all(), [
+      $validation = Validator::make($request->all(), [
               'firstname' => 'max:255',
                 'lastname' => 'max:255',
                 'middlename' => 'max:255',
-                'google_id' => 'unique:users|required',
+                'google_id' => 'email|required',
                 'login_id' => 'required',
             ]);
          if($validation->fails()){
@@ -192,6 +212,9 @@ else if($input == 4){
 
             } else{
 
+                 $get_user = User::select()
+                ->where('google_id',$request->google_id)
+                ->first();
                 
 
                 //create the users after validate
@@ -202,21 +225,29 @@ else if($input == 4){
                     'login_id' =>  $request['login_id'],
                     'google_id' =>  $request['google_id'],
                 ]);
-
-          return response([
+                $success['token'] = $user->createToken('MyApp')->accessToken;
+                 if(isset($user)){
+                    return response([
                     'success' => true,
-                    // 'token' => $token,
+                    'token' => $success,
                     'message'=> 'registration successfully done.']
                     ,200);
-
+            }
+            else {
+                return response()->json([
+                    'success' => false,
+                    'message' => " in-correct",
+                ]);
+            }
             }
         }
+//apple_id login
 else if($input == 5){
-     $validation = Validator::make($request->all(), [
+      $validation = Validator::make($request->all(), [
               'firstname' => 'max:255',
                 'lastname' => 'max:255',
                 'middlename' => 'max:255',
-                'apple_id' => 'unique:users|required',
+                'apple_id' => 'required',
                 'login_id' => 'required',
             ]);
          if($validation->fails()){
@@ -227,6 +258,9 @@ else if($input == 5){
 
             } else{
 
+                 $get_user = User::select()
+                ->where('apple_id',$request->apple_id)
+                ->first();
                 
 
                 //create the users after validate
@@ -237,13 +271,68 @@ else if($input == 5){
                     'login_id' =>  $request['login_id'],
                     'apple_id' =>  $request['apple_id'],
                 ]);
-
-          return response([
+                $success['token'] = $user->createToken('MyApp')->accessToken;
+                 if(isset($user)){
+                    return response([
                     'success' => true,
-                    // 'token' => $token,
+                    'token' => $success,
                     'message'=> 'registration successfully done.']
                     ,200);
+            }
+            else {
+                return response()->json([
+                    'success' => false,
+                    'message' => "in-correct",
+                ]);
+            }
+            }
+        }
+//admin side login
+else if($input == 6){
+      $validation = Validator::make($request->all(), [
+              'firstname' => 'max:255',
+                'lastname' => 'max:255',
+                'middlename' => 'max:255',
+                'email' => 'required',
+                'password' => 'required',
+            ]);
+         if($validation->fails()){
 
+            //Return the validation error
+                $fieldsWithErrorMessagesArray = $validation->messages()->get('*');
+                return $fieldsWithErrorMessagesArray;
+
+            } else{
+
+                 $get_user = User::select()
+                ->where('email',$request->email)
+                ->where('password',$request->password)
+                ->first();
+                
+                //$token = $get_user->createToken('API Token')->accessToken;
+                //create the users after validate
+                $user = User::create([
+                    'firstname' => $request['firstname'],
+                    'lastname' => $request['lastname'],
+                    'middlename' => $request['middlename'],
+                    'is_admin' => $request['is_admin'],
+                    'email' =>  $request['email'],
+                    'password' => bcrypt($request['password']),
+                ]);
+                $success['token'] = $user->createToken('MyApp')->accessToken;
+                 if(isset($user)){
+                    return response([
+                    'success' => true,
+                    'token' => $success,
+                    'message'=> 'registration successfully done.']
+                    ,200);
+            }
+            else {
+                return response()->json([
+                    'success' => false,
+                    'message' => "in-correct",
+                ]);
+            }
             }
         }
 }
@@ -282,8 +371,7 @@ else if($input == 5){
                    "code" => 1,
                    'message' => "Login successfully",
                    'token' => $token]);
-                //return response(['user' => Auth()->user(), 'token' => $token]);
-
+              
             }
             else
             {
@@ -363,7 +451,7 @@ elseif($request->login_id=='2'){
                    "code" => 1,
                    'message' => "Login successfully",
                    'token' => $token]);
-                //return response(['user' => Auth()->user(), 'token' => $token]);
+                
 
             }else{
                 //User not authenticated Mobile No wrong
@@ -400,7 +488,6 @@ elseif($request->login_id=='3'){
                    "code" => 1,
                    'message' => "Login successfully",
                    'token' => $token]);
-                //return response(['user' => Auth()->user(), 'token' => $token]);
 
             }else{
                 //User not authenticated Mobile No wrong
@@ -437,7 +524,7 @@ elseif($request->login_id=='4'){
                    "code" => 1,
                    'message' => "Login successfully",
                    'token' => $token]);
-                //return response(['user' => Auth()->user(), 'token' => $token]);
+               
 
             }else{
                 //User not authenticated Mobile No wrong
@@ -474,7 +561,7 @@ elseif($request->login_id=='5'){
                    "code" => 1,
                    'message' => "Login successfully",
                    'token' => $token]);
-                //return response(['user' => Auth()->user(), 'token' => $token]);
+               
 
             }else{
                 //User not authenticated Mobile No wrong
@@ -491,5 +578,6 @@ elseif($request->login_id=='5'){
         $string = str_shuffle($pin);
         return $string;
     }
+
 
 }
