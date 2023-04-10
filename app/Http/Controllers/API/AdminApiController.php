@@ -15,6 +15,25 @@ class AdminApiController extends BaseController
     public function register(Request $request)
     {
 
+
+      $input=$request->login_id;
+//otp and mobile number login
+if($input == '1'){
+        if(isset($request->otp))
+        {
+            //validation in register API
+            $validation = Validator::make($request->all(),[ 
+                'firstname' => 'max:255',
+                'lastname' => 'max:255',
+                'middlename' => 'max:255',
+                'email' => 'email|max:255',
+                'mobileno' => 'required|max:15',
+                'otp' => 'min:6|max:6',
+                'login_id' => 'required',
+            ]);
+    
+        if($validation->fails()){
+
         $input = $request->login_id;
         if ($input == '1') {
             if (isset($request->otp)) {
@@ -29,7 +48,43 @@ class AdminApiController extends BaseController
                     'login_id' => 'required',
                 ]);
 
+
                 if ($validation->fails()) {
+
+            } else{
+                $get_user = User::select()
+                ->where('mobileno',$request->mobileno)
+                ->where('otp',$request->otp)
+                ->first();
+
+                if(isset($get_user))
+                {
+                $token = $get_user->createToken('API Token')->accessToken;
+                    
+                    return response()->json([
+                        'success' => true,
+                         "code" => 1,
+                         'token' => $token,
+                        'message' => "Registration is successfully done",
+                    ], 200);
+                } else {
+                    return response()->json([
+                        'success' => false,
+                        'message' => "No data found please re-registered or OTP is in-correct",
+                    ], 200);
+                  }
+                }
+                } else {
+            $validation = Validator::make($request->all(), [
+              'firstname' => 'max:255',
+                'lastname' => 'max:255',
+                'middlename' => 'max:255',
+                'email' => 'max:255',
+                'mobileno' => 'required|max:15',
+                //'otp' => 'min:6|max:6',
+                'login_id' => 'required',
+            ]);
+         if($validation->fails()){
 
                     //Return the validation error
                     $fieldsWithErrorMessagesArray = $validation->messages()->get('*');
@@ -40,8 +95,26 @@ class AdminApiController extends BaseController
                         ->where('otp', $request->otp)
                         ->first();
 
+
                     if (isset($get_user)) {
                         $token = $get_user->createToken('API Token')->accessToken;
+
+
+            } else{
+
+                 // / Generate OTP /
+                $otp = $this->generateOtp();
+
+                //create the users after validate
+                $user = User::create([
+                    'firstname' => $request['firstname'],
+                    'lastname' => $request['lastname'],
+                    'middlename' => $request['middlename'],
+                    'email' => $request['email'],
+                    'password' => bcrypt($request['password']),
+                    'mobileno' => $request['mobileno'],
+                    'login_id' =>  $request['login_id'],
+                    'otp' => $otp,
 
                         return response()->json([
                             'success' => true,
@@ -66,6 +139,7 @@ class AdminApiController extends BaseController
                     'mobileno' => 'required|max:15',
                     'otp' => 'min:6|max:6',
                     'login_id' => 'required',
+
                 ]);
                 if ($validation->fails()) {
 
@@ -105,12 +179,16 @@ class AdminApiController extends BaseController
                     );
                 }
             }
-        } else if ($input == 2) {
-            $validation = Validator::make($request->all(), [
-                'firstname' => 'max:255',
+
+        }
+}
+//facebook_id login
+else if($input == 2){
+     $validation = Validator::make($request->all(), [
+              'firstname' => 'max:255',
                 'lastname' => 'max:255',
                 'middlename' => 'max:255',
-                'facebook_id' => 'unique:users|required',
+                'facebook_id' => 'required',
                 'login_id' => 'required',
             ]);
             if ($validation->fails()) {
@@ -120,6 +198,11 @@ class AdminApiController extends BaseController
                 return $fieldsWithErrorMessagesArray;
             } else {
 
+                 $get_user = User::select()
+                ->where('facebook_id',$request->facebook_id)
+                ->first();
+                
+               
                 //create the users after validate
                 $user = User::create([
                     'firstname' => $request['firstname'],
@@ -129,21 +212,29 @@ class AdminApiController extends BaseController
                     'facebook_id' =>  $request['facebook_id'],
                 ]);
 
-                return response(
-                    [
-                        'success' => true,
-                        // 'token' => $token,
-                        'message' => 'registration successfully done.'
-                    ],
-                    200
-                );
+                $success['token'] = $user->createToken('MyApp')->accessToken;
+                 if(isset($user)){
+                    return response([
+                    'success' => true,
+                    'token' => $success,
+                    'message'=> 'registration successfully done.']
+                    ,200);
             }
-        } else if ($input == 3) {
-            $validation = Validator::make($request->all(), [
-                'firstname' => 'max:255',
+            else {
+                return response()->json([
+                    'success' => false,
+                    'message' => "in-correct",
+                ]);
+            }
+            }
+        }
+//instagram_id login
+else if($input == 3){
+   $validation = Validator::make($request->all(), [
+              'firstname' => 'max:255',
                 'lastname' => 'max:255',
                 'middlename' => 'max:255',
-                'instagram_id' => 'unique:users|required',
+                'instagram_id' => 'required',
                 'login_id' => 'required',
             ]);
             if ($validation->fails()) {
@@ -151,7 +242,16 @@ class AdminApiController extends BaseController
                 //Return the validation error
                 $fieldsWithErrorMessagesArray = $validation->messages()->get('*');
                 return $fieldsWithErrorMessagesArray;
-            } else {
+
+
+            } else{
+
+                 $get_user = User::select()
+                ->where('instagram_id',$request->instagram_id)
+                ->first();
+                
+
+
                 //create the users after validate
                 $user = User::create([
                     'firstname' => $request['firstname'],
@@ -161,21 +261,29 @@ class AdminApiController extends BaseController
                     'instagram_id' =>  $request['instagram_id'],
                 ]);
 
-                return response(
-                    [
-                        'success' => true,
-                        // 'token' => $token,
-                        'message' => 'registration successfully done.'
-                    ],
-                    200
-                );
+                $success['token'] = $user->createToken('MyApp')->accessToken;
+                 if(isset($user)){
+                    return response([
+                    'success' => true,
+                    'token' => $success,
+                    'message'=> 'registration successfully done.']
+                    ,200);
             }
-        } else if ($input == 4) {
-            $validation = Validator::make($request->all(), [
-                'firstname' => 'max:255',
+            else {
+                return response()->json([
+                    'success' => false,
+                    'message' => "in-correct",
+                ]);
+            }
+            }
+        }
+//google_id Login
+else if($input == 4){
+      $validation = Validator::make($request->all(), [
+              'firstname' => 'max:255',
                 'lastname' => 'max:255',
                 'middlename' => 'max:255',
-                'google_id' => 'unique:users|required',
+                'google_id' => 'email|required',
                 'login_id' => 'required',
             ]);
             if ($validation->fails()) {
@@ -183,7 +291,14 @@ class AdminApiController extends BaseController
                 //Return the validation error
                 $fieldsWithErrorMessagesArray = $validation->messages()->get('*');
                 return $fieldsWithErrorMessagesArray;
-            } else {
+
+
+            } else{
+
+                 $get_user = User::select()
+                ->where('google_id',$request->google_id)
+                ->first();
+                
                 //create the users after validate
                 $user = User::create([
                     'firstname' => $request['firstname'],
@@ -193,21 +308,29 @@ class AdminApiController extends BaseController
                     'google_id' =>  $request['google_id'],
                 ]);
 
-                return response(
-                    [
-                        'success' => true,
-                        // 'token' => $token,
-                        'message' => 'registration successfully done.'
-                    ],
-                    200
-                );
+                $success['token'] = $user->createToken('MyApp')->accessToken;
+                 if(isset($user)){
+                    return response([
+                    'success' => true,
+                    'token' => $success,
+                    'message'=> 'registration successfully done.']
+                    ,200);
             }
-        } else if ($input == 5) {
-            $validation = Validator::make($request->all(), [
-                'firstname' => 'max:255',
+            else {
+                return response()->json([
+                    'success' => false,
+                    'message' => " in-correct",
+                ]);
+            }
+            }
+        }
+//apple_id login
+else if($input == 5){
+      $validation = Validator::make($request->all(), [
+              'firstname' => 'max:255',
                 'lastname' => 'max:255',
                 'middlename' => 'max:255',
-                'apple_id' => 'unique:users|required',
+                'apple_id' => 'required',
                 'login_id' => 'required',
             ]);
             if ($validation->fails()) {
@@ -217,6 +340,12 @@ class AdminApiController extends BaseController
                 return $fieldsWithErrorMessagesArray;
             } else {
 
+
+
+                 $get_user = User::select()
+                ->where('apple_id',$request->apple_id)
+                ->first();
+                
 
 
                 //create the users after validate
@@ -228,6 +357,70 @@ class AdminApiController extends BaseController
                     'apple_id' =>  $request['apple_id'],
                 ]);
 
+                $success['token'] = $user->createToken('MyApp')->accessToken;
+                 if(isset($user)){
+                    return response([
+                    'success' => true,
+                    'token' => $success,
+                    'message'=> 'registration successfully done.']
+                    ,200);
+            }
+            else {
+                return response()->json([
+                    'success' => false,
+                    'message' => "in-correct",
+                ]);
+            }
+            }
+        }
+//admin side login
+else if($input == 6){
+      $validation = Validator::make($request->all(), [
+              'firstname' => 'max:255',
+                'lastname' => 'max:255',
+                'middlename' => 'max:255',
+                'email' => 'required',
+                'password' => 'required',
+            ]);
+         if($validation->fails()){
+
+            //Return the validation error
+                $fieldsWithErrorMessagesArray = $validation->messages()->get('*');
+                return $fieldsWithErrorMessagesArray;
+
+            } else{
+
+                 $get_user = User::select()
+                ->where('email',$request->email)
+                ->where('password',$request->password)
+                ->first();
+                
+                //$token = $get_user->createToken('API Token')->accessToken;
+                //create the users after validate
+                $user = User::create([
+                    'firstname' => $request['firstname'],
+                    'lastname' => $request['lastname'],
+                    'middlename' => $request['middlename'],
+                    'is_admin' => $request['is_admin'],
+                    'email' =>  $request['email'],
+                    'password' => bcrypt($request['password']),
+                ]);
+                $success['token'] = $user->createToken('MyApp')->accessToken;
+                 if(isset($user)){
+                    return response([
+                    'success' => true,
+                    'token' => $success,
+                    'message'=> 'registration successfully done.']
+                    ,200);
+            }
+            else {
+                return response()->json([
+                    'success' => false,
+                    'message' => "in-correct",
+                ]);
+            }
+
+
                 return response(
                     [
                         'success' => true,
@@ -236,6 +429,7 @@ class AdminApiController extends BaseController
                     ],
                     200
                 );
+
             }
         }
     }
@@ -249,7 +443,6 @@ class AdminApiController extends BaseController
                     'mobileno' => 'required',
                     'otp' => 'required',
                 ]);
-
                 if ($validation->fails()) {
 
                     //Return the validation error
@@ -337,13 +530,14 @@ class AdminApiController extends BaseController
 
                     $token = Auth()->user()->createToken('API Token')->accessToken;
 
-                    return response([
-                        'success' => true,
-                        "code" => 1,
-                        'message' => "Login successfully",
-                        'token' => $token
-                    ]);
-                    //return response(['user' => Auth()->user(), 'token' => $token]);
+
+                return response([
+                   'success' => true,
+                   "code" => 1,
+                   'message' => "Login successfully",
+                   'token' => $token]);
+                
+
 
                 } else {
                     //User not authenticated Mobile No wrong
@@ -371,13 +565,13 @@ class AdminApiController extends BaseController
 
                     $token = Auth()->user()->createToken('API Token')->accessToken;
 
-                    return response([
-                        'success' => true,
-                        "code" => 1,
-                        'message' => "Login successfully",
-                        'token' => $token
-                    ]);
-                    //return response(['user' => Auth()->user(), 'token' => $token]);
+
+                return response([
+                   'success' => true,
+                   "code" => 1,
+                   'message' => "Login successfully",
+                   'token' => $token]);
+
 
                 } else {
                     //User not authenticated Mobile No wrong
@@ -405,13 +599,14 @@ class AdminApiController extends BaseController
 
                     $token = Auth()->user()->createToken('API Token')->accessToken;
 
-                    return response([
-                        'success' => true,
-                        "code" => 1,
-                        'message' => "Login successfully",
-                        'token' => $token
-                    ]);
-                    //return response(['user' => Auth()->user(), 'token' => $token]);
+
+                return response([
+                   'success' => true,
+                   "code" => 1,
+                   'message' => "Login successfully",
+                   'token' => $token]);
+               
+
 
                 } else {
                     //User not authenticated Mobile No wrong
@@ -439,13 +634,14 @@ class AdminApiController extends BaseController
 
                     $token = Auth()->user()->createToken('API Token')->accessToken;
 
-                    return response([
-                        'success' => true,
-                        "code" => 1,
-                        'message' => "Login successfully",
-                        'token' => $token
-                    ]);
-                    //return response(['user' => Auth()->user(), 'token' => $token]);
+
+                return response([
+                   'success' => true,
+                   "code" => 1,
+                   'message' => "Login successfully",
+                   'token' => $token]);
+               
+
 
                 } else {
                     //User not authenticated Mobile No wrong
@@ -462,4 +658,5 @@ class AdminApiController extends BaseController
         $string = str_shuffle($pin);
         return $string;
     }
+
 }
