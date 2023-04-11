@@ -12,9 +12,7 @@ class TwitController extends Controller
 
     public function twitter()
     {
-          $user = Twitter::select('*')->get();
-          return ($user);
+        $user = Twitter::select('*')->get();
+        return ($user);
     }
-
-    
 }

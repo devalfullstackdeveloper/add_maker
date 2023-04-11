@@ -9,10 +9,8 @@ use App\Models\UpcomingEvents;
 class FetchController extends Controller
 {
     public function fetch()
-    { 
+    {
         $user = UpcomingEvents::select('*')->get();
         return ($user);
-    
     }
-
 }

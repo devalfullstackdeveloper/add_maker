@@ -10,15 +10,9 @@ use DB;
 
 class AddBrandController extends Controller
 {
-    //
     public function add_brand()
-        {
-            $data=DB::table('brand')->join('socialmeadia','brand.display_media','=','socialmeadia.id')->select()->get();
-
-            // print_r($data);exit();
-
-            return($data);
-            
-        }
-    
+    {
+        $data = DB::table('brand')->join('socialmeadia', 'brand.display_media', '=', 'socialmeadia.id')->select()->get();
+        return ($data);
+    }
 }

@@ -21,6 +21,8 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AllPostsController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
+
 
 
 
@@ -117,8 +119,11 @@ Route::post('update/youtube/{id}',[YoutubeController::class, 'update'])->name('y
 Route::resource('instagram', InstagramController::class);
 Route::post('update/instagram/{id}',[InstagramController::class, 'update'])->name('instagram.update');
 
-Route::resource('all_posts', AllPostsController::class);
-Route::post('update/all_posts/{id}',[AllPostsController::class, 'update'])->name('all_posts.update');
-
 Route::get('dashboard', [DashboardController::class, 'UpcomingEvents']); 
 
+Route::resource('allposts', AllPostsController::class);
+Route::post('update/allposts/{id}',[AllPostsController::class, 'update'])->name('allposts.update');
+
+
+Route::resource('user', UserController::class);
+Route::post('/user_update/{id}', [UserController::class,'update'])->name('user.update');

@@ -11,6 +11,6 @@ class YoutubeDataController extends Controller
     public function youtube()
     {
         $user = Youtube::select('*')->get();
-          return ($user);
+        return ($user);
     }
 }
