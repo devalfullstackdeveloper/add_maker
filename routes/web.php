@@ -20,6 +20,7 @@ use App\Http\Controllers\InstagramController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AllPostsController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 
 
@@ -60,9 +61,9 @@ Route::get('page',function(){
     return view('page');
 });
 
-Route::get('dash',function(){
-    return view('dashboard');
-});
+// Route::get('dash',function(){
+//     return view('dashboard');
+// });
 
 Route::get('ind',function(){
     return view('industry.index');
@@ -118,8 +119,11 @@ Route::post('update/youtube/{id}',[YoutubeController::class, 'update'])->name('y
 Route::resource('instagram', InstagramController::class);
 Route::post('update/instagram/{id}',[InstagramController::class, 'update'])->name('instagram.update');
 
+Route::get('dashboard', [DashboardController::class, 'UpcomingEvents']); 
+
 Route::resource('allposts', AllPostsController::class);
 Route::post('update/allposts/{id}',[AllPostsController::class, 'update'])->name('allposts.update');
+
 
 Route::resource('user', UserController::class);
 Route::post('/user_update/{id}', [UserController::class,'update'])->name('user.update');
