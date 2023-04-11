@@ -1,10 +1,9 @@
 @extends('layout.layout')
 @section('content')
 <section>
-<div class="container mt-2">
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left mb-2 ">
+<div class="container-fluid mt-2">
+    <div class="page-title-wrap">
+        <div class="title-wrap">
                 <h2>Add New Menu</h2>
             </div>
             <div class="pull-right">
@@ -25,9 +24,10 @@
     <form action="{{ route('menu.update',$menu->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
+        <div class="edit-form-wrap">
             <div class="row">
             <input type="hidden" name="id" value="{{$menu->id}}">
-                <div class="col-xs-12 col-sm-12 col-md-12">
+                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                         <strong>Menu Title</strong>
                         <input value="{{$menu->title}}" type="text" name="title" class="form-control" placeholder="Menu Title">
@@ -37,36 +37,38 @@
                     </div>
                 </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                         <strong>Menu Description</strong>
-                        <textarea class="form-control" placeholder="Menu Description" name="description" id="description" cols="100" rows="3">{{$menu->description}}</textarea>
+                        <input class="form-control" placeholder="Menu Description" name="description" id="description" cols="100" value="{{$menu->description}}">
                         @error('name')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <strong>Menu Price</strong>
+                        <input  class="form-control" placeholder="Menu Price" name="price" id="price" cols="100" rows="3" value="{{$menu->price}}" > 
+                        @error('name')
+                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                         <strong>Image</strong>
                         <input type="file" name="images" class="form-control" placeholder="Uplpoad Images">
                         <input type="hidden" name="hidden_menu_image" class="form-control" placeholder="Image" value="{{$menu->images}}">
-                        <img class="mt-2" src="{{asset('/storage/app/'.$menu->images)}}" width="300px">
+                        <img class="list-img" src="{{asset('/storage/app/'.$menu->images)}}" width="300px">
                         @error('name')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Menu Price</strong>
-                        <textarea class="form-control" placeholder="Menu Price" name="price" id="price" cols="100" rows="3">{{$menu->price}}</textarea>
-                        @error('name')
-                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary ml-3">Update menu</button>
+
+                <div class="col-xs-12 col-sm-12 col-md-12 text-right mt-4">
+                <button type="submit" class="btn btn-primary ml-3">Submit</button>
             </div>
         </div>
     </form>

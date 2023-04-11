@@ -3,10 +3,9 @@
 
 @section('content')
 <section>
-<div class="container mt-2">
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left mb-2 ">
+<div class="container-fluid mt-2">
+    <div class="page-title-wrap">
+        <div class="title-wrap">
                 <h2>Add New Post</h2>
             </div>
             <div class="pull-right">
@@ -32,9 +31,10 @@
         <form action="{{ route('iposts.update',$ipost->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
+         <div class="edit-form-wrap">
             <div class="row">
             <input type="hidden" name="id" value="{{$ipost->id}}">
-                <div class="col-xs-12 col-sm-12 col-md-12">
+                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                         <strong>Post Title</strong>
                         <input value="{{$ipost->title}}" type="text" name="title" class="form-control" placeholder="Post Title">
@@ -44,10 +44,10 @@
                     </div>
                 </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                         <strong>Post Description</strong>
-                        <textarea class="form-control" placeholder="Post Description" name="description" id="description" cols="100" rows="3">{{$ipost->description}}</textarea>
+                        <input class="form-control" placeholder="Post Description" name="description" id="description" cols="100" rows="3" value="{{$ipost->description}}">
                         @error('name')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                         @enderror
@@ -55,18 +55,19 @@
                 </div>
 
 
-                <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="form-group">
                         <strong>Images</strong>
                         <input type="file" name="images" class="form-control" placeholder="Upload Images">
                         <input type="hidden" name="hidden_ipost_image" class="form-control" placeholder="Post Image" value="{{$ipost->images}}">
-                        <img class="mt-2" src="{{asset('/storage/app/'.$ipost->images)}}" width="300px">
+                        <img class="list-img" src="{{asset('/storage/app/'.$ipost->images)}}" width="300px">
                         @error('name')
                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary ml-3">Update Post</button>
+                 <div class="col-xs-12 col-sm-12 col-md-12 text-right mt-4">
+                <button type="submit" class="btn btn-primary ml-3">Submit</button>
             </div>
         </div>
     </form>

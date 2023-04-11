@@ -8,7 +8,7 @@
 
         <a href="{{ route('posts.create') }}" class="btn btn-primary btn-icon-split">
                 <span class="icon text-white-50">
-                    <i class="fa fa-plus" style="font-size:24px"></i>
+                    <i class="fa fa-plus"></i>
                 </span>
                 <span class="text">Add New Post</span></a>
             </div>
@@ -39,21 +39,21 @@
                               @foreach ($posts as $po)
                                <tr>
                                 <td>{{$i}}</td>
-                                <td>{{ $po->title}}</td>
-                                <td>{{ $po->description }}</td>
-                                <td><img alt="img" src="{{asset('/storage/app/'.$po->images)}}" width="100px"></td>
-                                <td>{{ $po->created_at }}</td>
+                                <td><div class="tect-desc">{{ $po->title}}</td></div>
+                                <td><div class="tect-desc"> {{ $po->description }}</td></div>
+                                <td><img alt="img" class="list-img" src="{{asset('/storage/app/'.$po->images)}}" width="100px"></td>
+                                <td><div class="date-wrap"> {{ $po->created_at }}</td></div>
                                 <td>
                                   <div class="action-wrap-btn">
 
-                                   <a href="{{ route('posts.show', $po->id) }}" class="btn btn-success btn-circle"><i class="fas fa-eye"></i></a>
+                                   <a href="{{ route('posts.show', $po->id) }}" class="btn "><i class="fas fa-eye text-success"></i></a>
 
-                                   <a href="{{route('posts.edit', $po->id)}}" class="btn btn-primary btn-circle"><i class="fas fa-edit"></i></a>
+                                   <a href="{{route('posts.edit', $po->id)}}" class="btn "><i class="fas fa-edit text-primary"></i></a>
 
                                    <form action="{{ route('posts.destroy',$po->id) }}" method="post" style="display: inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash"></i></button>
+                                    <button class="btn text-danger" type="submit"><i class="fas fa-trash"></i></button>
                                    </form> 
                                   </div>
                                 </td>
