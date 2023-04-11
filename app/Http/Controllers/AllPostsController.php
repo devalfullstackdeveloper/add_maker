@@ -19,11 +19,10 @@ class AllPostsController extends Controller
     {
 
         $all_posts = AllPosts::latest()->paginate();
-    
-        
-       return view('all_posts.index',compact('all_posts'))
-          ->with('i', (request()->input('page', 1) - 1) * 5);
 
+
+        return view('all_posts.index', compact('all_posts'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -37,9 +36,7 @@ class AllPostsController extends Controller
         $industryType = Industry::select('id', 'industry_type')->get();
         $category = Category::select('id', 'title')->get();
 
-         return view('all_posts.create', compact('industryType','category'));
-      
-
+        return view('all_posts.create', compact('industryType', 'category'));
     }
 
     /**
@@ -61,37 +58,34 @@ class AllPostsController extends Controller
             'caption' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
-            'status'=> 'required'
+            'status' => 'required'
 
-            ]);
-             
-            $file1 = $request->file('image');
-            $fileName1 = $request->file('image')->getClientOriginalName();             
-            $path1 = $request->file('image')->storeAs('allpost_image', $fileName1);
-            $file2 = $request->file('thumbnail');
-            $fileName2 = $request->file('thumbnail')->getClientOriginalName();             
-            $path2 = $request->file('thumbnail')->storeAs('allpost_thumbnail', $fileName2);
+        ]);
 
-            //$industryType = select::Industry('id', 'industry_type')->get();
+        $file1 = $request->file('image');
+        $fileName1 = $request->file('image')->getClientOriginalName();
+        $path1 = $request->file('image')->storeAs('allpost_image', $fileName1);
+        $file2 = $request->file('thumbnail');
+        $fileName2 = $request->file('thumbnail')->getClientOriginalName();
+        $path2 = $request->file('thumbnail')->storeAs('allpost_thumbnail', $fileName2);
 
-            $data = AllPosts::create([
+        //$industryType = select::Industry('id', 'industry_type')->get();
+
+        $data = AllPosts::create([
             'name' => $request->name,
             'industry_type' => $request->industry_type,
             'category_type' => $request->category_type,
             'description' => $request->description,
             'image' => $path1,
             'thumbnail' => $path2,
-            'caption'=>  $request->caption,
-            'start_date'=>  $request->start_date,
-            'end_date'=>  $request->end_date,
-            'status'=> $request->status,
+            'caption' =>  $request->caption,
+            'start_date' =>  $request->start_date,
+            'end_date' =>  $request->end_date,
+            'status' => $request->status,
 
         ]);
-            return redirect()->route('allposts.index')
-          ->with('success','all posts has been created successfully.');
-
-       
-
+        return redirect()->route('allposts.index')
+            ->with('success', 'all posts has been created successfully.');
     }
 
     /**
@@ -103,8 +97,8 @@ class AllPostsController extends Controller
 
     public function show($id)
     {
-        $data= AllPosts::find($id);
-        return view('all_posts.show',compact('data'));
+        $data = AllPosts::find($id);
+        return view('all_posts.show', compact('data'));
     }
 
     /**
@@ -117,8 +111,8 @@ class AllPostsController extends Controller
     public function edit($id)
     {
         $industryType = Industry::select('id', 'industry_type')->get();
-        $data= AllPosts::find($id);
-        return view('all_posts.edit',compact('data', 'industryType'));
+        $data = AllPosts::find($id);
+        return view('all_posts.edit', compact('data', 'industryType'));
     }
 
     /**
@@ -139,58 +133,55 @@ class AllPostsController extends Controller
             'caption' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
-            'status'=> 'required'
-      ]);
+            'status' => 'required'
+        ]);
 
-        
-// main image start
-    if(($_FILES['allpost_image']['name'] != '') && ($request->hidden_allpost_image != '')){
+
+        // main image start
+        if (($_FILES['allpost_image']['name'] != '') && ($request->hidden_allpost_image != '')) {
             $file1 = $request->file('allpost_image');
-            $fileName1 = $request->file('allpost_image')->getClientOriginalName(); 
+            $fileName1 = $request->file('allpost_image')->getClientOriginalName();
             $path1 = $request['allpost_image']->storeAs('allpost_image', $fileName1);
-
-    }else{
+        } else {
             $file1 = $request->file('hidden_allpost_image');
-            $fileName1 = $request->file('hidden_allpost_image'); 
+            $fileName1 = $request->file('hidden_allpost_image');
             $path1 = $request['hidden_allpost_image'];
-    
-    }
+        }
 
-   
-// // main image end
-   
 
-// thuumb image start
-    if(($_FILES['allpost_thumbnail']['name'] != '') && ($request->hidden_allpost_thumbnail != '')){
-    $file2 = $request->file('allpost_thumbnail');
-    $fileName2 = $request->file('allpost_thumbnail')->getClientOriginalName();  
-    $path2 = $request['allpost_thumbnail']->storeAs('allpost_thumbnail', $fileName2);
-  
-    }else{
+        // // main image end
 
-    $file2 = $request->file('hidden_allpost_thumbnail');
-    $fileName2 = $request->file('hidden_allpost_thumbnail');       
-     $path2 = $request['hidden_allpost_thumbnail'];
-    }
-    
-// thuumb image end
-    
 
-    $UpdateDetails = AllPosts::where('id', $request->id)->update(array(
-    'name' => $request->name,
-    'industry_type' => $request->industry_type,
-    'category_type' => $request->category_type,
-    'description' => $request->description,
-    'image' => $path1,
-    'thumbnail' => $path2 ,
-    'caption'=>  $request->caption,
-    'start_date'=>  $request->start_date,
-    'end_date'=>  $request->end_date,
-    'status'=> $request->status,
+        // thuumb image start
+        if (($_FILES['allpost_thumbnail']['name'] != '') && ($request->hidden_allpost_thumbnail != '')) {
+            $file2 = $request->file('allpost_thumbnail');
+            $fileName2 = $request->file('allpost_thumbnail')->getClientOriginalName();
+            $path2 = $request['allpost_thumbnail']->storeAs('allpost_thumbnail', $fileName2);
+        } else {
 
-    ));
-      return redirect()->route('allposts.index')
-                   ->with('success','updated successfully');
+            $file2 = $request->file('hidden_allpost_thumbnail');
+            $fileName2 = $request->file('hidden_allpost_thumbnail');
+            $path2 = $request['hidden_allpost_thumbnail'];
+        }
+
+        // thuumb image end
+
+
+        $UpdateDetails = AllPosts::where('id', $request->id)->update(array(
+            'name' => $request->name,
+            'industry_type' => $request->industry_type,
+            'category_type' => $request->category_type,
+            'description' => $request->description,
+            'image' => $path1,
+            'thumbnail' => $path2,
+            'caption' =>  $request->caption,
+            'start_date' =>  $request->start_date,
+            'end_date' =>  $request->end_date,
+            'status' => $request->status,
+
+        ));
+        return redirect()->route('allposts.index')
+            ->with('success', 'updated successfully');
     }
 
     /**
@@ -203,9 +194,8 @@ class AllPostsController extends Controller
     public function destroy($id)
     {
         //
-        $id=AllPosts::find($id);
+        $id = AllPosts::find($id);
         $id->delete();
-        return redirect('/allposts')->with('success','Deleted successfully');
-
+        return redirect('/allposts')->with('success', 'Deleted successfully');
     }
 }
