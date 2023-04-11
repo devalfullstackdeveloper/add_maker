@@ -20,7 +20,7 @@ use App\Http\Controllers\InstagramController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AllPostsController;
-
+use App\Http\Controllers\UserController;
 
 
 
@@ -121,4 +121,5 @@ Route::post('update/instagram/{id}',[InstagramController::class, 'update'])->nam
 Route::resource('allposts', AllPostsController::class);
 Route::post('update/allposts/{id}',[AllPostsController::class, 'update'])->name('allposts.update');
 
-
+Route::resource('user', UserController::class);
+Route::post('/user_update/{id}', [UserController::class,'update'])->name('user.update');
