@@ -20,8 +20,7 @@ use App\Http\Controllers\InstagramController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AllPostsController;
-
-
+use App\Http\Controllers\DashboardController;
 
 
 
@@ -60,9 +59,9 @@ Route::get('page',function(){
     return view('page');
 });
 
-Route::get('dash',function(){
-    return view('dashboard');
-});
+// Route::get('dash',function(){
+//     return view('dashboard');
+// });
 
 Route::get('ind',function(){
     return view('industry.index');
@@ -121,4 +120,5 @@ Route::post('update/instagram/{id}',[InstagramController::class, 'update'])->nam
 Route::resource('all_posts', AllPostsController::class);
 Route::post('update/all_posts/{id}',[AllPostsController::class, 'update'])->name('all_posts.update');
 
+Route::get('dashboard', [DashboardController::class, 'UpcomingEvents']); 
 
