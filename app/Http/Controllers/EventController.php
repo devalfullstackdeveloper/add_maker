@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\upcomingevents;
+use App\Models\UpcomingEvents;
 use Illuminate\Http\Request;
 use Validator;
  use File;
 // use Illuminate\Support\Facades\Validator;
 
 
-class eventController extends Controller
+class EventController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class eventController extends Controller
      */
     public function index()
     {
-        $upcomingevents = upcomingevents::latest()->paginate();
+        $upcomingevents = UpcomingEvents::latest()->paginate();
     
         
        return view('upcomingevents.index',compact('upcomingevents'))
@@ -58,7 +58,7 @@ class eventController extends Controller
         $fileName = $request->file('icon')->getClientOriginalName();             
         $path = $request->file('icon')->storeAs('event_image', $fileName);
 
-            $data = upcomingevents::create([
+            $data = UpcomingEvents::create([
             'title' => $request->title,
             'description' => $request->description,
             'icon' => $path,
@@ -77,10 +77,10 @@ class eventController extends Controller
      * @param  \App\Models\upcomingevents  $upcomingevents
      * @return \Illuminate\Http\Response
      */
-    public function show(upcomingevents $upcomingevents ,$id)
+    public function show(UpcomingEvents $upcomingevents ,$id)
     {
         //
-        $data= upcomingevents::find($id);
+        $data= UpcomingEvents::find($id);
         return view('upcomingevents.show',compact('data'));
     }
 
@@ -94,7 +94,8 @@ class eventController extends Controller
     public function edit($id )
     {
     
-        $data= upcomingevents::find($id);
+    
+        $data= UpcomingEvents::find($id);
         return view('upcomingevents.edit',compact('data'));
     }
 
@@ -108,8 +109,8 @@ class eventController extends Controller
     public function update(Request $request ,$id)
     {
 
-           // print_r($request->all()); exit();
-
+            // print_r($request->all()); exit();
+           
             $request->validate([
             'title' => 'required',
             'description' => 'required',
@@ -127,7 +128,7 @@ class eventController extends Controller
                 $path = $request['hidden_icon'];
             }           
             
-            $UpdateDetails = upcomingevents::where('id', $request->id)->update(array(
+            $UpdateDetails = UpcomingEvents::where('id', $request->id)->update(array(
              "title" => $request->title,
             "description" => $request->description,
             "icon" => $path,
@@ -136,8 +137,11 @@ class eventController extends Controller
 
          ));
         }else{
-         $UpdateDetails = upcomingevents::where('id', $request->id)->update(array(
+         $UpdateDetails = UpcomingEvents::where('id', $request->id)->update(array(
             "title" => $request->title,
+             "description" => $request->description,
+            "date" => $request->date,
+           "status" => $request->status,
      ));
       return redirect()->route('event.index')
           ->with('success','upcoming events has been updated successfully.');
@@ -153,12 +157,10 @@ class eventController extends Controller
     public function destroy ($id)
     { 
 
-        $idd = upcomingevents::findOrFail($id);
+        $idd = UpcomingEvents::findOrFail($id);
         $idd->delete();
         return redirect('/event')->with('completed', 'event has been deleted');
     
     }
     
 }
-
-

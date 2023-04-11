@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('All_Posts', function (Blueprint $table) {
+        Schema::create('allposts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('industry_type');
+            $table->string('category_type');
             $table->text('description');
             $table->string('image');
             $table->string('thumbnail');
@@ -35,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('All_Posts');
+        Schema::dropIfExists('allposts');
     }
 };

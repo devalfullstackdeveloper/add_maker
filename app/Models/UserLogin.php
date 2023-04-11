@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Passport\HasApiTokens;
-class userlogin extends Model
+class UserLogin extends Model
 {
     use HasFactory,HasApiTokens;
     protected $table='userlogin';

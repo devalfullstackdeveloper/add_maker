@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\twitter;
+use App\Models\Instagram;
 use Illuminate\Http\Request;
- use File;
+use File;
 use Validator;
 
-class twitterController extends Controller
+class InstagramController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,12 +16,10 @@ class twitterController extends Controller
      */
     public function index()
     {
-        $twitter = twitter::latest()->paginate();
-       return view('twitter.index',compact('twitter'))
-          ->with('i', (request()->input('page', 1) - 1) * 5);
-    
+        $instagram = Instagram::latest()->paginate();
+       return view('instagram.index',compact('instagram'))
+        ->with('i', (request()->input('page', 1) - 1) * 5);
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -30,7 +28,7 @@ class twitterController extends Controller
      */
     public function create()
     {
-       return view('twitter.create');
+        return view('instagram.create');   
     }
 
     /**
@@ -41,8 +39,7 @@ class twitterController extends Controller
      */
     public function store(Request $request)
     {
-        //
-           $validation = Validator::make($request->all(),[ 
+         $validation = Validator::make($request->all(),[ 
             'title' => 'required',
             'description'=> 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -50,92 +47,88 @@ class twitterController extends Controller
             'status'=> 'required'
             ]);
             $file = $request->file('image');
-        $fileName = $request->file('image')->getClientOriginalName();             
-        $path = $request->file('image')->storeAs('twitter_image', $fileName);
-        $data = twitter::create([
-           'title' => $request->title,
+          $fileName = $request->file('image')->getClientOriginalName();             
+          $path = $request->file('image')->storeAs('insta_image', $fileName);
+            $data = Instagram::create([
+            'title' => $request->title,
             'description' => $request->description,
             'image' => $path,
             'date'=>  $request->date,
             'status'=> $request->status,
-        ]);
-            return redirect()->route('twitter.index')
-          ->with('success','upcoming events has been created successfully.');
+              ]);
+            return redirect()->route('instagram.index')
+          ->with('success','instagram stories  has been created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\twitter  $twitter
+     * @param  \App\Models\instagram  $instagram
      * @return \Illuminate\Http\Response
      */
-     public function show($id)
+    public function show($id)
     {
-        //
-         $data= twitter::find($id);
-        return view('twitter.show',compact('data'));
+         $data= Instagram::find($id);
+        return view('instagram.show',compact('data'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\twitter  $twitter
+     * @param  \App\Models\instagram  $instagram
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-    
-        $data= twitter::find($id);
-        return view('twitter.edit',compact('data'));
+         $data= Instagram::find($id);
+        return view('instagram.edit',compact('data'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\twitter  $twitter
+     * @param  \App\Models\instagram  $instagram
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, Instagram $instagram)
     {
-        
-         $request->validate([
+        $request->validate([
             'title' => 'required',
             'description' => 'required',
             'date'=> 'required',
             'status'=> 'required'
-
             ]);
 
        if($_FILES['image']['name'] != ''){
             //upload image
-        $file = $request->file('image');
+
+      $file = $request->file('image');
             $fileName = $request->file('image')->getClientOriginalName(); 
             if($fileName != ''){
-                $path = $request->file('image')->storeAs('twitter_image', $fileName);
+                $path = $request->file('image')->storeAs('insta_image', $fileName);
             }else{
                 $path = $request['hidden_image'];
             }           
-
-        $UpdateDetails = twitter::where('id', $request->id)->update(array(
+                
+        $UpdateDetails = Instagram::where('id', $request->id)->update(array(
        "title" => $request->title,
        "description" => $request->description,
        "image" => $path,
        "date" => $request->date,
         "status" => $request->status,
+
      ));
-        
+
       }else{
-       $UpdateDetails = twitter::where('id', $request->id)->update(array(
+       $UpdateDetails = Instagram::where('id', $request->id)->update(array(
         "title" => $request->title,
         "description" => $request->description,
         "date" => $request->date,
         "status" => $request->status,
-
      ));
-
       }
-      return redirect()->route('twitter.index')
+      return redirect()->route('instagram.index')
           ->with('success','upcoming events has been created successfully.');
   
     }
@@ -143,14 +136,16 @@ class twitterController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\twitter  $twitter
+     * @param  \App\Models\instagram  $instagram
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
-        $idd = twitter::findOrFail($id);
+        
+        $idd = Instagram::findOrFail($id);
         $idd->delete();
-        return redirect('/twitter')->with('completed', 'event has been deleted');
-     }
+        return redirect('/instagram')->with('completed', 'event has been deleted');
+    }
 }
+
+

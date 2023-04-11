@@ -6,15 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Poster;
 use Illuminate\Http\Request;
 
-class poster_data_controller extends Controller
+class PosterDataController extends Controller
 {
-    
+
     public function poster()
     {
 
-      $user = poster::select('*')->get();
-          return ($user);   
+        $user = Poster::select('*')->get();
+        return ($user);
     }
-
-    
 }

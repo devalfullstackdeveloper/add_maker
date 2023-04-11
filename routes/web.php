@@ -7,21 +7,20 @@ use App\Http\Controllers\Auth\GalleryController;
 use App\Http\Controllers\FacebookController;
 use App\Http\Controllers\Auth\AdminController;
 use App\Http\Controllers\LogoutController;
-
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\IpostsController;
 use App\Http\Controllers\IndustryController;
 use App\Http\Controllers\FbookController;
 use App\Http\Controllers\BussinessCardController;
-
-use App\Http\Controllers\eventController;
-use App\Http\Controllers\twitterController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\TwitterController;
 use App\Http\Controllers\PosterController;
-use App\Http\Controllers\youtubeController;
-use App\Http\Controllers\instagramController;
+use App\Http\Controllers\YoutubeController;
+use App\Http\Controllers\InstagramController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\All_Posts_Controller;
+use App\Http\Controllers\AllPostsController;
+use App\Http\Controllers\UserController;
 
 
 
@@ -40,8 +39,7 @@ use App\Http\Controllers\All_Posts_Controller;
 Route::get('/', function () {
     return view('welcome');
 });
-    Route::get('google',function(){
-
+Route::get('google',function(){
     return view('googleAuth');
         
     });
@@ -74,8 +72,6 @@ Route::get('ind',function(){
 Route::post('post-login', [AdminController::class, 'postLogin'])->name('login.post');
 
 Route::get('auth/google', [LoginController::class, 'redirectToGoogle']);        
-//Route::get('auth/google/callback',[LoginController::class, 'handleGoogleCallback']);
-
 
 Route::get('auth/insta', [GalleryController::class, 'redirectToInstagramProvider']);     
 Route::get('auth/insta/callback', [GalleryController::class, 'instagramProviderCallback']);
@@ -86,9 +82,6 @@ Route::get('auth/facebbok/callback', [FacebookController::class, 'facebookCallba
 Route::get('auth/apple',[AppleLoginController::class,'appleLogin']);
 
 Route::group(['middleware' => ['auth']], function() {
-    /**
-    * Logout Route
-    */
 Route::get('/logout', [LogoutController::class, 'perform'])->name('logout.perform');
  });
 
@@ -100,18 +93,13 @@ Route::resource('fbook', FbookController::class);
 Route::resource('bcard', BussinessCardController::class);
 Route::post('/update/bcard/{id}', [BussinessCardController::class,'update'])->name('bcard.update');
   
-//  Route::post('delete-industry', [IndustryController::class,'destroy']);
-//  Route::get('admins', [IndustryController::class, 'indexs'])->name('admins.index');
-
- Route::resource('event', eventController::class);
+Route::resource('event', EventController::class);
 Route::resource('posts', PostController::class);
 Route::resource('/iposts', IpostsController::class);
 
-Route::resource('event', eventController::class);
-Route::post('update/event/{id}',[eventController::class, 'update'])->name('event.update');
-
-Route::resource('twitter', twitterController::class);
-Route::post('update/twitter/{id}',[twitterController::class, 'update'])->name('twitter.update');
+Route::post('update/event/{id}',[EventController::class, 'update'])->name('event.update');
+Route::resource('twitter', TwitterController::class);
+Route::post('update/twitter/{id}',[TwitterController::class, 'update'])->name('twitter.update');
 
 Route::resource('poster', PosterController::class);
 Route::post('update/poster/{id}',[PosterController::class, 'update'])->name('poster.update');
@@ -119,19 +107,19 @@ Route::post('update/poster/{id}',[PosterController::class, 'update'])->name('pos
 Route::resource('fbook', FbookController::class);
 Route::post('/fbook_update/{id}', [FbookController::class,'update'])->name('fbook.update');
 
-
 Route::resource('industry', IndustryController::class);
 Route::post('/industry_update/{id}', [IndustryController::class,'update'])->name('industry.update');
 
 Route::resource('brands', BrandController::class);  //api
 
-Route::resource('youtube', youtubeController::class);
-Route::post('update/youtube/{id}',[youtubeController::class, 'update'])->name('youtube.update');
+Route::resource('youtube', YoutubeController::class);
+Route::post('update/youtube/{id}',[YoutubeController::class, 'update'])->name('youtube.update');
 
-Route::resource('instagram', instagramController::class);
-Route::post('update/instagram/{id}',[instagramController::class, 'update'])->name('instagram.update');
+Route::resource('instagram', InstagramController::class);
+Route::post('update/instagram/{id}',[InstagramController::class, 'update'])->name('instagram.update');
 
-Route::resource('all_posts', All_Posts_Controller::class);
-Route::post('update/all_posts/{id}',[All_Posts_Controller::class, 'update'])->name('all_posts.update');
+Route::resource('allposts', AllPostsController::class);
+Route::post('update/allposts/{id}',[AllPostsController::class, 'update'])->name('allposts.update');
 
-
+Route::resource('user', UserController::class);
+Route::post('/user_update/{id}', [UserController::class,'update'])->name('user.update');

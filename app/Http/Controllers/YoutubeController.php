@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\youtube;
+use App\Models\Youtube;
 use Illuminate\Http\Request;
 use File;
 use Validator;
@@ -16,7 +16,7 @@ class youtubeController extends Controller
      */
     public function index()
     {
-        $youtube = youtube::latest()->paginate();
+        $youtube = Youtube::latest()->paginate();
        return view('youtube.index',compact('youtube'))
         ->with('i', (request()->input('page', 1) - 1) * 5);
     }
@@ -49,7 +49,7 @@ class youtubeController extends Controller
         $file = $request->file('image');
         $fileName = $request->file('image')->getClientOriginalName();             
         $path = $request->file('image')->storeAs('yt_image', $fileName);
-        $data = youtube::create([
+        $data = Youtube::create([
              'title' => $request->title,
             'description' => $request->description,
             'image' => $path,
@@ -69,7 +69,7 @@ class youtubeController extends Controller
      */
     public function show($id)
     {
-        $data= youtube::find($id);
+        $data= Youtube::find($id);
         return view('youtube.show',compact('data'));
     }
 
@@ -81,7 +81,7 @@ class youtubeController extends Controller
      */
     public function edit($id)
     {
-          $data= youtube::find($id);
+          $data= Youtube::find($id);
         return view('youtube.edit',compact('data'));
     }
 
@@ -111,7 +111,7 @@ class youtubeController extends Controller
             }           
             
 
-        $UpdateDetails = youtube::where('id', $request->id)->update(array(
+        $UpdateDetails = Youtube::where('id', $request->id)->update(array(
        "title" => $request->title,
        "description" => $request->description,
        "image" => $path,
@@ -121,7 +121,7 @@ class youtubeController extends Controller
      ));
 
       }else{
-       $UpdateDetails = youtube::where('id', $request->id)->update(array(
+       $UpdateDetails = Youtube::where('id', $request->id)->update(array(
         "title" => $request->title,
         "description" => $request->description,
         "date" => $request->date,
@@ -143,7 +143,7 @@ class youtubeController extends Controller
      */
     public function destroy($id)
     {
-        $idd = youtube::findOrFail($id);
+        $idd = Youtube::findOrFail($id);
         $idd->delete();
         return redirect('/youtube')->with('completed', 'event has been deleted');
     }

@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class youtube extends Model
+class Instagram extends Model
 {
     use HasFactory;
-    protected $table='youtube';
+    protected $table='instagram';
     protected $fillable = [
-        'title','description', 'image','date', 'status'
+    'title','description', 'image','date', 'status'
     ];
 }

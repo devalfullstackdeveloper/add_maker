@@ -3,16 +3,15 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\instagram;
+use App\Models\Instagram;
 use Illuminate\Http\Request;
 
-class instacontroller extends Controller
+class InstaController extends Controller
 {
-    
+
     public function insta()
     {
-        $user = instagram::select('*')->get();
-         return ($user);
+        $user = Instagram::select('*')->get();
+        return ($user);
     }
-
 }

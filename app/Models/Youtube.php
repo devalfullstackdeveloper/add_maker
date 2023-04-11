@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class profile extends Model
+class Youtube extends Model
 {
     use HasFactory;
-    protected $table='profile';
+    protected $table='youtube';
     protected $fillable = [
-        'name','mobile_no'
+        'title','description', 'image','date', 'status'
     ];
 }

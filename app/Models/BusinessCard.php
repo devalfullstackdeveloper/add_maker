@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class twitter extends Model
+class BusinessCard extends Model
 {
     use HasFactory;
-    protected $table='twitter';
+     protected $table='business_card';
     protected $fillable = [
-        'title','description', 'image','date', 'status'
-    ];
+        'description', 'image', 'date', 'status'];
 }
