@@ -19,10 +19,8 @@ class AdminController extends Controller
 
         $credentials = $request->only('email', 'password','is_admin');
         if (Auth::attempt($credentials)) {
-
-        return redirect()->intended('dash')
-            ->withSuccess('You have Successfully loggedin');
-            
+            return redirect()->intended('dashboard')
+                        ->withSuccess('You have Successfully loggedin');
         }
   
         return redirect("admin")->withSuccess('Oppes! You have entered invalid credentials');
