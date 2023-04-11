@@ -22,6 +22,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AllPostsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminProfileController;
 
 
 
@@ -127,3 +128,15 @@ Route::post('update/allposts/{id}',[AllPostsController::class, 'update'])->name(
 
 Route::resource('user', UserController::class);
 Route::post('/user_update/{id}', [UserController::class,'update'])->name('user.update');
+
+
+
+// admin profile 
+Route::controller(AdminProfileController::class)->group(function(){
+    Route::get('/admin/profile', 'Profile')->name('admin.profile');
+    Route::get('/edit/profile', 'EditProfile')->name('edit.profile');
+    Route::post('/store/profile', 'StoreProfile')->name('store.profile');
+    Route::get('/admin/logout', 'destroy')->name('admin.logout');
+
+
+});
