@@ -74,7 +74,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//FETCH api for Upcomin Events 
+//FETCH api for Upcoming Events 
  Route::get('/events',[FetchController::class, 'fetch'])->middleware('auth:api');
 
 

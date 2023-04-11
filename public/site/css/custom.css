@@ -7,4 +7,43 @@
 }
 .action-wrap-btn .btn {
 	margin: 0 8px;
+	padding: 0;
+}
+.tect-desc {
+	line-height: 18px;
+}
+.date-wrap {
+	white-space: nowrap;
+}
+.page-title-wrap {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-bottom: 30px;
+}
+.edit-form-wrap {
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	padding: 15px;
+}
+.list-img {
+	width: 100px;
+	height: 60px;
+}
+#dataTable_wrapper .toggle.btn {
+	height: 24.7983px !important;
+	width: 86px !important;
+	min-height: 30px;
+	
+}
+#dataTable_wrapper .toggle.btn, #dataTable_wrapper .toggle .btn{
+	line-height: 1.8;
+}
+#dataTable_wrapper  .toggle-group label,.toggle-group span {
+	padding: 0;
+}
+#dataTable_wrapper  .toggle-on.btn {
+	padding-right: 0;
+}
+#dataTable_wrapper  .toggle-on {
+	right: 50%;
 }

@@ -32,7 +32,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
             <br><br><strong>Industry Image:</strong><br>
-            <img src="{{asset('/storage/app/'.$data->industry_image)}}" alt="{{$data->industry_type}}" style="width: 100px;"> 
+            <img class="list-img" src="{{asset('/storage/app/'.$data->industry_image)}}" alt="{{$data->industry_type}}"> 
             </div>
         </div>
     </div>

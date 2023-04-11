@@ -142,10 +142,11 @@ class EventController extends Controller
              "description" => $request->description,
             "date" => $request->date,
            "status" => $request->status,
-     ));
+         ));
+        }   
       return redirect()->route('event.index')
           ->with('success','upcoming events has been updated successfully.');
-    }
+    
 }
 
     /**
@@ -161,6 +162,15 @@ class EventController extends Controller
         $idd->delete();
         return redirect('/event')->with('completed', 'event has been deleted');
     
+    }
+
+    public function changeStatus(Request $request)
+    {  
+   
+        $user = UpcomingEvents::find($request['id']);
+        $user->status = $request['status'];
+        $user->save();
+  
     }
     
 }

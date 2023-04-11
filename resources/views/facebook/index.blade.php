@@ -8,9 +8,9 @@
 
             <a href="{{route('fbook.create')}}" class="btn btn-primary btn-icon-split">
                 <span class="icon text-white-50">
-                    <i class="fa fa-plus" style="font-size:24px"></i>
+                    <i class="fa fa-plus"></i>
                 </span>
-                <span class="text">Add Type</span></a>
+                <span class="text">Add Facebook AD</span></a>
             </div>
             <div class="container-fluid">
                 <!-- DataTales Example -->
@@ -38,21 +38,25 @@
                               @foreach ($facebook as $fb)
                                <tr>
                                 <td>{{$i}}</td>
-                                <td>{{ $fb->title }}</td>
-                                <td>{{ $fb->description }}</td>
-                                <td><img src="{{asset('/storage/app/'.$fb->image)}}" alt="{{$fb->title}}" style="width: 100px;"></td>
+                                <td>
+                                <div class="tect-desc">{{ $fb->title }}</div>
+                                </td>
+                                <td>
+                                <div class="tect-desc">{{ $fb->description }}</div>
+                                </td>
+                                <td><img class="list-img" src="{{asset('/storage/app/'.$fb->image)}}" alt="{{$fb->title}}"></td>
                                 <td>{{ $fb->status }}</td>
                                 <td>
                                   <div class="action-wrap-btn">
 
-                                   <a href="{{route('fbook.show',$fb->id)}}" class="btn btn-success btn-circle"><i class="fas fa-eye"></i></a>
+                                   <a href="{{route('fbook.show',$fb->id)}}" class="btn"><i class="fas fa-eye text-success"></i></a>
 
-                                   <a href="{{ route('fbook.edit',$fb->id) }}" class="btn btn-primary btn-circle"><i class="fas fa-edit"></i></a>
+                                   <a href="{{ route('fbook.edit',$fb->id) }}" class="btn"><i class="fas fa-edit text-primary"></i></a>
 
                                    <form action="{{ route('fbook.destroy',$fb->id) }}" method="post" style="display: inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash"></i></button>
+                                    <button class="btn" type="submit"><i class="fas fa-trash text-danger"></i></button>
                                    </form>                  
                                   </div>
                                 </td>

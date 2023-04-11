@@ -26,21 +26,21 @@
 
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-            <br><br><strong>industry_type:</strong><br>
+            <br><br><strong>Category Type:</strong><br>
                 {{ $data->category_type }}
             </div>
     </div>
 
     <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-            <br><br><strong>industry_type:</strong><br>
+            <br><br><strong>Industry Type:</strong><br>
                 {{ $data->industry_type }}
             </div>
     </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-            <br><br><strong>description:</strong><br>
+            <br><br><strong>Description:</strong><br>
                 {{ $data->description }}
             </div>
         </div>
@@ -48,14 +48,14 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Image:</strong>
-                <img src="{{asset('/storage/app/'.$data->image)}}" alt="{{$data->title}}" style="width: 100px;">
+                <img class="list-img" src="{{asset('/storage/app/'.$data->image)}}" alt="{{$data->title}}" >
             </div>
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Thumbnail:</strong>
-                <img src="{{asset('/storage/app/'.$data->thumbnail)}}" alt="{{$data->title}}" style="width: 100px;">
+                <img class="list-img" src="{{asset('/storage/app/'.$data->thumbnail)}}" alt="{{$data->title}}" >
             </div>
         </div>
 

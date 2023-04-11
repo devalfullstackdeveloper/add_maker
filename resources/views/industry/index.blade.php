@@ -3,6 +3,7 @@
 
 
 @section('content')
+
 <section>
     <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -10,68 +11,80 @@
 
             <a href="{{ route('industry.create') }}" class="btn btn-primary btn-icon-split">
                 <span class="icon text-white-50">
-                    <i class="fa fa-plus" style="font-size:24px"></i>
+                    <i class="fa fa-plus"></i>
                 </span>
-                <span class="text">Add Type</span></a>
-            </div>
-            <div class="container-fluid">
-                <!-- DataTales Example -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary"> List</h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
+                <span class="text">Add Industry Type</span></a>
+        </div>
+        <div class="container-fluid">
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary"> List</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
                                     <th>Id</th>
                                     <th>Industry_type</th>
                                     <th>Description</th>
                                     <th>Industry_Image</th>
                                     <th width="280px">Action</th>
-                                    </tr>
-                                </thead>
-                            
-                                <tbody>
-                                 <?php $i=1; 
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <?php $i=1; 
                                    ?>
-                              @foreach ($industry as $indus)
-                               <tr>
-                                <td>{{$i}}</td>
-                                <td>{{ $indus->industry_type }}</td>
-                                <td>{{ $indus->description }}</td>
+                                @foreach ($industry as $indus)
+                                <tr>
+                                    <td>{{$i}}</td>
+                                    <td>
+                                        <div class="tect-desc">{{ $indus->industry_type }}</div>
+                                    </td>
+                                    <td>
+                                        <div class="tect-desc">{{ $indus->description }}</div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div>
+                                                <img src="{{asset('/storage/app/'.$indus->industry_image)}}"
+                                                class="list-img" alt="{{$indus->industry_type}}">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="action-wrap-btn">
 
+                                            <a href="{{ route('industry.show',$indus->id) }}"
+                                                class="btn"><i class="fas fa-eye text-success"></i></a>
 
-                        <td><img src="{{asset('/storage/app/'.$indus->industry_image)}}" alt="{{$indus->industry_type}}" style="width: 100px;"></td>
+                                            <a href="{{ route('industry.edit',$indus->id) }}"
+                                                class="btn"><i class="fas fa-edit text-primary"></i></a>
 
-                                <td>
-                                  <div class="action-wrap-btn">
-
-                                   <a href="{{ route('industry.show',$indus->id) }}" class="btn btn-success btn-circle"><i class="fas fa-eye"></i></a>
-
-                                   <a href="{{ route('industry.edit',$indus->id) }}" class="btn btn-primary btn-circle"><i class="fas fa-edit"></i></a>
-
-                                   <form action="{{ route('industry.destroy', $indus->id)}}" method="post" style="display: inline-block">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash"></i></button>
-                                   </form>                  
-                                  </div>
-                                </td>
-                               </tr>
+                                            <form action="{{ route('industry.destroy', $indus->id)}}" method="post"
+                                                style="display: inline-block">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn" type="submit"><i
+                                                        class="fas fa-trash text-danger"></i></button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
                                 <?php $i++;?>
-                              @endforeach
-                                 </tbody>
-                                </table>
-                        </div>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
+        </div>
     </div>
 </section>
 
 
 <script src="{{asset('/public/site/js/jquery/jquery.min.js')}}"></script>
- 
+
 @endsection
