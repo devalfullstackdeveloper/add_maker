@@ -42,23 +42,6 @@ if($input == '1'){
                 ->where('mobileno',$request->mobileno)
                 ->where('otp',$request->otp)
                 ->first();
-
-                if(isset($get_user))
-                {
-                $token = $get_user->createToken('API Token')->accessToken;
-                    
-                    return response()->json([
-                        'success' => true,
-                         "code" => 1,
-                         'token' => $token,
-                        'message' => "Registration is successfully done",
-                    ], 200);
-                } else {
-                    return response()->json([
-                        'success' => false,
-                        'message' => "No data found please re-registered or OTP is in-correct",
-                    ], 200);
-                  }
                 }
                 } else {
             $validation = Validator::make($request->all(), [
@@ -67,7 +50,7 @@ if($input == '1'){
                 'middlename' => 'max:255',
                 'email' => 'max:255',
                 'mobileno' => 'required|max:15',
-                //'otp' => 'min:6|max:6',
+                'otp' => 'min:6|max:6',
                 'login_id' => 'required',
             ]);
          if($validation->fails()){
@@ -344,7 +327,7 @@ else if($input == 6){
  public function login(Request $request)
     {
       
-      if($request->login_id=='1'){
+     
            if(isset($request->otp))
          {
         $validation = Validator::make($request->all(),[ 
@@ -426,8 +409,8 @@ else if($input == 6){
             }
 
         }
-    }
-elseif($request->login_id=='2'){
+
+if($request->login_id=='2'){
 
         $validation = Validator::make($request->all(),[ 
             'facebook_id' => 'required',
