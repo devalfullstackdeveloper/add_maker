@@ -36,6 +36,18 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
 
             <div class="form-group">
+            <strong>Category Type</strong>
+            <select class="custom-select"  name="category_type">
+                @foreach($category as $cat)
+            <option value="{{$cat->id}}">{{$cat->title}}</option>
+                @endforeach
+            </select>
+            </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+
+            <div class="form-group">
             <strong>Industry Type</strong>
             <select class="custom-select"  name="industry_type">
                 @foreach($industryType as $industryTypeData)
