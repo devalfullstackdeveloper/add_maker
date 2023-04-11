@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
-use Illuminate\Http\Request;  
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\Controller;
@@ -21,23 +21,13 @@ class UserIndustryController extends Controller
     public function store(Request $request)
     {
 
-     $input = $request->all();
-      foreach ($input['industry'] as  $value) 
-      {
-        $user_industry = UserIndustry::create([
-            'industry_id'=>$value['industry_id'],
-            'userid'=>$input['userid'],
-            'description'=>$value['description'],
-        ]);
-      
-    }    
-   }
+        $input = $request->all();
+        foreach ($input['industry'] as  $value) {
+            $user_industry = UserIndustry::create([
+                'industry_id' => $value['industry_id'],
+                'userid' => $input['userid'],
+                'description' => $value['description'],
+            ]);
+        }
+    }
 }
-
-        
-    
-       
-     
-
-   
-

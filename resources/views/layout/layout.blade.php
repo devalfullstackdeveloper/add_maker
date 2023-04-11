@@ -130,6 +130,15 @@
                 </a>
 
                 </a>
+		 <a class="nav-link" href="{{ url('allposts') }}">
+                  <i class="menu-icon mdi mdi-file-document"></i>
+                    <span class="menu-title">All Posts</span>
+                </a>
+		
+		<a class="nav-link" href="{{ url('user') }}">
+                  <i class="menu-icon mdi mdi-file-document"></i>
+                    <span class="menu-title">Users</span>
+                </a>
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->

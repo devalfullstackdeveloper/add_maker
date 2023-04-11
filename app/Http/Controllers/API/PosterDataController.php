@@ -8,13 +8,11 @@ use Illuminate\Http\Request;
 
 class PosterDataController extends Controller
 {
-    
+
     public function poster()
     {
 
-      $user = Poster::select('*')->get();
-          return ($user);   
+        $user = Poster::select('*')->get();
+        return ($user);
     }
-
-    
 }

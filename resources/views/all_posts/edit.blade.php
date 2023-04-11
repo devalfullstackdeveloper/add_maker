@@ -9,25 +9,57 @@
                 <h2>Edit Data</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('all_posts.index') }}"> Back</a>
+
+                <a class="btn btn-primary" href="{{ route('allposts.index') }}"> Back</a>
+
             </div>
         </div>
     </div>
    
-    <form action="{{ route('all_posts.update',$data->id) }}" method="POST" enctype="multipart/form-data"> 
+
+    <form action="{{ route('allposts.update',$data->id) }}" method="POST" enctype="multipart/form-data"> 
+
         @csrf
         @method('POST')
      
          <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Title:</strong>
-                    <input type="text" name="title" value="{{ $data->title}}" class="form-control" placeholder="Title">
+
+                    <strong>Name:</strong>
+                    <input type="text" name="name" value="{{ $data->name}}" class="form-control" placeholder="Name">
+
                 </div>
             </div>
 
         
             <div class="col-xs-12 col-sm-12 col-md-12">
+
+            <div class="form-group">
+            <strong>Category Type</strong>
+            <select class="custom-select"  name="category_type">
+                @foreach($category as $cat)
+            <option value="{{$cat->id}}">{{$cat->title}}</option>
+                @endforeach
+            </select>
+            </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+
+            <div class="form-group">
+            <strong>Industry Type</strong>
+            <select class="custom-select"  name="industry_type">
+                @foreach($industryType as $industryTypeData)
+            <option value="{{$industryTypeData->industry_type}}">{{$industryTypeData->industry_type}}</option>
+                @endforeach
+            </select>
+            </div>
+            </div>
+
+        
+            <div class="col-xs-12 col-sm-12 col-md-12">
+
                 <div class="form-group">
                     <strong>Description:</strong>
                     <input type="text" name="description" value="{{ $data->description}}" class="form-control" placeholder="Description">
@@ -37,19 +69,43 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Image:</strong>
-                      <input type="file" name="icon" class="form-control" placeholder="Icon">
-                        <input type="hidden" name="hidden_event_image" class="form-control" placeholder="Icon" value={{$data->icon}}>
-                        <img src="{{asset('/storage/app/'.$data->icon)}}" alt="{{$data->icon}}" style="width: 100px;">
-                        @error('name')
-                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                        @enderror
+
+                      <input type="file" name="allpost_image" class="form-control" placeholder="Image">
+                        <input type="hidden" name="hidden_allpost_image" class="form-control" placeholder="Image" value={{$data->image}}>
+                        <img src="{{asset('/storage/app/'.$data->image)}}" alt="{{$data->image }}" style="width: 100px;">
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Thumbnail:</strong>
+                      <input type="file" name="allpost_thumbnail" class="form-control" placeholder="Thumbnail">
+                        <input type="hidden" name="hidden_allpost_thumbnail" class="form-control" placeholder="Thumbnail" value={{$data->thumbnail}}>
+                        <img src="{{asset('/storage/app/'.$data->thumbnail)}}" alt="{{$data->thumbnail}}" style="width: 100px;">
+
                 </div>
             </div>
 
              <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Date:</strong>
-                    <input type="date"  name="date" class="form-control" placeholder="Date" value="{{ $data->date}}" >
+
+                    <strong>Caption:</strong>
+                    <input type="text" name="caption" value="{{ $data->caption}}" class="form-control" placeholder="Caption">
+                </div>
+            </div>
+
+             <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Start Date:</strong>
+                    <input type="date"  name="start_date" class="form-control" placeholder="Date" value="{{ $data->start_date}}" >
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>End Date:</strong>
+                    <input type="date"  name="end_date" class="form-control" placeholder="Date" value="{{ $data->end_date}}" >
+                 
                 </div>
             </div>
 
