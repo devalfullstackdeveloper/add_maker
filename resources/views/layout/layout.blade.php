@@ -40,7 +40,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">AD Maker <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">AD Maker </div>
             </a>
 
             <!-- Divider -->
@@ -57,17 +57,17 @@
                 <hr class="sidebar-divider">
 
                 <!-- Heading -->
-                <div class="sidebar-heading">
+                <!-- <div class="sidebar-heading">
                     Interface
-                </div>
+                </div> -->
 
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    <!-- <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Components</span>
-                </a>
+                </a> -->
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Components:</h6>
@@ -255,12 +255,12 @@
 
         <!-- Nav Item - Alerts -->
         <li class="nav-item dropdown no-arrow mx-1">
-            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+            <!-- <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-bell fa-fw"></i>
+            <i class="fas fa-bell fa-fw"></i> -->
             <!-- Counter - Alerts -->
-            <span class="badge badge-danger badge-counter">3+</span>
-        </a>
+            <!-- <span class="badge badge-danger badge-counter">3+</span> -->
+        <!-- </a> -->
         <!-- Dropdown - Alerts -->
         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
         aria-labelledby="alertsDropdown">
@@ -305,13 +305,16 @@
 </li>
 
 <!-- Nav Item - Messages -->
-<li class="nav-item dropdown no-arrow mx-1">
+
+<!-- <li class="nav-item dropdown no-arrow mx-1">
     <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <i class="fas fa-envelope fa-fw"></i>
-    <!-- Counter - Messages -->
+    Counter - Messages
     <span class="badge badge-danger badge-counter">7</span>
-</a>
+</a> -->
+
+
 <!-- Dropdown - Messages -->
 <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
 aria-labelledby="messagesDropdown">
@@ -376,9 +379,12 @@ aria-labelledby="messagesDropdown">
 <li class="nav-item dropdown no-arrow">
     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+    <!-- <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span> -->
+    <div class="info text-dark">
+        {{(session('firstname'))}}
+    </div>
     <img class="img-profile rounded-circle"
-    src="img/undraw_profile.svg">
+    src="{{asset('/public/assets/admin/admin.jpg')}}">
 </a>
 <!-- Dropdown - User Information -->
 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
