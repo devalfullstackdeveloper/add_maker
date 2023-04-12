@@ -47,12 +47,8 @@
                                         <div class="tect-desc">{{ $indus->description }}</div>
                                     </td>
                                     <td>
-                                        <div class="d-flex px-2 py-1">
-                                            <div>
-                                                <img src="{{asset('/storage/app/'.$indus->industry_image)}}"
+                                              <img src="{{asset('/storage/app/'.$indus->industry_image)}}"
                                                 class="list-img" alt="{{$indus->industry_type}}">
-                                            </div>
-                                        </div>
                                     </td>
                                     <td>
                                         <div class="action-wrap-btn">
