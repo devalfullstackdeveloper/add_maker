@@ -45,7 +45,12 @@
                                 <div class="tect-desc">{{ $fb->description }}</div>
                                 </td>
                                 <td><img class="list-img" src="{{asset('/storage/app/'.$fb->image)}}" alt="{{$fb->title}}"></td>
-                                <td>{{ $fb->status }}</td>
+                                <!-- <td>{{ $fb->status }}</td> -->
+                                <td>
+                                        <input data-id="{{$fb->id}}" class="toggle-class" type="checkbox"
+                                            data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
+                                            data-on="Active" data-off="Inactive" {{ $fb->status ? 'checked' : '' }}>
+                                </td>
                                 <td>
                                   <div class="action-wrap-btn">
 
@@ -74,4 +79,36 @@
 
 <script src="{{asset('/public/site/js/jquery/jquery.min.js')}}"></script>
  
+<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous">
+</script>
+<script>
+jQuery(document).ready(function() {
+    jQuery('.toggle-class').change(function(e) {
+        // e.preventDefault();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        });
+        var status = $(this).prop('checked') == true ? 1 : 0;
+        var user_id = $(this).data('id');
+        //   console.log(user_id);
+
+        jQuery.ajax({
+            method: 'post',
+            dataType: "json",
+            url: "{{ url('changeStatusFacebook') }}",
+            data: {
+                'status': status,
+                'id': user_id
+            },
+            success: function(data) {
+                console.log(data.success);
+            }
+        });
+    });
+});
+</script>
+
 @endsection

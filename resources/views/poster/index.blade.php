@@ -45,7 +45,12 @@
                                 <td>{{ $pr->description }}</td>
                                 <td><img alt="img" src="{{asset('/storage/app/'.$pr->poster_img)}}" width="100px"></td>
                                 <td>{{$pr->poster_date }}</td>
-                                <td>{{$pr->status }}</td>
+                                <!-- <td>{{$pr->status }}</td> -->
+                                <td>
+                                        <input data-id="{{$pr->id}}" class="toggle-class" type="checkbox"
+                                            data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
+                                            data-on="Active" data-off="Inactive" {{ $pr->status ? 'checked' : '' }}>
+                                </td>
                                 <td>
                                   <div class="action-wrap-btn">
 
@@ -74,5 +79,37 @@
 
 
 <script src="{{asset('/public/site/js/jquery/jquery.min.js')}}"></script>
- 
+
+<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous">
+</script>
+<script>
+jQuery(document).ready(function() {
+    jQuery('.toggle-class').change(function(e) {
+        // e.preventDefault();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        });
+        var status = $(this).prop('checked') == true ? 1 : 0;
+        var user_id = $(this).data('id');
+        //   console.log(user_id);
+
+        jQuery.ajax({
+            method: 'post',
+            dataType: "json",
+            url: "{{ url('changeStatusPoster') }}",
+            data: {
+                'status': status,
+                'id': user_id
+            },
+            success: function(data) {
+                console.log(data.success);
+            }
+        });
+    });
+});
+</script>
+
 @endsection

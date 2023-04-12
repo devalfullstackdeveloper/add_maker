@@ -107,17 +107,19 @@ Route::resource('/category', CategoryController::class);
 
 //route for crud Menu
 Route::resource('/menu', MenuController::class);
-Route::resource('fbook', FbookController::class);
+
+
+//route for crud Business Card
 Route::resource('bcard', BussinessCardController::class);
+Route::post('changeStatusBcard',[BussinessCardController::class, 'changeStatusBcard']);
+
+
 Route::post('/update/bcard/{id}', [BussinessCardController::class,'update'])->name('bcard.update');
   
 //route for crud Upcoming Events
 Route::resource('event', EventController::class);
 Route::post('update/event/{id}',[EventController::class, 'update'])->name('event.update');
 Route::post('changeStatus',[EventController::class, 'changeStatus']);
-
-//route for crud Facebook Posts
-Route::resource('posts', PostController::class);
 
 //route for crud Instagram Posts
 Route::resource('/iposts', IpostsController::class);
@@ -126,14 +128,17 @@ Route::resource('/iposts', IpostsController::class);
 //route for crud Twitter
 Route::resource('twitter', TwitterController::class);
 Route::post('update/twitter/{id}',[TwitterController::class, 'update'])->name('twitter.update');
+Route::post('changeStatusTwitter',[TwitterController::class, 'changeStatusTwitter']);
 
 //route for crud Poster
 Route::resource('poster', PosterController::class);
 Route::post('update/poster/{id}',[PosterController::class, 'update'])->name('poster.update');
+Route::post('changeStatusPoster',[PosterController::class, 'changeStatusPoster']);
 
 //route for crud Facebook Ad
 Route::resource('fbook', FbookController::class);
 Route::post('/fbook_update/{id}', [FbookController::class,'update'])->name('fbook.update');
+Route::post('changeStatusFacebook',[FbookController::class, 'changeStatusFacebook']);
 
 //route for crud Industry
 Route::resource('industry', IndustryController::class);
@@ -144,16 +149,19 @@ Route::resource('brands', BrandController::class);  //api
 //route for crud Youtube
 Route::resource('youtube', YoutubeController::class);
 Route::post('update/youtube/{id}',[YoutubeController::class, 'update'])->name('youtube.update');
+Route::post('changeStatusYoutube',[YoutubeController::class, 'changeStatusYoutube']);
 
 //route for crud Instagram Stories
 Route::resource('instagram', InstagramController::class);
 Route::post('update/instagram/{id}',[InstagramController::class, 'update'])->name('instagram.update');
+Route::post('changeStatusInstagram',[InstagramController::class, 'changeStatusInstagram']);
 
 Route::get('dashboard', [DashboardController::class, 'UpcomingEvents']); 
 
 //route for crud All posts
 Route::resource('allposts', AllPostsController::class);
 Route::post('update/allposts/{id}',[AllPostsController::class, 'update'])->name('allposts.update');
+Route::post('changeStatusAllPosts',[AllPostsController::class, 'changeStatusAllPosts']);
 
 //route for crud User
 Route::resource('user', UserController::class);

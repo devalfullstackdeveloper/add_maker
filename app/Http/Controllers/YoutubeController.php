@@ -147,4 +147,13 @@ class youtubeController extends Controller
         $idd->delete();
         return redirect('/youtube')->with('completed', 'event has been deleted');
     }
+
+    public function changeStatusYoutube(Request $request)
+    {  
+   
+        $user = Youtube::find($request['id']);
+        $user->status = $request['status'];
+        $user->save();
+  
+    }
 }
