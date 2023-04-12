@@ -7,7 +7,6 @@
     <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Upcoming Events</h1>
-
             <a href="{{route('event.create')}}" class="btn btn-primary btn-icon-split">
                 <span class="icon text-white-50">
                     <i class="fa fa-plus"></i>
@@ -25,54 +24,80 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                    <th>Id</th>
-                                    <th>Title</th>
-                                    <th>Description</th>
-                                    <th>Icon</th>
-                                    <th>Date</th>
-                                    <th>Status</th>
-                                    <th width="280px">Action</th>
+                                        <th>Id</th>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Icon</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th width="280px">Action</th>
                                     </tr>
                                 </thead>
-                            
+
                                 <tbody>
-                                 <?php $i=1; 
+                                   <?php $i=1; 
                                    ?>
-                              @foreach ($upcomingevents as $up)
-                               <tr>
-                                <td>{{$i}}</td>
-                                <td><div class="tect-desc"> {{ $up->title }}</td></div>
-                                <td><div class="tect-desc">{{ $up->description }}</td></div>
-                                <td><img alt="img" class="list-img"  src="{{asset('/storage/app/'.$up->icon)}}" width="100px"></td>
-                                 <td><div class="date-wrap">{{$up->date }}</td></div>
-                                <td>{{ $up->status }}</td>
-                                <td>
-                                  <div class="action-wrap-btn">
+                                   @foreach ($upcomingevents as $up)
+                                   <tr>
+                                    <td>{{$i}}</td>
+                                    <td><div class="tect-desc"> {{ $up->title }}</td></div>
+                                    <td><div class="tect-desc">{{ $up->description }}</td></div>
+                                    <td><img alt="img" class="list-img"  src="{{asset('/storage/app/'.$up->icon)}}" width="100px"></td>
+                                    <td><div class="date-wrap">{{$up->date }}</td></div>
+                                    <td>{{ $up->status }}</td>
+                                    <td>
+                                      <div class="action-wrap-btn">
 
-                                   <a href="{{route('event.show',$up->id)}}" class="btn"><i class="fas fa-eye text-success"></i></a>
+                                         <a href="{{route('event.show',$up->id)}}" class="btn"><i class="fas fa-eye text-success"></i></a>
 
-                                   <a href="{{route('event.edit',$up->id)}}" class="btn"><i class="fas fa-edit text-primary"></i></a>
+                                         <a href="{{route('event.edit',$up->id)}}" class="btn"><i class="fas fa-edit text-primary"></i></a>
 
-                                   <form action="{{route('event.destroy',$up->id)}}" method="post" style="display: inline-block">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn" type="submit"><i class="fas fa-trash text-danger"></i></button>
-                                   </form>                  
-                                  </div>
+                                         <form action="{{route('event.destroy',$up->id)}}" method="post" style="display: inline-block">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn" type="submit"><i class="fas fa-trash text-danger"></i></button>
+                                        </form>                  
+                                    </div>
                                 </td>
-                               </tr>
-                                <?php $i++;?>
-                              @endforeach
-                                 </tbody>
-                                </table>
-                        </div>
-                    </div>
+                            </tr>
+                            <?php $i++;?>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
+        </div>
     </div>
+</div>
 </section>
-
-
 <script src="{{asset('/public/site/js/jquery/jquery.min.js')}}"></script>
- 
+<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+crossorigin="anonymous">
+</script>
+<script>
+    jQuery(document).ready(function() {
+        jQuery('.toggle-class').change(function(e) {
+        // e.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                }
+            });
+            var status = $(this).prop('checked') == true ? 1 : 0;
+            var user_id = $(this).data('id');
+            jQuery.ajax({
+                method: 'post',
+                dataType: "json",
+                url: "{{ url('changeStatus') }}",
+                data: {
+                    'status': status,
+                    'id': user_id
+                },
+                success: function(data) {
+                    console.log(data.success);
+                }
+            });
+        });
+    });
+</script>
 @endsection

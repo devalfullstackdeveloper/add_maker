@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="{{ asset('public/site/css/toastr.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('public/site/css/custom.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('public/site/js/datatables/dataTables.bootstrap4.min.css') }}" type="text/css">
-
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
 </head>
 
@@ -768,12 +768,10 @@ aria-labelledby="userDropdown">
 <script  src="{{asset('/public/site/js/chart.js/Chart.min.js')}}"></script>
 <script src="{{asset('/public/site/js/demo/chart-area-demo.js')}}"></script>
 <script src="{{asset('/public/site/js/demo/chart-pie-demo.js')}}"></script>
-
-
 <script src="{{asset('/public/site/js/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('/public/site/js/datatables/dataTables.bootstrap4.min.js')}}"></script>
 <script src="{{asset('/public/site/js/demo/datatables-demo.js')}}"></script>
-
+<script src="{{asset('/public/site/js/jquery/bootstrap-toggle.min.js')}}"></script>
 
 </body>
 
