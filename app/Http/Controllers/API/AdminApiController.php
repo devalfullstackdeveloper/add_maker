@@ -27,7 +27,7 @@ if($input == '1'){
                 'middlename' => 'max:255',
                 'email' => 'email|max:255',
                 'mobileno' => 'required|max:15',
-                'otp' => 'min:6|max:6',
+                'otp' => 'min:4|max:4',
                 'login_id' => 'required',
             ]);
     
@@ -50,7 +50,7 @@ if($input == '1'){
                 'middlename' => 'max:255',
                 'email' => 'max:255',
                 'mobileno' => 'required|max:15',
-                'otp' => 'min:6|max:6',
+                'otp' => 'min:4|max:4',
                 'login_id' => 'required',
             ]);
          if($validation->fails()){
@@ -560,7 +560,7 @@ elseif($request->login_id=='5'){
     }
     
     public function generateOtp(){
-        $pin = mt_rand(100000,999999);
+        $pin = mt_rand(1000,9999);
             // shuffle the result
         $string = str_shuffle($pin);
         return $string;
