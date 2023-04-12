@@ -44,9 +44,8 @@
 
                                 <td>{{ $pr->poster_name }}</td>
                                 <td>{{ $pr->description }}</td>
-                                <td><img alt="img" src="{{asset('/storage/app/'.$pr->poster_img)}}" width="100px"></td>
+                                <td><img alt="img" class="list-img" src="{{asset('/storage/app/'.$pr->poster_img)}}" width="100px"></td>
                                 <td>{{$pr->poster_date }}</td>
-                                <!-- <td>{{$pr->status }}</td> -->
                                 <td>
                                         <input data-id="{{$pr->id}}" class="toggle-class" type="checkbox"
                                             data-onstyle="success" data-offstyle="danger" data-toggle="toggle"

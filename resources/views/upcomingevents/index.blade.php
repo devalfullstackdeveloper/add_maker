@@ -4,7 +4,6 @@
 
 @section('content')
 <section>
-
     <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Upcoming Events</h1>
@@ -45,14 +44,17 @@
                                     <td><div class="tect-desc">{{ $up->description }}</td></div>
                                     <td><img alt="img" class="list-img"  src="{{asset('/storage/app/'.$up->icon)}}" width="100px"></td>
                                     <td><div class="date-wrap">{{$up->date }}</td></div>
-                                    <td>{{ $up->status }}</td>
-                                    <td>
+                                      <td>
+                                        <input data-id="{{$up->id}}" class="toggle-class" type="checkbox"
+                                            data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
+                                            data-on="Active" data-off="Inactive" {{ $up->status ? 'checked' : '' }}>
+                                          </td>
+                                       <td>
                                       <div class="action-wrap-btn">
-
                                          <a href="{{route('event.show',$up->id)}}" class="btn"><i class="fas fa-eye text-success"></i></a>
 
                                          <a href="{{route('event.edit',$up->id)}}" class="btn"><i class="fas fa-edit text-primary"></i></a>
-
+                                         
                                          <form action="{{route('event.destroy',$up->id)}}" method="post" style="display: inline-block">
                                             @csrf
                                             @method('DELETE')
@@ -92,7 +94,7 @@ jQuery(document).ready(function() {
         jQuery.ajax({
             method: 'post',
             dataType: "json",
-            url: "{{ url('changeStatus') }}",
+            url: "{{ url('changeStatusUpcoming') }}",
             data: {
                 'status': status,
                 'id': user_id
