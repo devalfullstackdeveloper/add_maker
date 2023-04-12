@@ -153,4 +153,13 @@ class TwitterController extends Controller
         $idd->delete();
         return redirect('/twitter')->with('completed', 'event has been deleted');
      }
+
+     public function changeStatusTwitter(Request $request)
+    {  
+   
+        $user = Twitter::find($request['id']);
+        $user->status = $request['status'];
+        $user->save();
+  
+    }
 }

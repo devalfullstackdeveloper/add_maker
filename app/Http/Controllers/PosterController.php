@@ -148,4 +148,13 @@ class PosterController extends Controller
         $idd->delete();
         return redirect('/poster')->with('completed', 'event has been deleted');
     }
+
+    public function changeStatusPoster(Request $request)
+    {  
+   
+        $user = Poster::find($request['id']);
+        $user->status = $request['status'];
+        $user->save();
+  
+    }
 }

@@ -154,4 +154,13 @@ class BussinessCardController extends Controller
         $business_card->delete();
         return redirect()->route('bcard.index');
     }
+
+    public function changeStatusBcard(Request $request)
+    {  
+   
+        $user = BusinessCard::find($request['id']);
+        $user->status = $request['status'];
+        $user->save();
+  
+    }
 }

@@ -34,7 +34,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Image:</strong>
-                <img src="{{asset('/storage/app/'.$data->image)}}" alt="{{$data->title}}" style="width: 100px;">
+                <img class="list-img" src="{{asset('/storage/app/'.$data->image)}}" alt="{{$data->title}}">
             </div>
         </div>
 

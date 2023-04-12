@@ -8,9 +8,9 @@
 
             <a href="{{route('fbook.create')}}" class="btn btn-primary btn-icon-split">
                 <span class="icon text-white-50">
-                    <i class="fa fa-plus" style="font-size:24px"></i>
+                    <i class="fa fa-plus"></i>
                 </span>
-                <span class="text">Add Type</span></a>
+                <span class="text">Add Facebook AD</span></a>
             </div>
             <div class="container-fluid">
                 <!-- DataTales Example -->
@@ -38,21 +38,30 @@
                               @foreach ($facebook as $fb)
                                <tr>
                                 <td>{{$i}}</td>
-                                <td>{{ $fb->title }}</td>
-                                <td>{{ $fb->description }}</td>
-                                <td><img src="{{asset('/storage/app/'.$fb->image)}}" alt="{{$fb->title}}" style="width: 100px;"></td>
-                                <td>{{ $fb->status }}</td>
+                                <td>
+                                <div class="tect-desc">{{ $fb->title }}</div>
+                                </td>
+                                <td>
+                                <div class="tect-desc">{{ $fb->description }}</div>
+                                </td>
+                                <td><img class="list-img" src="{{asset('/storage/app/'.$fb->image)}}" alt="{{$fb->title}}"></td>
+                                <!-- <td>{{ $fb->status }}</td> -->
+                                <td>
+                                        <input data-id="{{$fb->id}}" class="toggle-class" type="checkbox"
+                                            data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
+                                            data-on="Active" data-off="Inactive" {{ $fb->status ? 'checked' : '' }}>
+                                </td>
                                 <td>
                                   <div class="action-wrap-btn">
 
-                                   <a href="{{route('fbook.show',$fb->id)}}" class="btn btn-success btn-circle"><i class="fas fa-eye"></i></a>
+                                   <a href="{{route('fbook.show',$fb->id)}}" class="btn"><i class="fas fa-eye text-success"></i></a>
 
-                                   <a href="{{ route('fbook.edit',$fb->id) }}" class="btn btn-primary btn-circle"><i class="fas fa-edit"></i></a>
+                                   <a href="{{ route('fbook.edit',$fb->id) }}" class="btn"><i class="fas fa-edit text-primary"></i></a>
 
                                    <form action="{{ route('fbook.destroy',$fb->id) }}" method="post" style="display: inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash"></i></button>
+                                    <button class="btn" type="submit"><i class="fas fa-trash text-danger"></i></button>
                                    </form>                  
                                   </div>
                                 </td>
@@ -70,4 +79,36 @@
 
 <script src="{{asset('/public/site/js/jquery/jquery.min.js')}}"></script>
  
+<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous">
+</script>
+<script>
+jQuery(document).ready(function() {
+    jQuery('.toggle-class').change(function(e) {
+        // e.preventDefault();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        });
+        var status = $(this).prop('checked') == true ? 1 : 0;
+        var user_id = $(this).data('id');
+        //   console.log(user_id);
+
+        jQuery.ajax({
+            method: 'post',
+            dataType: "json",
+            url: "{{ url('changeStatusFacebook') }}",
+            data: {
+                'status': status,
+                'id': user_id
+            },
+            success: function(data) {
+                console.log(data.success);
+            }
+        });
+    });
+});
+</script>
+
 @endsection
