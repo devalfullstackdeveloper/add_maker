@@ -158,11 +158,18 @@ Route::post('changeStatusInstagram',[InstagramController::class, 'changeStatusIn
 
 Route::get('dashboard', [DashboardController::class, 'UpcomingEvents']); 
 
+
 //route for crud All posts
 Route::resource('allposts', AllPostsController::class);
 Route::post('update/allposts/{id}',[AllPostsController::class, 'update'])->name('allposts.update');
 Route::post('changeStatusAllPosts',[AllPostsController::class, 'changeStatusAllPosts']);
 
 //route for crud User
+
+Route::resource('allposts', AllPostsController::class);
+Route::post('update/allposts/{id}',[AllPostsController::class, 'update'])->name('allposts.update');
+
+
+
 Route::resource('user', UserController::class);
 Route::post('/user_update/{id}', [UserController::class,'update'])->name('user.update');
