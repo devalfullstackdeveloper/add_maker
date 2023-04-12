@@ -11,7 +11,7 @@
 
             <a href="{{route('event.create')}}" class="btn btn-primary btn-icon-split">
                 <span class="icon text-white-50">
-                    <i class="fa fa-plus" style="font-size:24px"></i>
+                    <i class="fa fa-plus"></i>
                 </span>
                 <span class="text">Add Type</span></a>
         </div>
@@ -39,6 +39,7 @@
                             <tbody>
                                 <?php $i=1; 
                                    ?>
+
                                 @foreach ($upcomingevents as $up)
                                 <tr>
                                     <td>{{$i}}</td>
@@ -72,6 +73,31 @@
                                         </div>
                                     </td>
                                 </tr>
+
+                              @foreach ($upcomingevents as $up)
+                               <tr>
+                                <td>{{$i}}</td>
+                                <td><div class="tect-desc"> {{ $up->title }}</td></div>
+                                <td><div class="tect-desc">{{ $up->description }}</td></div>
+                                <td><img alt="img" class="list-img"  src="{{asset('/storage/app/'.$up->icon)}}" width="100px"></td>
+                                 <td><div class="date-wrap">{{$up->date }}</td></div>
+                                <td>{{ $up->status }}</td>
+                                <td>
+                                  <div class="action-wrap-btn">
+
+                                   <a href="{{route('event.show',$up->id)}}" class="btn"><i class="fas fa-eye text-success"></i></a>
+
+                                   <a href="{{route('event.edit',$up->id)}}" class="btn"><i class="fas fa-edit text-primary"></i></a>
+
+                                   <form action="{{route('event.destroy',$up->id)}}" method="post" style="display: inline-block">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn" type="submit"><i class="fas fa-trash text-danger"></i></button>
+                                   </form>                  
+                                  </div>
+                                </td>
+                               </tr>
+
                                 <?php $i++;?>
                                 @endforeach
                             </tbody>

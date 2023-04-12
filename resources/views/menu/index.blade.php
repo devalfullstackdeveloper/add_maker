@@ -6,7 +6,7 @@
                 <h1 class="h3 mb-0 text-gray-800">All Menu</h1>
                 <a href="{{ route('menu.create') }}" class="btn btn-primary btn-icon-split">
                 <span class="icon text-white-50">
-                    <i class="fa fa-plus" style="font-size:24px"></i>
+                    <i class="fa fa-plus"></i>
                 </span>
                 <span class="text">Add New Menu</span></a>
             </div>
@@ -36,19 +36,19 @@
                               @foreach ($menu as $menu)
                                <tr>
                                 <td>{{$i}}</td>
-                                <td>{{ $menu->title}}</td>
-                                <td>{{ $menu->description }}</td>
+                                <td><div class="tect-desc"> {{ $menu->title}}</td></div>
+                                <td><div class="tect-desc"> {{ $menu->description }}</td></div>
                                 <td><img alt="img" src="{{asset('/storage/app/'.$menu->images)}}" width="100px"></td>
                                 <td>{{ $menu->price }}</td>
-                                <td>{{ $menu->created_at }}</td>
+                                <td><div class="date-wrap">{{ $menu->created_at }}</td>
                                 <td>
                                   <div class="action-wrap-btn">
-                                   <a href="{{ route('menu.show', $menu->id) }}" class="btn btn-success btn-circle"><i class="fas fa-eye"></i></a>
-                                   <a href="{{route('menu.edit', $menu->id)}}" class="btn btn-primary btn-circle"><i class="fas fa-edit"></i></a>
+                                   <a href="{{ route('menu.show', $menu->id) }}" class="btn "><i class="fas fa-eye text-success"></i></a>
+                                   <a href="{{route('menu.edit', $menu->id)}}" class="btn "><i class="fas fa-edit text-primary"></i></a>
                                    <form action="{{ route('menu.destroy',$menu->id) }}" method="post" style="display: inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash"></i></button>
+                                    <button class="btn text-danger" type="submit"><i class="fas fa-trash"></i></button>
                                    </form> 
                                   </div>
                                 </td>

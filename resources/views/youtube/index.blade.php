@@ -10,7 +10,7 @@
 
             <a href="{{route('youtube.create')}}" class="btn btn-primary btn-icon-split">
                 <span class="icon text-white-50">
-                    <i class="fa fa-plus" style="font-size:24px"></i>
+                    <i class="fa fa-plus"></i>
                 </span>
                 <span class="text">Add Type</span></a>
             </div>
@@ -41,6 +41,7 @@
                               @foreach ($youtube as $yo)
                                <tr>
                                 <td>{{$i}}</td>
+
                                 <td>{{ $yo->title }}</td>
                                 <td>{{ $yo->description }}</td>
                                 <td><img alt="img" src="{{asset('/storage/app/'.$yo->image)}}" width="100px"></td>
@@ -51,17 +52,24 @@
                                             data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
                                             data-on="Active" data-off="Inactive" {{ $yo->status ? 'checked' : '' }}>
                                     </td>
+
+                                <td><div class="tect-desc">{{ $yo->title }}</td></div>
+                                <td><div class="tect-desc">{{ $yo->description }}</td></div>
+                                <td><img alt="img" class="list-img" src="{{asset('/storage/app/'.$yo->image)}}" width="100px"></td>
+                                 <td><div class="date-wrap">{{$yo->date }}</td></div>
+                                <td>{{ $yo->status }}</td>
+
                                 <td>
                                   <div class="action-wrap-btn">
 
-                                   <a href="{{route('youtube.show',$yo->id)}}" class="btn btn-success btn-circle"><i class="fas fa-eye"></i></a>
+                                   <a href="{{route('youtube.show',$yo->id)}}" class="btn "><i class="fas fa-eye text-success"></i></a>
 
-                                   <a href="{{route('youtube.edit',$yo->id)}}" class="btn btn-primary btn-circle"><i class="fas fa-edit"></i></a>
+                                   <a href="{{route('youtube.edit',$yo->id)}}" class="btn "><i class="fas fa-edit text-primary"></i></a>
 
                                    <form action="{{route('youtube.destroy',$yo->id)}}" method="post" style="display: inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash"></i></button>
+                                    <button class="btn  text-danger" type="submit"><i class="fas fa-trash"></i></button>
                                    </form>                  
                                   </div>
                                 </td>
