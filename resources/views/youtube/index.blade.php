@@ -52,13 +52,6 @@
                                             data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
                                             data-on="Active" data-off="Inactive" {{ $yo->status ? 'checked' : '' }}>
                                     </td>
-
-                                <td><div class="tect-desc">{{ $yo->title }}</td></div>
-                                <td><div class="tect-desc">{{ $yo->description }}</td></div>
-                                <td><img alt="img" class="list-img" src="{{asset('/storage/app/'.$yo->image)}}" width="100px"></td>
-                                 <td><div class="date-wrap">{{$yo->date }}</td></div>
-                                <td>{{ $yo->status }}</td>
-
                                 <td>
                                   <div class="action-wrap-btn">
 

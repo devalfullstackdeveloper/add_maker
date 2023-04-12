@@ -52,12 +52,6 @@
                                             data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
                                             data-on="Active" data-off="Inactive" {{ $pr->status ? 'checked' : '' }}>
                                 </td>
-                      <td><div class="tect-desc"> {{ $pr->poster_name }}</td></div>
-                                <td> <div class="tect-desc"> {{ $pr->description }}</td></div>
-                                <td><img alt="img" class="list-img"  src="{{asset('/storage/app/'.$pr->poster_img)}}" width="100px"></td>
-                                <td><div class="date-wrap"> {{$pr->poster_date }}</td></div>
-                                <td>{{$pr->status }}</td>
-
                                 <td>
                                   <div class="action-wrap-btn">
 
