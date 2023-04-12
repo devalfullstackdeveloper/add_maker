@@ -73,31 +73,6 @@
                                         </div>
                                     </td>
                                 </tr>
-
-                              @foreach ($upcomingevents as $up)
-                               <tr>
-                                <td>{{$i}}</td>
-                                <td><div class="tect-desc"> {{ $up->title }}</td></div>
-                                <td><div class="tect-desc">{{ $up->description }}</td></div>
-                                <td><img alt="img" class="list-img"  src="{{asset('/storage/app/'.$up->icon)}}" width="100px"></td>
-                                 <td><div class="date-wrap">{{$up->date }}</td></div>
-                                <td>{{ $up->status }}</td>
-                                <td>
-                                  <div class="action-wrap-btn">
-
-                                   <a href="{{route('event.show',$up->id)}}" class="btn"><i class="fas fa-eye text-success"></i></a>
-
-                                   <a href="{{route('event.edit',$up->id)}}" class="btn"><i class="fas fa-edit text-primary"></i></a>
-
-                                   <form action="{{route('event.destroy',$up->id)}}" method="post" style="display: inline-block">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn" type="submit"><i class="fas fa-trash text-danger"></i></button>
-                                   </form>                  
-                                  </div>
-                                </td>
-                               </tr>
-
                                 <?php $i++;?>
                                 @endforeach
                             </tbody>

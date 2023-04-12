@@ -53,13 +53,6 @@
                                             data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
                                             data-on="Active" data-off="Inactive" {{ $tw->status ? 'checked' : '' }}>
                                     </td>
-
-                                <td><div class="tect-desc"> {{ $tw->title }}</td></div>
-                                <td><div class="tect-desc"> {{ $tw->description }}</td></div>
-                                <td><img alt="img" class="list-img"  src="{{asset('/storage/app/'.$tw->image)}}" width="100px"></td>
-                                 <td><div class="date-wrap"> {{$tw->date }}</td></div>
-                                <td>{{ $tw->status }}</td>
-
                                 <td>
                                   <div class="action-wrap-btn">
 
