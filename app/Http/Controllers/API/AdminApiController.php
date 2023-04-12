@@ -343,7 +343,9 @@ else if($input == 6){
         }
         else
         {
-            $user = User::where('mobileno', $request->mobileno)->first();
+            $user = User::where('mobileno', $request->mobileno)
+                          ->where('otp', $request->otp)
+                          ->first();
 
             if(isset($user->otp)){
                 if($user->otp == $request->otp)
@@ -382,9 +384,11 @@ else if($input == 6){
                 $fieldsWithErrorMessagesArray = $validation->messages()->get('*');
                 return $fieldsWithErrorMessagesArray;
             }else{
-                    $user = User::where('mobileno', $request->mobileno)->first();
+                    $user = User::where('mobileno', $request->mobileno)
+                                ->where('otp', $request->otp)->first();
                     if ($user) { 
-                       $get_user_OTP = User::select('otp')->where('mobileno',$request->mobileno)->first();
+                       $get_user_OTP = User::select('otp')->where('mobileno',$request->mobileno)
+                                                            ->where('otp', $request->otp)->first();
                        if($get_user_OTP)
                        {
 
