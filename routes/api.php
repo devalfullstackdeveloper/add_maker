@@ -46,7 +46,7 @@ use App\Http\Controllers\API\MenuApiController;
 Route::post('/register', [App\Http\Controllers\API\AdminApiController::class, 'register']);
 
 //api for login
-Route::post('/login',[App\Http\Controllers\API\AdminApiController::class, 'login']);
+Route::post('/verifiedOTP',[App\Http\Controllers\API\AdminApiController::class, 'login']);
 
 //api for Industry
 
