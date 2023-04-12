@@ -10,7 +10,7 @@
 
             <a href="{{route('poster.create')}}" class="btn btn-primary btn-icon-split">
                 <span class="icon text-white-50">
-                    <i class="fa fa-plus" style="font-size:24px"></i>
+                    <i class="fa fa-plus"></i>
                 </span>
                 <span class="text">Add Type</span></a>
             </div>
@@ -41,22 +41,22 @@
                               @foreach ($poster as $pr)
                                <tr>
                                 <td>{{$i}}</td>
-                                <td>{{ $pr->poster_name }}</td>
-                                <td>{{ $pr->description }}</td>
-                                <td><img alt="img" src="{{asset('/storage/app/'.$pr->poster_img)}}" width="100px"></td>
-                                <td>{{$pr->poster_date }}</td>
+                                <td><div class="tect-desc"> {{ $pr->poster_name }}</td></div>
+                                <td> <div class="tect-desc"> {{ $pr->description }}</td></div>
+                                <td><img alt="img" class="list-img"  src="{{asset('/storage/app/'.$pr->poster_img)}}" width="100px"></td>
+                                <td><div class="date-wrap"> {{$pr->poster_date }}</td></div>
                                 <td>{{$pr->status }}</td>
                                 <td>
                                   <div class="action-wrap-btn">
 
-                                   <a href="{{route('poster.show',$pr->id)}}" class="btn btn-success btn-circle"><i class="fas fa-eye"></i></a>
+                                   <a href="{{route('poster.show',$pr->id)}}" class="btn "><i class="fas fa-eye text-success"></i></a>
 
-                                   <a href="{{route('poster.edit',$pr->id)}}" class="btn btn-primary btn-circle"><i class="fas fa-edit"></i></a>
+                                   <a href="{{route('poster.edit',$pr->id)}}" class="btn "><i class="fas fa-edit text-primary"></i></a>
 
                                    <form action="{{route('poster.destroy',$pr->id)}}" method="post" style="display: inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash"></i></button>
+                                    <button class="btn  text-danger" type="submit"><i class="fas fa-trash"></i></button>
                                    </form>                  
                                   </div>
                                 </td>

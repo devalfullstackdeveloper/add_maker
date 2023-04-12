@@ -10,7 +10,7 @@
 
             <a href="{{route('twitter.create')}}" class="btn btn-primary btn-icon-split">
                 <span class="icon text-white-50">
-                    <i class="fa fa-plus" style="font-size:24px"></i>
+                    <i class="fa fa-plus"></i>
                 </span>
                 <span class="text">Add Type</span></a>
             </div>
@@ -41,23 +41,22 @@
                               @foreach ($twitter as $tw)
                                <tr>
                                 <td>{{$i}}</td>
-                                <td>{{ $tw->title }}</td>
-                                <td>{{ $tw->description }}</td>
-                                <td><img alt="img" src="{{asset('/storage/app/'.$tw->image)}}" width="100px"></td>
-                               
-                                 <td>{{$tw->date }}</td>
+                                <td><div class="tect-desc"> {{ $tw->title }}</td></div>
+                                <td><div class="tect-desc"> {{ $tw->description }}</td></div>
+                                <td><img alt="img" class="list-img"  src="{{asset('/storage/app/'.$tw->image)}}" width="100px"></td>
+                                 <td><div class="date-wrap"> {{$tw->date }}</td></div>
                                 <td>{{ $tw->status }}</td>
                                 <td>
                                   <div class="action-wrap-btn">
 
-                                   <a href="{{route('twitter.show',$tw->id)}}" class="btn btn-success btn-circle"><i class="fas fa-eye"></i></a>
+                                   <a href="{{route('twitter.show',$tw->id)}}" class="btn "><i class="fas fa-eye text-success"></i></a>
 
-                                   <a href="{{route('twitter.edit',$tw->id)}}" class="btn btn-primary btn-circle"><i class="fas fa-edit"></i></a>
+                                   <a href="{{route('twitter.edit',$tw->id)}}" class="btn "><i class="fas fa-edit text-primary"></i></a>
 
                                    <form action="{{route('twitter.destroy',$tw->id)}}" method="post" style="display: inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash"></i></button>
+                                    <button class="btn text-danger " type="submit"><i class="fas fa-trash"></i></button>
                                    </form>                  
                                   </div>
                                 </td>

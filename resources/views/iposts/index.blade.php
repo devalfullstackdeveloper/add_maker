@@ -37,21 +37,21 @@
                               @foreach ($iposts as $po)
                                <tr>
                                 <td>{{$i}}</td>
-                                <td>{{ $po->title}}</td>
-                                <td>{{ $po->description }}</td>
-                                <td><img alt="img" src="{{asset('/storage/app/'.$po->images)}}" width="100px"></td>
+                                <td><div class="tect-desc">{{ $po->title}}</td></div>
+                                <td><div class="tect-desc"> {{ $po->description }}</td></div>
+                                <td><img alt="img" class="list-img" src="{{asset('/storage/app/'.$po->images)}}" width="100px"></td>
                                 <td>{{ $po->created_at }}</td>
                                 <td>
                                   <div class="action-wrap-btn">
 
-                                   <a href="{{ route('iposts.show', $po->id) }}" class="btn btn-success btn-circle"><i class="fas fa-eye"></i></a>
+                                   <a href="{{route('iposts.show', $po->id) }}" class="btn "><i class="fas fa-eye text-success"></i></a>
 
-                                   <a href="{{route('iposts.edit', $po->id)}}" class="btn btn-primary btn-circle"><i class="fas fa-edit"></i></a>
+                                   <a href="{{route('iposts.edit', $po->id)}}" class="btn "><i class="fas fa-edit text-primary"></i></a>
 
-                                   <form action="{{ route('iposts.destroy',$po->id) }}" method="post" style="display: inline-block">
+                                   <form action="{{route('iposts.destroy',$po->id) }}" method="post" style="display: inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash"></i></button>
+                                    <button class="btn  text-danger" type="submit"><i class="fas fa-trash"></i></button>
                                    </form> 
                                   </div>
                                 </td>
