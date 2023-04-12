@@ -94,7 +94,7 @@ jQuery(document).ready(function() {
         jQuery.ajax({
             method: 'post',
             dataType: "json",
-            url: "{{ url('changeStatusUpcoming') }}",
+            url: "{{ url('changeStatus') }}",
             data: {
                 'status': status,
                 'id': user_id
