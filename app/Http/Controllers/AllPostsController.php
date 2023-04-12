@@ -111,8 +111,10 @@ class AllPostsController extends Controller
     public function edit($id)
     {
         $industryType = Industry::select('id', 'industry_type')->get();
-        $data = AllPosts::find($id);
-        return view('all_posts.edit', compact('data', 'industryType'));
+        $category = Category::select('id', 'title')->get();
+        $data= AllPosts::find($id);
+       
+        return view('all_posts.edit',compact('data','industryType','category'));
     }
 
     /**
@@ -197,5 +199,14 @@ class AllPostsController extends Controller
         $id = AllPosts::find($id);
         $id->delete();
         return redirect('/allposts')->with('success', 'Deleted successfully');
+    }
+
+    public function changeStatusAllPosts(Request $request)
+    {  
+   
+        $user = AllPosts::find($request['id']);
+        $user->status = $request['status'];
+        $user->save();
+  
     }
 }

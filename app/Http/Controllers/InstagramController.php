@@ -146,6 +146,15 @@ class InstagramController extends Controller
         $idd->delete();
         return redirect('/instagram')->with('completed', 'event has been deleted');
     }
+
+    public function changeStatusInstagram(Request $request)
+    {  
+   
+        $user = Instagram::find($request['id']);
+        $user->status = $request['status'];
+        $user->save();
+  
+    }
 }
 
 

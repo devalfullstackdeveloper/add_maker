@@ -41,6 +41,7 @@
                               @foreach ($youtube as $yo)
                                <tr>
                                 <td>{{$i}}</td>
+
                                 <td><div class="tect-desc">{{ $yo->title }}</div></td>
                                 <td><div class="tect-desc">{{ $yo->description }}</div></td>
                                 <td><img alt="img" class="list-img" src="{{asset('/storage/app/'.$yo->image)}}" width="100px"></td>
@@ -78,8 +79,7 @@
     </div>
 </section>
 
-<script src="{{asset('/public/site/js/jquery/jquery.min.js')}}"></script>
-
+<script src="{{asset('/public/site/js/jquery/jquery.min.js')}}"></script> 
 <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous">
 </script>
@@ -112,5 +112,4 @@ jQuery(document).ready(function() {
 });
 </script>
 
- 
 @endsection

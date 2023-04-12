@@ -152,4 +152,12 @@ class FbookController extends Controller
         $idd->delete();
         return redirect('/fbook')->with('completed', 'Facebook has been deleted');
     }
+    public function changeStatusFacebook(Request $request)
+    {  
+   
+        $user = Facebook::find($request['id']);
+        $user->status = $request['status'];
+        $user->save();
+  
+    }
 }

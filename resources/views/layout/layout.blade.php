@@ -8,23 +8,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="_token" content="{{csrf_token()}}" />
 
     <title>SB Admin 2 - Dashboard</title>
 
     <!-- Custom fonts for this template-->
     <link
-    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-    rel="stylesheet">
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
-      <link rel="stylesheet" href="{{ asset('public/site/css/fontawesome-free/css/all.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('public/site/css/fontawesome-free/css/all.min.css') }}" type="text/css">
 
     <!-- Custom styles for this template-->
     <link rel="stylesheet" href="{{ asset('public/site/css/sb-admin-2.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('public/site/css/toastr.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('public/site/css/custom.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('public/site/js/datatables/dataTables.bootstrap4.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('public/site/js/datatables/dataTables.bootstrap4.min.css') }}"
+        type="text/css">
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-
 </head>
 
 <body id="page-top">
@@ -51,19 +52,19 @@
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
-                </li>
+            </li>
 
-                <!-- Divider -->
-                <hr class="sidebar-divider">
+            <!-- Divider -->
+            <hr class="sidebar-divider">
 
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Interface
-                </div>
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Interface
+            </div>
 
-                <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Components</span>
@@ -76,66 +77,71 @@
                     </div>
                 </div>
                 <a class="nav-link" href="{{ url('industry') }}">
-                  <i class="menu-icon mdi mdi-file-document"></i>
+                    <i class="menu-icon mdi mdi-file-document"></i>
                     <span class="menu-title">Industry</span>
                 </a>
 
                 <a class="nav-link" href="{{ url('fbook') }}">
-                  <i class="menu-icon mdi mdi-file-document"></i>
+                    <i class="menu-icon mdi mdi-file-document"></i>
                     <span class="menu-title">Facebook</span>
                 </a>
 
                 <a class="nav-link" href="{{ url('posts') }}">
-                  <i class="menu-icon mdi mdi-file-document"></i>
+                    <i class="menu-icon mdi mdi-file-document"></i>
                     <span class="menu-title">Facebook Posts</span>
                 </a>
 
                 <a class="nav-link" href="{{ url('iposts') }}">
-                  <i class="menu-icon mdi mdi-file-document"></i>
+                    <i class="menu-icon mdi mdi-file-document"></i>
                     <span class="menu-title">Instagram Posts</span>
                 </a>
 
-            <a class="nav-link" href="{{ url('event') }}">
-                  <i class="menu-icon mdi mdi-file-document"></i>
+                <a class="nav-link" href="{{ url('event') }}">
+                    <i class="menu-icon mdi mdi-file-document"></i>
                     <span class="menu-title">Upcoming Events</span>
                 </a>
 
-            <a class="nav-link" href="{{ url('twitter') }}">
-                  <i class="menu-icon mdi mdi-file-document"></i>
+                <a class="nav-link" href="{{ url('twitter') }}">
+                    <i class="menu-icon mdi mdi-file-document"></i>
                     <span class="menu-title">Twitter</span>
                 </a>
+
                 <a class="nav-link" href="{{ url('poster') }}">
-                  <i class="menu-icon mdi mdi-file-document"></i>
+                    <i class="menu-icon mdi mdi-file-document"></i>
                     <span class="menu-title">Poster</span>
                 </a>
+
                 <a class="nav-link" href="{{ url('youtube') }}">
-                  <i class="menu-icon mdi mdi-file-document"></i>
+                    <i class="menu-icon mdi mdi-file-document"></i>
                     <span class="menu-title">Youtube</span>
                 </a>
+
                 <a class="nav-link" href="{{ url('bcard') }}">
-                  <i class="menu-icon mdi mdi-file-document"></i>
+                    <i class="menu-icon mdi mdi-file-document"></i>
                     <span class="menu-title">Business Card</span>
-                </a>    
-                  <a class="nav-link" href="{{ url('instagram') }}">
-                  <i class="menu-icon mdi mdi-file-document"></i>
-                    <span class="menu-title">Instagram Stories</span>    
                 </a>
+
+                <a class="nav-link" href="{{ url('instagram') }}">
+                    <i class="menu-icon mdi mdi-file-document"></i>
+                    <span class="menu-title">Instagram Stories</span>
+                </a>
+
                 <a class="nav-link" href="{{ url('menu') }}">
-                  <i class="menu-icon mdi mdi-file-document"></i>
+                    <i class="menu-icon mdi mdi-file-document"></i>
                     <span class="menu-title">Menu</span>
                 </a>
+
                 <a class="nav-link" href="{{ url('category') }}">
-                  <i class="menu-icon mdi mdi-file-document"></i>
+                    <i class="menu-icon mdi mdi-file-document"></i>
                     <span class="menu-title">All Category</span>
                 </a>
 
-                </a>
-		 <a class="nav-link" href="{{ url('allposts') }}">
-                  <i class="menu-icon mdi mdi-file-document"></i>
+                <a class="nav-link" href="{{ url('allposts') }}">
+                    <i class="menu-icon mdi mdi-file-document"></i>
                     <span class="menu-title">All Posts</span>
                 </a>
 		
-		<a class="nav-link" href="{{ url('user') }}">
+		        <a class="nav-link" href="{{ url('user') }}">
                   <i class="menu-icon mdi mdi-file-document"></i>
                     <span class="menu-title">Users</span>
                 </a>
@@ -160,16 +166,16 @@
         </div>
     </li> -->
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
+            <!-- Divider -->
+            <hr class="sidebar-divider">
 
-    <!-- Heading -->
-    <!-- <div class="sidebar-heading">
+            <!-- Heading -->
+            <!-- <div class="sidebar-heading">
         Addons
     </div> -->
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    <!-- <li class="nav-item">
+            <!-- Nav Item - Pages Collapse Menu -->
+            <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
         aria-expanded="true" aria-controls="collapsePages">
         <i class="fas fa-fw fa-folder"></i>
@@ -189,31 +195,31 @@
     </div>
 </li> -->
 
-<!-- Nav Item - Charts -->
-<!-- <li class="nav-item">
+            <!-- Nav Item - Charts -->
+            <!-- <li class="nav-item">
     <a class="nav-link" href="charts.html">
         <i class="fas fa-fw fa-chart-area"></i>
         <span>Charts</span></a>
     </li> -->
 
-   <!--  <li class="nav-item">
+            <!--  <li class="nav-item">
         <a class="nav-link" href="tables.html">
             <i class="fas fa-fw fa-table"></i>
             <span>Tables</span></a>
         </li> -->
 
-        <!-- <hr class="sidebar-divider d-none d-md-block"> -->
+            <!-- <hr class="sidebar-divider d-none d-md-block"> -->
 
-        <div class="text-center d-none d-md-inline">
-            <button class="rounded-circle border-0" id="sidebarToggle"></button>
-        </div>
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
 
-        <!-- <div class="sidebar-card d-none d-lg-flex">
+            <!-- <div class="sidebar-card d-none d-lg-flex">
             <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
             <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
             <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
         </div>-->
-    </ul>
+        </ul>
 
     <div id="content-wrapper" class="d-flex flex-column">
 
@@ -759,6 +765,7 @@ aria-labelledby="userDropdown">
     </div>
 </div>
 
+</body>
 
 <script src="{{asset('/public/site/js/common.min.js')}}"></script>
 <script src="{{asset('/public/site/js/jquery/jquery.min.js')}}"></script>

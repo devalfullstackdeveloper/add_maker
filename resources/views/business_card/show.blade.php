@@ -1,7 +1,5 @@
 @extends('layout.layout')
 
-
-
 @section('content')
 <section> 
 <div class="container mt-2">
@@ -23,7 +21,7 @@
                 {{ $data->description }}
 
             <br><br><strong>Image:</strong><br>
-            <img src="{{asset('/storage/app/'.$data->image)}}" alt="" style="width: 100px;">
+            <img class="list-img" src="{{asset('/storage/app/'.$data->image)}}" alt="img" >
                 
 
              <br><br><strong>Date:</strong><br>
