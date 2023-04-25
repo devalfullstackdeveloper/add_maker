@@ -10,7 +10,7 @@ class DashboardController extends Controller
    public function UpcomingEvents() 
    {
 
-     $upcomingevents_data = upcomingevents::select('title','icon')->limit(4)->orderBy('date', 'ASC')->get();
+     $upcomingevents_data = upcomingevents::select('title','icon')->limit(4)->orderBy('date', 'DESC')->get();
      return view('dashboard',compact('upcomingevents_data'));
 
       // echo "<pre>";
